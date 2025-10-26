@@ -1,45 +1,71 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import ServicesSection from "./ServicesSection";
-import ClientReview from "./ClientReview";
-import Title from "../shared/Title";
-import { motion } from "framer-motion"; // Import Framer Motion
+'use client';
+
+import React, { useEffect, useState, useRef } from 'react';
+import ServicesSection from './ServicesSection';
+import ClientReview from './ClientReview';
+import Title from '../shared/Title';
+import { motion, useInView } from 'framer-motion';
 
 const AboutMe = () => {
-  // Parent container animation variants for staggering children
+  // Animation variants for parent container
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2, // Stagger child animations by 0.2s
+        staggerChildren: 0.05, // Fast stagger (same as others)
       },
     },
   };
 
-  // Animation variants for individual sections
+  // Animation variants for sections
   const sectionVariants = {
-    hidden: {
-      opacity: 0,
-      y: 30, // Slide up from below
-    },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.5, // Smooth 0.5s animation
-        ease: "easeOut",
+        duration: 0.3, // Fast animation (same as others)
+        ease: 'easeOut',
+        when: 'beforeChildren',
+        staggerChildren: 0.05, // Fast stagger (same as others)
       },
     },
   };
+
+  // Animation variants for child elements
+  const childVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.25, // Fast child animation (same as others)
+        ease: 'easeOut',
+      },
+    },
+  };
+
+  // Refs for each section
+  const aboutRef = useRef(null);
+  const satisfactionRef = useRef(null);
+  const servicesRef = useRef(null);
+  const reviewRef = useRef(null);
+
+  // useInView hooks
+  const isAboutInView = useInView(aboutRef, { once: true, amount: 0.2 });
+  const isSatisfactionInView = useInView(satisfactionRef, { once: true, amount: 0.2 });
+  const isServicesInView = useInView(servicesRef, { once: true, amount: 0.2 });
+  const isReviewInView = useInView(reviewRef, { once: true, amount: 0.2 });
+
   const texts = [
-    "Passionate Web Developer & Problem Solver",
-    "I build Web Applications",
-    "Full-Stack MERN Developer",
+    'Passionate Web Developer & Problem Solver',
+    'I build Web Applications',
+    'Full-Stack MERN Developer',
   ];
 
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
-  const [displayedText, setDisplayedText] = useState("");
+  const [displayedText, setDisplayedText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
@@ -67,113 +93,117 @@ const AboutMe = () => {
 
     return () => clearTimeout(timeout);
   }, [displayedText, isDeleting, currentTextIndex]);
+
   return (
     <motion.div
-      className=" "
+      className=""
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
       {/* About Me Section */}
-      <motion.div className="mb-16" variants={sectionVariants}>
-        <div
+      <motion.div
+        ref={aboutRef}
+        variants={sectionVariants}
+        initial="hidden"
+        animate={isAboutInView ? 'visible' : 'hidden'}
+        className="mb-16"
+      >
+        <motion.div
+          variants={childVariants}
           style={{
-            borderBottom: "1px solid transparent",
+            borderBottom: '1px solid transparent',
             borderImage:
-              "linear-gradient(to right, rgb(65, 65, 65), rgb(22, 22, 22)) 1",
+              'linear-gradient(to right, rgb(65, 65, 65), rgb(22, 22, 22)) 1',
           }}
         >
-          <Title title={"About Me"} />
-        </div>
-        <h1 className="mt-9 mb-4 text-5xl ">
+          <Title title={'About Me'} />
+        </motion.div>
+        <motion.h1
+          variants={childVariants}
+          className="mt-9 mb-4 text-5xl"
+        >
           I am a <span className="text-[#72ebc2]">{displayedText}</span>
-        </h1>
-
-       <motion.p
-  className="text-gray-500 text-sm leading-relaxed mb-4"
-  variants={sectionVariants}
->
-  I&apos;m a passionate web developer with a knack for crafting visually
-  stunning and highly functional web applications.
-</motion.p>
-
-<motion.p
-  className="text-gray-500 text-sm md:text-sm leading-relaxed mb-4"
-  variants={sectionVariants}
->
-  My focus is on creating seamless user experiences, leveraging the
-  latest technologies to build responsive, scalable, and aesthetically
-  pleasing websites. Whether it&apos;s designing sleek UI components or
-  optimizing performance, I thrive on solving complex challenges with
-  creativity and precision.
-</motion.p>
-
-<motion.p
-  className="text-gray-500 text-lg md:text-sm leading-relaxed"
-  variants={sectionVariants}
->
-  Let&apos;s collaborate to turn your vision into reality with cutting-edge
-  web solutions that stand out in the digital world!
-</motion.p>
-
+        </motion.h1>
+        <motion.p
+          variants={childVariants}
+          className="text-gray-500 text-sm leading-relaxed mb-4"
+        >
+          I&apos;m a passionate web developer with a knack for crafting visually
+          stunning and highly functional web applications.
+        </motion.p>
+        <motion.p
+          variants={childVariants}
+          className="text-gray-500 text-sm md:text-sm leading-relaxed mb-4"
+        >
+          My focus is on creating seamless user experiences, leveraging the
+          latest technologies to build responsive, scalable, and aesthetically
+          pleasing websites. Whether it&apos;s designing sleek UI components or
+          optimizing performance, I thrive on solving complex challenges with
+          creativity and precision.
+        </motion.p>
+        <motion.p
+          variants={childVariants}
+          className="text-gray-500 text-lg md:text-sm leading-relaxed"
+        >
+          Let&apos;s collaborate to turn your vision into reality with cutting-edge
+          web solutions that stand out in the digital world!
+        </motion.p>
       </motion.div>
 
       {/* Client Satisfaction Section */}
-      <motion.div className="mb-16" variants={sectionVariants}>
-        <div style={{
+      <motion.div
+        ref={satisfactionRef}
+        variants={sectionVariants}
+        initial="hidden"
+        animate={isSatisfactionInView ? 'visible' : 'hidden'}
+        className="mb-16"
+      >
+        <motion.div
+          variants={childVariants}
+          style={{
             borderTop: '1px solid transparent',
-          
-             borderBottom: '1px solid transparent',
-             
-            borderImage: 'linear-gradient(to left, rgb(65, 65, 65), rgba(255, 255, 255, 0)) 1',
-          }} className="grid lg:grid-cols-4 text-center grid-cols-2 py-4 justify-between gap-8 text-gray-500">
-          <motion.div
-            className=" gap-5 hover:scale-105 transition-transform duration-300"
-            variants={sectionVariants}
-          >
-            <h3 className="font-bold lg:text-5xl text-3xl mb-2">100%</h3>
-            <p className="text-sm ">
-              Clients Satisfied
-            </p>
-          </motion.div>
-          <motion.div
-            className=" gap-5 hover:scale-105 transition-transform duration-300"
-            variants={sectionVariants}
-          >
-            <h3 className="font-bold lg:text-5xl text-3xl mb-2">100+</h3>
-            <p className="text-sm">
-              Positive Feedback
-            </p>
-            
-          </motion.div>
-          <motion.div
-            className="gap-5 hover:scale-105 transition-transform duration-300"
-            variants={sectionVariants}
-          >
-            <h3 className="font-bold lg:text-5xl text-3xl mb-2">30+</h3>
-            <p className="text-sm">
-              Project Completed
-            </p>
-          </motion.div>
-          <motion.div
-            className="gap-5 hover:scale-105 transition-transform duration-300"
-            variants={sectionVariants}
-          >
-            <h3 className="font-bold lg:text-5xl text-3xl mb-2">2+</h3>
-            <p className="text-sm">
-              Years Experience
-            </p>
-          </motion.div>
-        </div>
+            borderBottom: '1px solid transparent',
+            borderImage:
+              'linear-gradient(to left, rgb(65, 65, 65), rgba(255, 255, 255, 0)) 1',
+          }}
+          className="grid  lg:grid-cols-4 text-center grid-cols-2 py-4 justify-between gap-8 text-gray-500"
+        >
+          {[
+            { value: '100%', label: 'Clients Satisfied' },
+            { value: '100+', label: 'Positive Feedback' },
+            { value: '30+', label: 'Project Completed' },
+            { value: '2+', label: 'Years Experience' },
+          ].map((item, idx) => (
+            <motion.div
+              key={idx}
+              variants={childVariants}
+              className="gap-5 hover:scale-105 transition-transform duration-300"
+            >
+              <h3 className="font-bold font-style lg:text-5xl text-3xl mb-2">{item.value}</h3>
+              <p className="text-sm">{item.label}</p>
+            </motion.div>
+          ))}
+        </motion.div>
       </motion.div>
 
       {/* Services Section */}
-      <motion.div variants={sectionVariants}>
+      <motion.div
+        ref={servicesRef}
+        variants={sectionVariants}
+        initial="hidden"
+        animate={isServicesInView ? 'visible' : 'hidden'}
+      >
         <ServicesSection />
       </motion.div>
 
       {/* Client Review Section */}
-      <motion.div variants={sectionVariants}>
+      <motion.div
+        ref={reviewRef}
+        variants={sectionVariants}
+        initial="hidden"
+        animate={isReviewInView ? 'visible' : 'hidden'}
+      >
         <ClientReview />
       </motion.div>
     </motion.div>

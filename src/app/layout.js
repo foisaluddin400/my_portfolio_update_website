@@ -4,6 +4,15 @@ import ClientLayout from "./layout/ClientLayout";
 import ReduxProvider from "@/provider/ReduxProvider";
 
 
+
+
+const style = localFont({
+  src: "../font/LondrinaSketch-Regular.ttf",
+  variable: "--style-display"
+  
+});
+
+
 const playSans = localFont({
   src: "../font/Syne-Regular-BF642e31d3934f5.otf",
   variable: "--clash-display"
@@ -30,7 +39,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="product">
-      <body className={` ${playSans.variable}  antialiased`}>
+      <body className={` ${playSans.variable} ${style.variable}  antialiased`}>
         <ReduxProvider>
        
             <ClientLayout >{children}</ClientLayout>

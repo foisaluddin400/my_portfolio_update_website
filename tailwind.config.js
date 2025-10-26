@@ -18,6 +18,7 @@ module.exports = {
       },
       fontFamily: {
         clash: ["var(--clash-display)"],
+        style: ["var(--style-display)"],
       },
     },
   },
