@@ -21,18 +21,10 @@ export default function ClientLayout({ children }) {
   return (
     <>
       <div className="flex flex-col min-h-screen">
-        {!hideNavbarFooter && (
-          <div>
-            <Navbar />
-          </div>
-        )}
+  
        
         <div className=" text-black flex-grow">{children}</div>
-        {!hideNavbarFooter && (
-          <div>
-            <Footer />
-          </div>
-        )}
+   
       </div>
     </>
   );

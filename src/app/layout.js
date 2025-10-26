@@ -4,6 +4,13 @@ import ClientLayout from "./layout/ClientLayout";
 import ReduxProvider from "@/provider/ReduxProvider";
 
 
+const playSans = localFont({
+  src: "../font/Syne-Regular-BF642e31d3934f5.otf",
+  variable: "--clash-display"
+  
+});
+
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -20,24 +27,14 @@ export const metadata = {
   description: "E-commerce",
 };
 
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="product">
-      <body
-        className={`${geistSans.variable} bg-white ${geistMono.variable} antialiased`}
-      >
-
-
-
-        
-         <ReduxProvider>
+      <body className={` ${playSans.variable}  antialiased`}>
+        <ReduxProvider>
        
-            <div className="">
+            <ClientLayout >{children}</ClientLayout>
           
-              <ClientLayout>{children}</ClientLayout>
-            </div>
-     
         </ReduxProvider>
       </body>
     </html>

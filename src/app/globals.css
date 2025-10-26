@@ -1,25 +1,110 @@
+/* global.css */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    font-family: sans-serif;
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@font-face {
+  font-family: "MyCustomFont";
+  src: url("/fonts/MyCustomFont-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "MyCustomFont", sans-serif;
 }
-li{
-  list-style: none;
+
+/* Glassmorphism Base Styles */
+.glassmorphism {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Gradient Border (Static) */
+.gradient-border {
+  position: relative;
+}
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid transparent;
+  border-image: linear-gradient(to right, rgba(250, 204, 21, 0.5), rgba(45, 212, 191, 0.5)) 1;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Custom Scrollbar (Green) */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 2px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #72ebc2;
+  border-radius: 2px;
+  transition: background 0.3s ease;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #72ebc2;
+}
+.custom-scrollbar {
+  scrollbar-width: none;
+  width: 2px;
+  scrollbar-color: #72ebc2 rgba(0, 0, 0, 0.1);
+}
+
+/* Animations (Optional, can be removed if animations are not needed) */
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+@keyframes slideIn {
+  0% { opacity: 0; transform: translateX(50px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.slide-in {
+  opacity: 0;
+  animation: slideIn 0.5s ease-out forwards;
+}
+
+@keyframes gradientBorder {
+  0% {
+    border-image: linear-gradient(to right, rgba(250, 204, 21, 0.5), rgba(45, 212, 191, 0.5)) 1;
+  }
+  50% {
+    border-image: linear-gradient(to right, rgba(45, 212, 191, 0.5), rgba(250, 204, 21, 0.5)) 1;
+  }
+  100% {
+    border-image: linear-gradient(to right, rgba(250, 204, 21, 0.5), rgba(45, 212, 191, 0.5)) 1;
+  }
+}
+.animate-gradient-border {
+  animation: gradientBorder 3s ease-in-out infinite;
+}
+
+/* Hide Scrollbar for Specific Cases */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Generic Button Style */
+.btn {
+  @apply bg-white/10 backdrop-blur-md border border-white/10 rounded-full text-white px-4 py-2 hover:bg-yellow-400/50 transition-colors duration-300;
 }
