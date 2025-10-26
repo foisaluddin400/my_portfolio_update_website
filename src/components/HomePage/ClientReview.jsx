@@ -57,7 +57,7 @@ const ClientReview = () => {
                 {reviews.map((review, idx) => (
                   <div key={idx} className="w-full flex-shrink-0 animate-slideIn">
                     <p className="text-gray-300 text-lg md:text-3xl leading-relaxed mb-4 italic">
-                      "{review.review}"
+                      {review.review}
                     </p>
                     <h4 className="text-white font-semibold text-lg">{review.name}</h4>
                     <p className="text-gray-400 text-sm">{review.date}</p>

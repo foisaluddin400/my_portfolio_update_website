@@ -89,30 +89,33 @@ const AboutMe = () => {
           I am a <span className="text-[#72ebc2]">{displayedText}</span>
         </h1>
 
-        <motion.p
-          className=" text-gray-500 text-sm leading-relaxed mb-4"
-          variants={sectionVariants}
-        >
-          I'm a passionate web developer with a knack for crafting visually
-          stunning and highly functional web applications.
-        </motion.p>
-        <motion.p
-          className="text-gray-500 text-sm md:text-sm leading-relaxed mb-4"
-          variants={sectionVariants}
-        >
-          My focus is on creating seamless user experiences, leveraging the
-          latest technologies to build responsive, scalable, and aesthetically
-          pleasing websites. Whether it's designing sleek UI components or
-          optimizing performance, I thrive on solving complex challenges with
-          creativity and precision.
-        </motion.p>
-        <motion.p
-          className="text-gray-500 text-lg md:text-sm leading-relaxed"
-          variants={sectionVariants}
-        >
-          Let's collaborate to turn your vision into reality with cutting-edge
-          web solutions that stand out in the digital world!
-        </motion.p>
+       <motion.p
+  className="text-gray-500 text-sm leading-relaxed mb-4"
+  variants={sectionVariants}
+>
+  I&apos;m a passionate web developer with a knack for crafting visually
+  stunning and highly functional web applications.
+</motion.p>
+
+<motion.p
+  className="text-gray-500 text-sm md:text-sm leading-relaxed mb-4"
+  variants={sectionVariants}
+>
+  My focus is on creating seamless user experiences, leveraging the
+  latest technologies to build responsive, scalable, and aesthetically
+  pleasing websites. Whether it&apos;s designing sleek UI components or
+  optimizing performance, I thrive on solving complex challenges with
+  creativity and precision.
+</motion.p>
+
+<motion.p
+  className="text-gray-500 text-lg md:text-sm leading-relaxed"
+  variants={sectionVariants}
+>
+  Let&apos;s collaborate to turn your vision into reality with cutting-edge
+  web solutions that stand out in the digital world!
+</motion.p>
+
       </motion.div>
 
       {/* Client Satisfaction Section */}
