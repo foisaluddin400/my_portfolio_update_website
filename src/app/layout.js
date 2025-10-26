@@ -32,8 +32,11 @@ const geistMono = localFont({
 });
 
 export const metadata = {
-  title: "JusBuy Website",
-  description: "E-commerce",
+  title: "RK Foisal",
+  description: "RK Foisal's Personal Portfolio Website showcasing projects, blogs, resume, and contact information.",
+   icons: {
+    icon: "/vercel.svg",
+  },
 };
 
 export default function RootLayout({ children }) {
