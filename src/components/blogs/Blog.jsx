@@ -184,8 +184,8 @@ export default function Blog() {
         bodyStyle={{
           background: '#1a1a1a',
           color: 'white',
-          borderRadius: '12px',
-          margin: '-20px -5px',
+          borderRadius: '7px',
+          margin: '-20px -25px',
         }}
         closeIcon={
           <CloseOutlined

@@ -1,49 +1,49 @@
 'use client';
 
 import React, { useRef } from 'react';
-import { FaLaptopCode, FaServer, FaPaintBrush } from 'react-icons/fa';
+import { FaLaptopCode, FaServer, FaPaintBrush, FaCode, FaMobileAlt, FaCloud } from 'react-icons/fa';
 import Title from '../shared/Title';
 import { motion, useInView } from 'framer-motion';
 
 const ServicesSection = () => {
-  const services = [
-    {
-      icon: <FaLaptopCode size={40} className="text-yellow-400 mb-3" />,
-      title: 'Frontend Development',
-      description:
-        'Crafting responsive and interactive UI with React, Tailwind CSS, and modern tools.',
-    },
-    {
-      icon: <FaServer size={40} className="text-teal-400 mb-3" />,
-      title: 'Backend Development',
-      description:
-        'Building scalable server-side applications and APIs using Node.js and databases.',
-    },
-    {
-      icon: <FaPaintBrush size={40} className="text-pink-400 mb-3" />,
-      title: 'UI/UX Design',
-      description:
-        'Designing visually appealing and user-friendly interfaces for better experience.',
-    },
-    {
-      icon: <FaLaptopCode size={40} className="text-yellow-400 mb-3" />,
-      title: 'Frontend Development',
-      description:
-        'Crafting responsive and interactive UI with React, Tailwind CSS, and modern tools.',
-    },
-    {
-      icon: <FaServer size={40} className="text-teal-400 mb-3" />,
-      title: 'Backend Development',
-      description:
-        'Building scalable server-side applications and APIs using Node.js and databases.',
-    },
-    {
-      icon: <FaPaintBrush size={40} className="text-pink-400 mb-3" />,
-      title: 'UI/UX Design',
-      description:
-        'Designing visually appealing and user-friendly interfaces for better experience.',
-    },
-  ];
+ const services = [
+  {
+    icon: <FaLaptopCode size={40} className="text-yellow-400 mb-3" />,
+    title: 'Frontend Development',
+    description:
+      'Building responsive, fast, and interactive user interfaces using React, Next.js, and Tailwind CSS.',
+  },
+  {
+    icon: <FaServer size={40} className="text-teal-400 mb-3" />,
+    title: 'Backend Development',
+    description:
+      'Developing robust and scalable backend systems with Node.js, Express, and MongoDB.',
+  },
+  {
+    icon: <FaPaintBrush size={40} className="text-pink-400 mb-3" />,
+    title: 'UI/UX Design',
+    description:
+      'Designing clean, intuitive, and user-centered interfaces to deliver smooth digital experiences.',
+  },
+  {
+    icon: <FaCode size={40} className="text-blue-400 mb-3" />,
+    title: 'Full-Stack Web Development',
+    description:
+      'Combining frontend and backend expertise to build complete, production-ready web applications.',
+  },
+  {
+    icon: <FaMobileAlt size={40} className="text-green-400 mb-3" />,
+    title: 'Responsive Design',
+    description:
+      'Ensuring websites look and perform beautifully across all devices — desktop, tablet, and mobile.',
+  },
+  {
+    icon: <FaCloud size={40} className="text-purple-400 mb-3" />,
+    title: 'API Integration & Deployment',
+    description:
+      'Integrating REST APIs, managing data flow, and deploying applications using platforms like Vercel and Render.',
+  },
+];
 
   // Animation variants for service cards
   const sectionVariants = {
@@ -120,7 +120,7 @@ const ServicesSection = () => {
               </motion.h3>
               <motion.p
                 variants={childVariants}
-                className="text-gray-300"
+                className="text-gray-400 text-base"
               >
                 {service.description}
               </motion.p>

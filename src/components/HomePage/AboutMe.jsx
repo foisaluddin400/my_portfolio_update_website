@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, Suspense } from 'react';
 import ServicesSection from './ServicesSection';
 import ClientReview from './ClientReview';
 import Title from '../shared/Title';
@@ -58,12 +58,14 @@ const AboutMe = () => {
   const isServicesInView = useInView(servicesRef, { once: true, amount: 0.2 });
   const isReviewInView = useInView(reviewRef, { once: true, amount: 0.2 });
 
-  const texts = [
-    'Passionate Web Developer & Problem Solver',
-    'I build Web Applications',
-    'Full-Stack MERN Developer',
+    const texts = [
+    'Creative Front-End Developer',
+    'Turning Ideas into Web Reality',
+    'MERN Stack Web Developer',
+    'JavaScript & React Enthusiast',
+    'Building Modern Web Experiences',
+    'Bringing Designs to Life with Code',
   ];
-
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
@@ -126,29 +128,32 @@ const AboutMe = () => {
           I am a <span className="text-[#72ebc2]">{displayedText}</span>
         </motion.h1>
         <motion.p
-          variants={childVariants}
-          className="text-gray-500 text-sm leading-relaxed mb-4"
-        >
-          I&apos;m a passionate web developer with a knack for crafting visually
-          stunning and highly functional web applications.
-        </motion.p>
-        <motion.p
-          variants={childVariants}
-          className="text-gray-500 text-sm md:text-sm leading-relaxed mb-4"
-        >
-          My focus is on creating seamless user experiences, leveraging the
-          latest technologies to build responsive, scalable, and aesthetically
-          pleasing websites. Whether it&apos;s designing sleek UI components or
-          optimizing performance, I thrive on solving complex challenges with
-          creativity and precision.
-        </motion.p>
-        <motion.p
-          variants={childVariants}
-          className="text-gray-500 text-lg md:text-sm leading-relaxed"
-        >
-          Let&apos;s collaborate to turn your vision into reality with cutting-edge
-          web solutions that stand out in the digital world!
-        </motion.p>
+  variants={childVariants}
+  className="text-gray-500 text-sm leading-relaxed mb-4"
+>
+  I&apos;m a passionate MERN Stack and Front-End Developer with a knack for crafting
+  visually stunning and highly functional web applications.
+</motion.p>
+
+<motion.p
+  variants={childVariants}
+  className="text-gray-500 text-sm md:text-sm leading-relaxed mb-4"
+>
+  My focus is on building seamless user experiences using modern technologies
+  like React, Node.js, Express, and MongoDB. I love designing sleek UI
+  components, optimizing performance, and bringing creative ideas to life with
+  clean, efficient code.
+</motion.p>
+
+<motion.p
+  variants={childVariants}
+  className="text-gray-500 text-lg md:text-sm leading-relaxed"
+>
+  Let&apos;s collaborate to turn your vision into reality with modern,
+  performance-driven, and visually engaging web solutions that stand out in the
+  digital world!
+</motion.p>
+
       </motion.div>
 
       {/* Client Satisfaction Section */}
@@ -171,7 +176,7 @@ const AboutMe = () => {
         >
           {[
             { value: '100%', label: 'Clients Satisfied' },
-            { value: '100+', label: 'Positive Feedback' },
+            { value: '38+', label: 'Positive Feedback' },
             { value: '30+', label: 'Project Completed' },
             { value: '2+', label: 'Years Experience' },
           ].map((item, idx) => (
@@ -204,7 +209,7 @@ const AboutMe = () => {
         initial="hidden"
         animate={isReviewInView ? 'visible' : 'hidden'}
       >
-        <ClientReview />
+        <Suspense fallback={<div className="text-center py-10">Loading...</div>}><ClientReview /></Suspense>
       </motion.div>
     </motion.div>
   );

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import HomePage from "@/components/HomePage/HomePage";
 
 export default function Home() {
@@ -56,7 +56,9 @@ export default function Home() {
 
       {/* 🌟 Main content */}
       <div className="relative z-10 font-clash">
+        <Suspense fallback={<div className="text-center py-10">Loading...</div>}>
         <HomePage />
+        </Suspense>
       </div>
     </div>
   );

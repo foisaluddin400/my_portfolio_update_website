@@ -4,6 +4,7 @@ import { Briefcase, GraduationCap } from 'lucide-react';
 import Title from '../shared/Title';
 import SkillSecton from './Skill';
 import { motion } from 'framer-motion'; // Import Framer Motion
+import { Suspense } from 'react';
 
 const experienceItems = [
   {
@@ -275,7 +276,7 @@ export function ResumeTimeline() {
 
       {/* Skills Section */}
       <motion.div variants={sectionVariants}>
-        <SkillSecton />
+        <Suspense fallback={<div className="text-center py-10">Loading...</div>}><SkillSecton /></Suspense>
       </motion.div>
     </motion.div>
   );

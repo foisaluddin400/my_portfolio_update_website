@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Image from "next/image";
 import {
   Menu,
@@ -41,11 +41,11 @@ export default function HomePage() {
   ];
 
   const menuContent = {
-    About: <AboutMe />,
-    Resume: <ResumeTimeline />,
-    Blogs: <Blog />,
-    Projects: <ProjectPage />,
-    Contact: <Contact />,
+    About: <Suspense fallback={<div className="text-center py-10">Loading...</div>}><AboutMe /></Suspense>,
+    Resume: <Suspense fallback={<div className="text-center py-10">Loading...</div>}><ResumeTimeline /></Suspense>,
+    Blogs: <Suspense fallback={<div className="text-center py-10">Loading...</div>}><Blog /></Suspense>,
+    Projects: <Suspense fallback={<div className="text-center py-10">Loading...</div>}><ProjectPage /></Suspense>,
+    Contact: <Suspense fallback={<div className="text-center py-10">Loading...</div>}><Contact /></Suspense>,
   };
 
   // Array of cover images
@@ -309,7 +309,9 @@ export default function HomePage() {
               exit="exit"
               className="text-gray-200 text-lg w-full"
             >
-              {menuContent[activeTab]}
+            <Suspense fallback={<div className="text-center py-10">Loading...</div>}>
+                {menuContent[activeTab]}
+              </Suspense>
             </motion.div>
           </AnimatePresence>
         </div>
