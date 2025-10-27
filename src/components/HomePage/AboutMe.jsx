@@ -13,7 +13,7 @@ const AboutMe = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.05, // Fast stagger (same as others)
+        staggerChildren: 0.05,
       },
     },
   };
@@ -25,10 +25,10 @@ const AboutMe = () => {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.3, // Fast animation (same as others)
+        duration: 0.3,
         ease: 'easeOut',
         when: 'beforeChildren',
-        staggerChildren: 0.05, // Fast stagger (same as others)
+        staggerChildren: 0.05,
       },
     },
   };
@@ -40,7 +40,7 @@ const AboutMe = () => {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.25, // Fast child animation (same as others)
+        duration: 0.25,
         ease: 'easeOut',
       },
     },
@@ -58,7 +58,7 @@ const AboutMe = () => {
   const isServicesInView = useInView(servicesRef, { once: true, amount: 0.2 });
   const isReviewInView = useInView(reviewRef, { once: true, amount: 0.2 });
 
-    const texts = [
+  const texts = [
     'Creative Front-End Developer',
     'Turning Ideas into Web Reality',
     'MERN Stack Web Developer',
@@ -94,7 +94,7 @@ const AboutMe = () => {
     }
 
     return () => clearTimeout(timeout);
-  }, [displayedText, isDeleting, currentTextIndex]);
+  }, [displayedText, isDeleting, currentTextIndex, texts]); // Added texts to dependency array
 
   return (
     <motion.div
@@ -128,32 +128,29 @@ const AboutMe = () => {
           I am a <span className="text-[#72ebc2]">{displayedText}</span>
         </motion.h1>
         <motion.p
-  variants={childVariants}
-  className="text-gray-500 text-sm leading-relaxed mb-4"
->
-  I&apos;m a passionate MERN Stack and Front-End Developer with a knack for crafting
-  visually stunning and highly functional web applications.
-</motion.p>
-
-<motion.p
-  variants={childVariants}
-  className="text-gray-500 text-sm md:text-sm leading-relaxed mb-4"
->
-  My focus is on building seamless user experiences using modern technologies
-  like React, Node.js, Express, and MongoDB. I love designing sleek UI
-  components, optimizing performance, and bringing creative ideas to life with
-  clean, efficient code.
-</motion.p>
-
-<motion.p
-  variants={childVariants}
-  className="text-gray-500 text-lg md:text-sm leading-relaxed"
->
-  Let&apos;s collaborate to turn your vision into reality with modern,
-  performance-driven, and visually engaging web solutions that stand out in the
-  digital world!
-</motion.p>
-
+          variants={childVariants}
+          className="text-gray-500 text-sm leading-relaxed mb-4"
+        >
+          I&apos;m a passionate MERN Stack and Front-End Developer with a knack for crafting
+          visually stunning and highly functional web applications.
+        </motion.p>
+        <motion.p
+          variants={childVariants}
+          className="text-gray-500 text-sm md:text-sm leading-relaxed mb-4"
+        >
+          My focus is on building seamless user experiences using modern technologies
+          like React, Node.js, Express, and MongoDB. I love designing sleek UI
+          components, optimizing performance, and bringing creative ideas to life with
+          clean, efficient code.
+        </motion.p>
+        <motion.p
+          variants={childVariants}
+          className="text-gray-500 text-lg md:text-sm leading-relaxed"
+        >
+          Let&apos;s collaborate to turn your vision into reality with modern,
+          performance-driven, and visually engaging web solutions that stand out in the
+          digital world!
+        </motion.p>
       </motion.div>
 
       {/* Client Satisfaction Section */}
@@ -172,7 +169,7 @@ const AboutMe = () => {
             borderImage:
               'linear-gradient(to left, rgb(65, 65, 65), rgba(255, 255, 255, 0)) 1',
           }}
-          className="grid  lg:grid-cols-4 text-center grid-cols-2 py-4 justify-between gap-8 text-gray-500"
+          className="grid lg:grid-cols-4 text-center grid-cols-2 py-4 justify-between gap-8 text-gray-500"
         >
           {[
             { value: '100%', label: 'Clients Satisfied' },
@@ -209,7 +206,9 @@ const AboutMe = () => {
         initial="hidden"
         animate={isReviewInView ? 'visible' : 'hidden'}
       >
-        <Suspense fallback={<div className="text-center py-10">Loading...</div>}><ClientReview /></Suspense>
+        <Suspense fallback={<div className="text-center py-10">Loading...</div>}>
+          <ClientReview />
+        </Suspense>
       </motion.div>
     </motion.div>
   );

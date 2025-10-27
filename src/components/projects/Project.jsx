@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { Modal } from 'antd';
 import {
@@ -12,6 +12,121 @@ import {
 import projectPic from '../../../public/cover.jpg';
 import Title from '../shared/Title';
 import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
+
+// ProjectCard component to render individual project cards
+const ProjectCard = ({ project, onOpenModal }) => {
+  const cardRef = useRef(null);
+  const isInView = useInView(cardRef, { once: true, amount: 0.2 });
+
+  // Animation variants for project cards
+  const sectionVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.3,
+        ease: 'easeOut',
+        when: 'beforeChildren',
+        staggerChildren: 0.05,
+      },
+    },
+  };
+
+  // Animation variants for child elements
+  const childVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.25,
+        ease: 'easeOut',
+      },
+    },
+  };
+
+  return (
+    <motion.div
+      ref={cardRef}
+      variants={sectionVariants}
+      initial="hidden"
+      animate={isInView ? 'visible' : 'hidden'}
+      style={{
+        borderTop: '1px solid transparent',
+        borderRight: '1px solid transparent',
+        borderBottom: '1px solid transparent',
+        borderLeft: '1px solid transparent',
+        borderImage:
+          'linear-gradient(to right, rgb(65, 65, 65), rgba(22, 22, 22, 0)) 1',
+      }}
+      className="relative group overflow-hidden"
+    >
+      {/* Project Image */}
+      <motion.div
+        variants={childVariants}
+        className="relative w-full h-64 overflow-hidden"
+      >
+        <Image
+          src={project.image}
+          alt={project.title}
+          fill
+          className="object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+        <div className="absolute inset-0 flex items-center gap-4 justify-center bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 cursor-pointer">
+          <a
+            href={project.codeLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="border border-[#72ebc2] w-[50px] h-[50px] flex justify-center items-center rounded-full text-[#72ebc2] text-xl hover:scale-110 transition transform"
+          >
+            <CodeOutlined />
+          </a>
+          <a
+            href={project.previewLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="border border-[#72ebc2] w-[50px] h-[50px] flex justify-center items-center rounded-full text-[#72ebc2] text-xl hover:scale-110 transition transform"
+          >
+            <EyeOutlined />
+          </a>
+        </div>
+      </motion.div>
+
+      {/* Title & Description */}
+      <motion.div
+        variants={childVariants}
+        className="p-4 flex flex-col gap-2 relative"
+      >
+        <motion.div
+          variants={childVariants}
+          className="flex items-center justify-between"
+        >
+          <motion.h3
+            variants={childVariants}
+            className="text-xl font-bold text-white"
+          >
+            {project.title}
+          </motion.h3>
+          <motion.button
+            variants={childVariants}
+            onClick={() => onOpenModal(project)}
+            className="text-white text-xl hover:text-cyan-400 transition"
+          >
+            <InfoCircleOutlined />
+          </motion.button>
+        </motion.div>
+        <motion.p
+          variants={childVariants}
+          className="text-gray-400"
+        >
+          {project.description}
+        </motion.p>
+      </motion.div>
+    </motion.div>
+  );
+};
 
 export default function ProjectPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -38,30 +153,17 @@ export default function ProjectPage() {
     },
   ];
 
-  // Animation variants for project cards
+  // Animation variants for section
   const sectionVariants = {
     hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.3, // Fast animation (same as SkillSection and Blog)
+        duration: 0.3,
         ease: 'easeOut',
         when: 'beforeChildren',
-        staggerChildren: 0.05, // Fast stagger (same as SkillSection and Blog)
-      },
-    },
-  };
-
-  // Animation variants for child elements
-  const childVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.25, // Fast child animation (same as SkillSection and Blog)
-        ease: 'easeOut',
+        staggerChildren: 0.05,
       },
     },
   };
@@ -86,95 +188,9 @@ export default function ProjectPage() {
         <Title title={'My Projects'} />
       </motion.div>
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-8">
-        {projects.map((project) => {
-          // Create a ref for each project card
-          const cardRef = useRef(null);
-          const isInView = useInView(cardRef, {
-            once: true,
-            amount: 0.2,
-          });
-
-          return (
-            <motion.div
-              key={project.id}
-              ref={cardRef}
-              variants={sectionVariants}
-              initial="hidden"
-              animate={isInView ? 'visible' : 'hidden'}
-              style={{
-                borderTop: '1px solid transparent',
-                borderRight: '1px solid transparent',
-                borderBottom: '1px solid transparent',
-                borderLeft: '1px solid transparent',
-                borderImage:
-                  'linear-gradient(to right, rgb(65, 65, 65), rgba(22, 22, 22, 0)) 1',
-              }}
-              className="relative group overflow-hidden"
-            >
-              {/* Project Image */}
-              <motion.div
-                variants={childVariants}
-                className="relative w-full h-64 overflow-hidden"
-              >
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 flex items-center gap-4 justify-center bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 cursor-pointer">
-                  <a
-                    href={project.codeLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="border border-[#72ebc2] w-[50px] h-[50px] flex justify-center items-center rounded-full text-[#72ebc2] text-xl hover:scale-110 transition transform"
-                  >
-                    <CodeOutlined />
-                  </a>
-                  <a
-                    href={project.previewLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="border border-[#72ebc2] w-[50px] h-[50px] flex justify-center items-center rounded-full text-[#72ebc2] text-xl hover:scale-110 transition transform"
-                  >
-                    <EyeOutlined />
-                  </a>
-                </div>
-              </motion.div>
-
-              {/* Title & Description */}
-              <motion.div
-                variants={childVariants}
-                className="p-4 flex flex-col gap-2 relative"
-              >
-                <motion.div
-                  variants={childVariants}
-                  className="flex items-center justify-between"
-                >
-                  <motion.h3
-                    variants={childVariants}
-                    className="text-xl font-bold text-white"
-                  >
-                    {project.title}
-                  </motion.h3>
-                  <motion.button
-                    variants={childVariants}
-                    onClick={() => openModal(project)}
-                    className="text-white text-xl hover:text-cyan-400 transition"
-                  >
-                    <InfoCircleOutlined />
-                  </motion.button>
-                </motion.div>
-                <motion.p
-                  variants={childVariants}
-                  className="text-gray-400"
-                >
-                  {project.description}
-                </motion.p>
-              </motion.div>
-            </motion.div>
-          );
-        })}
+        {projects.map((project) => (
+          <ProjectCard key={project.id} project={project} onOpenModal={openModal} />
+        ))}
       </div>
 
       {/* Project Details Modal */}

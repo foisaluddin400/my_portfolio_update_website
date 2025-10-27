@@ -5,56 +5,56 @@ import Title from '../shared/Title';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 
 const ClientReview = () => {
-const reviews = [
-  {
-    name: 'John Doe',
-    review:
-      'Amazing work! The website exceeded my expectations with its sleek design and performance. Highly recommend!',
-    date: 'October 20, 2025',
-  },
-  {
-    name: 'Jane Smith',
-    review:
-      'Professional and timely delivery. The UI/UX is top-notch, and the support was excellent.',
-    date: 'October 15, 2025',
-  },
-  {
-    name: 'Mike Johnson',
-    review:
-      'A pleasure to work with. The backend solutions were robust and perfectly tailored to our needs.',
-    date: 'October 10, 2025',
-  },
-  {
-    name: 'Sarah Williams',
-    review:
-      'Foisal created a responsive, visually appealing website that boosted our brand presence online. Fantastic job!',
-    date: 'October 5, 2025',
-  },
-  {
-    name: 'David Brown',
-    review:
-      'His MERN stack knowledge is impressive. The project was delivered faster than expected and performed flawlessly.',
-    date: 'September 30, 2025',
-  },
-  {
-    name: 'Olivia Taylor',
-    review:
-      'Very dedicated and detail-oriented developer. The animations and transitions made our site come alive!',
-    date: 'September 25, 2025',
-  },
-  {
-    name: 'James Anderson',
-    review:
-      'Excellent communication and coding skills. The web app runs smoothly and the design looks premium.',
-    date: 'September 20, 2025',
-  },
-  {
-    name: 'Sophia Martinez',
-    review:
-      'Creative, reliable, and technically strong — Foisal delivered exactly what we needed with a modern touch.',
-    date: 'September 15, 2025',
-  },
-];
+  const reviews = [
+    {
+      name: 'John Doe',
+      review:
+        'Amazing work! The website exceeded my expectations with its sleek design and performance. Highly recommend!',
+      date: 'October 20, 2025',
+    },
+    {
+      name: 'Jane Smith',
+      review:
+        'Professional and timely delivery. The UI/UX is top-notch, and the support was excellent.',
+      date: 'October 15, 2025',
+    },
+    {
+      name: 'Mike Johnson',
+      review:
+        'A pleasure to work with. The backend solutions were robust and perfectly tailored to our needs.',
+      date: 'October 10, 2025',
+    },
+    {
+      name: 'Sarah Williams',
+      review:
+        'Foisal created a responsive, visually appealing website that boosted our brand presence online. Fantastic job!',
+      date: 'October 5, 2025',
+    },
+    {
+      name: 'David Brown',
+      review:
+        'His MERN stack knowledge is impressive. The project was delivered faster than expected and performed flawlessly.',
+      date: 'September 30, 2025',
+    },
+    {
+      name: 'Olivia Taylor',
+      review:
+        'Very dedicated and detail-oriented developer. The animations and transitions made our site come alive!',
+      date: 'September 25, 2025',
+    },
+    {
+      name: 'James Anderson',
+      review:
+        'Excellent communication and coding skills. The web app runs smoothly and the design looks premium.',
+      date: 'September 20, 2025',
+    },
+    {
+      name: 'Sophia Martinez',
+      review:
+        'Creative, reliable, and technically strong — Foisal delivered exactly what we needed with a modern touch.',
+      date: 'September 15, 2025',
+    },
+  ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -65,10 +65,10 @@ const reviews = [
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.3, // Fast animation (same as others)
+        duration: 0.3,
         ease: 'easeOut',
         when: 'beforeChildren',
-        staggerChildren: 0.05, // Fast stagger (same as others)
+        staggerChildren: 0.05,
       },
     },
   };
@@ -80,7 +80,7 @@ const reviews = [
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.25, // Fast child animation (same as others)
+        duration: 0.25,
         ease: 'easeOut',
       },
     },
@@ -93,10 +93,10 @@ const reviews = [
       opacity: 1,
       x: 0,
       transition: {
-        duration: 0.3, // Match section duration
+        duration: 0.3,
         ease: 'easeOut',
         when: 'beforeChildren',
-        staggerChildren: 0.05, // Match stagger
+        staggerChildren: 0.05,
       },
     },
     exit: { opacity: 0, x: -50, transition: { duration: 0.3, ease: 'easeOut' } },
@@ -127,7 +127,7 @@ const reviews = [
 
     // Cleanup interval on component unmount
     return () => clearInterval(interval);
-  }, []);
+  }, [nextSlide]); // Added nextSlide to dependency array
 
   return (
     <div className="pt-16 pb-11">
