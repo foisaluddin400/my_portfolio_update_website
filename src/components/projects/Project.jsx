@@ -13,7 +13,10 @@ import projectPic from '../../../public/cover.jpg';
 import Title from '../shared/Title';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-
+import project1 from '../../../public/img/project_1.png'
+import project2 from '../../../public/img/project_2.png'
+import project3 from '../../../public/img/project_3.jpg'
+import project4 from '../../../public/img/project_4.png'
 // ProjectCard component to render individual project cards
 const ProjectCard = ({ project, onOpenModal }) => {
   const cardRef = useRef(null);
@@ -66,13 +69,13 @@ const ProjectCard = ({ project, onOpenModal }) => {
       {/* Project Image */}
       <motion.div
         variants={childVariants}
-        className="relative w-full h-64 overflow-hidden"
+        className="relative w-full h-60 m-2 overflow-hidden"
       >
         <Image
           src={project.image}
           alt={project.title}
           fill
-          className="object-cover transition-transform duration-500 group-hover:scale-110"
+          className="object-cover object-top transition-transform duration-500 group-hover:scale-110"
         />
         <div className="absolute inset-0 flex items-center gap-4 justify-center bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 cursor-pointer">
           <a
@@ -119,7 +122,7 @@ const ProjectCard = ({ project, onOpenModal }) => {
         </motion.div>
         <motion.p
           variants={childVariants}
-          className="text-gray-400"
+          className="text-gray-400 line-clamp-2"
         >
           {project.description}
         </motion.p>
@@ -135,18 +138,36 @@ export default function ProjectPage() {
   const projects = [
     {
       id: 1,
-      title: 'Project One',
-      description: 'This is a short description of Project One.',
-      image: projectPic,
+      title: 'Profitable Businesses for Sale',
+      description: 'A comprehensive platform to buy and sell profitable businesses with detailed listings and analytics.',
+      image: project1,
       codeLink: 'https://github.com/username/project-one',
-      previewLink: 'https://project-one-demo.com',
+      previewLink: 'https://profitablebusinessesforsale.com',
       details: 'This is the full detailed description of Project One...',
     },
     {
       id: 2,
-      title: 'Project Two',
+      title: 'Cathy\'s Jewelry',
+      description: 'An elegant e-commerce website for Cathy\'s Jewelry, showcasing a wide range of exquisite jewelry pieces with seamless shopping experience.',
+      image: project2,
+      codeLink: 'https://github.com/username/project-two',
+      previewLink: 'https://cathysjewelry.net',
+      details: 'This is the full detailed description of Project Two...',
+    },
+       {
+      id: 3,
+      title: 'Kids Know Rights',
+      description: 'An educational platform dedicated to teaching children about their rights through interactive content and resources.',
+      image: project3,
+      codeLink: 'https://github.com/username/project-two',
+      previewLink: 'https://kidsknowrights.com/',
+      details: 'This is the full detailed description of Project Two...',
+    },
+       {
+      id: 4,
+      title: 'Pending Project',
       description: 'This is a short description of Project Two.',
-      image: projectPic,
+      image: project4,
       codeLink: 'https://github.com/username/project-two',
       previewLink: 'https://project-two-demo.com',
       details: 'This is the full detailed description of Project Two...',
