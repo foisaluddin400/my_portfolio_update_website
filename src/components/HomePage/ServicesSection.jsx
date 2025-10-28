@@ -51,7 +51,7 @@ const ServiceCard = ({ service }) => {
         borderBottom: '1px solid transparent',
         borderLeft: '1px solid transparent',
         borderImage:
-          'linear-gradient(to right, rgb(65, 65, 65), rgb(22, 22, 22)) 1',
+          'linear-gradient(to right, rgb(76, 249, 255), rgba(255, 255, 255, 0)) 1',
       }}
     >
       <motion.div variants={childVariants}>{service.icon}</motion.div>

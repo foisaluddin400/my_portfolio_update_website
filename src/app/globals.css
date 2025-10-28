@@ -17,7 +17,7 @@ body {
 
 /* Glassmorphism Base Styles */
 .glassmorphism {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(17, 153, 158, 0.06);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);

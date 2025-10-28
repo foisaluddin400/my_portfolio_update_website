@@ -89,8 +89,8 @@ export default function Contact() {
           >
             {[
               { label: 'Name', value: 'Momtaj Uddin' },
-              { label: 'Email', value: 'example@email.com' },
-              { label: 'Phone', value: '+880 1234 567890' },
+              { label: 'Email', value: 'foisalrk2@gmail.com' },
+              { label: 'Phone', value: '+880 1605 722887' },
               { label: 'Address', value: 'Dhaka, Bangladesh' },
             ].map((item, idx) => (
               <motion.div key={idx} variants={childVariants}>

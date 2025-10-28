@@ -163,7 +163,7 @@ export default function Blog() {
       >
         <Title title={'My Blogs'} />
       </motion.div>
-      <div className="grid grid-cols-1 md:grid-cols-1 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {portfolioItems.map((item) => (
           <BlogCard key={item.id} item={item} onShowModal={showModal} />
         ))}
