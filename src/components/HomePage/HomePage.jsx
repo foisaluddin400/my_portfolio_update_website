@@ -183,9 +183,9 @@ export default function HomePage() {
                     <Image
                       src={profile}
                       alt="RK Foisal"
-                      width={500}
-                      height={500}
-                      className="object-cover w-[120px] h-[120px] rounded-full border border-[#72ebc2] absolute -bottom-12 left-1/2 transform -translate-x-1/2 shadow-md"
+                      width={1300}
+                      height={1300}
+                      className="object-cover w-[130px] h-[130px] rounded-full border border-[#72ebc2] absolute -bottom-12 left-1/2 transform -translate-x-1/2 shadow-md"
                     />
                   </div>
                   <h2 className="text-2xl mt-16 text-white">RK Foisal</h2>
