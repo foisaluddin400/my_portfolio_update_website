@@ -190,14 +190,7 @@ export function ResumeTimeline() {
                     {item.description}
                   </motion.p>
 
-                  <motion.a
-                    href="#"
-                    className="inline-flex items-center gap-2 text-xs  text-white hover:text-[#72ebc2] transition-colors mt-2"
-                    variants={sectionVariants}
-                  >
-                    {item.actionLabel}
-                    <span className="text-[#72ebc2]">›</span>
-                  </motion.a>
+                  
                 </div>
               </motion.div>
             ))}
@@ -264,14 +257,7 @@ export function ResumeTimeline() {
                     {item.location}
                   </motion.p>
 
-                  <motion.a
-                    href="#"
-                    className="inline-flex items-center gap-2 text-xs  text-white hover:text-[#72ebc2] transition-colors mt-2"
-                    variants={sectionVariants}
-                  >
-                    {item.actionLabel}
-                    <span className="text-[#72ebc2]">›</span>
-                  </motion.a>
+                  
                 </div>
               </motion.div>
             ))}
