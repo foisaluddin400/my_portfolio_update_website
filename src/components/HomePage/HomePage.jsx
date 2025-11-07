@@ -193,7 +193,7 @@ export default function HomePage() {
                 <div className="flex justify-end mt-2 mr-2">
                   <h1 className="p-2 px-4 flex items-center gap-2 text-sm border border-white/10 text-end rounded-full text-white/45 ">
                     <div className="w-[8px] h-[8px] rounded-full bg-[#64e28a]"></div>
-                    <span>Available for <span className="text-[#72ebc2]">3 projects</span></span>
+                    <span>Available for <span className="text-[#72ebc2]">6 projects</span></span>
                   </h1>
                 </div>
                 <div className="flex flex-col items-center px-5">
