@@ -124,7 +124,7 @@ const SkillSection = () => {
               className="text-xl md:text-2xl font-bold text-white tracking-wide"
               variants={childVariants}
             >
-             Technology Skills
+              Technology Skills
             </motion.h2>
           </div>
 
@@ -155,7 +155,7 @@ const SkillSection = () => {
         </motion.div>
 
         {/* Language Skills */}
-         <motion.div
+        <motion.div
           ref={commSkillsRef}
           variants={sectionVariants}
           initial="hidden"
@@ -188,21 +188,21 @@ const SkillSection = () => {
             </motion.h2>
           </div>
           <motion.div
-            className="flex gap-6 flex-wrap"
+            className="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 "
             variants={sectionVariants}
           >
             {[
               { skill: "GitHub", percent: 85 },
-  { skill: "Git", percent: 80 },
-  { skill: "VS Code", percent: 90 },
-  { skill: "Figma", percent: 75 },
-  { skill: "Postman", percent: 80 },
-  { skill: "Vercel", percent: 85 },
-  { skill: "Netlify", percent: 80 },
-   { skill: "Framer Motion", percent: 85 },
-  { skill: "Canva", percent: 70 },
-  { skill: "Dialogflow", percent: 75 }, // updated chatbot tool
-  { skill: "Chrome DevTools", percent: 90 },
+              { skill: "Git", percent: 80 },
+              { skill: "VS Code", percent: 90 },
+              { skill: "Figma", percent: 75 },
+              { skill: "Postman", percent: 80 },
+              { skill: "Vercel", percent: 85 },
+              { skill: "Netlify", percent: 80 },
+              { skill: "Framer Motion", percent: 85 },
+              { skill: "Canva", percent: 70 },
+              { skill: "Dialogflow", percent: 75 }, 
+              { skill: "Chrome DevTools", percent: 90 },
             ].map((item, index) => (
               <motion.div
                 key={index}
@@ -224,8 +224,8 @@ const SkillSection = () => {
         </motion.div>
 
         {/* Communication Skills */}
-     
-  <motion.div
+
+        <motion.div
           ref={langSkillsRef}
           variants={sectionVariants}
           initial="hidden"

@@ -168,7 +168,7 @@ export default function HomePage() {
                       }`}
                     >
                       <item.icon className="w-5 h-5 z-10" />
-                      <span className="absolute bottom-[5px] md:left-10 sm:left-1/2 md:top-1/2 sm:-translate-x-1/2 md:-translate-y-1/2 opacity-0 transform sm:-translate-y-2 md:translate-x-4 transition-all duration-300 ml-3 ease-in-out whitespace-nowrap group-hover:opacity-100 group-hover:sm:-translate-y-0 group-hover:md:translate-x-0">
+                      <span className="absolute bottom-[2px] md:left-10 sm:left-1/2  sm:-translate-x-1/2  opacity-0 transform sm:-translate-y-2  transition-all duration-300 ml-3 ease-in-out whitespace-nowrap group-hover:opacity-100 group-hover:sm:-translate-y-0 group-hover:md:translate-x-0">
                         {item.label}
                       </span>
                     </button>
