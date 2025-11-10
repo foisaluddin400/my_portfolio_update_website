@@ -108,14 +108,12 @@ export default function HomePage() {
     }
   };
 
-  // Animation variants for cover image
   const slideVariants = {
     enter: { opacity: 0 },
     center: { opacity: 1 },
     exit: { opacity: 0 },
   };
 
-  // Animation variants for section content
   const sectionVariants = {
     initial: {
       opacity: 0,
@@ -145,13 +143,11 @@ export default function HomePage() {
         WebkitBackdropFilter: "blur(8px)",
         backdropFilter: "blur(8px)",
       }}
-      className="sm:block md:flex min-h-screen text-white overflow-hidden bg-white/6 backdrop-blur-md bg-[#1818186e] border border-white/10 shadow-lg"
+      className="sm:block md:flex min-h-screen text-white bg-white/6 backdrop-blur-md bg-[#1818186e] border border-white/10 shadow-lg"
     >
-      {/* Left-Side Section (Hidden for non-About tabs on mobile only) */}
       {isLeftSectionVisible && (
-        <div className="sm:w-full md:w-[360px] lg:w-[460px] no-scrollbar md:flex md:flex-col md:items-center md:fixed md:overflow-y-auto">
+        <div className="sm:w-full md:w-[360px] lg:w-[460px]  md:flex md:flex-col md:items-center md:fixed md:overflow-y-auto">
           <div className="flex items-center md:h-screen ">
-            {/* Navigation Menu (Desktop) */}
             <div className="hidden md:flex">
               <div
                 className="bg-white/6 backdrop-blur-xl border border-white/10 bg-[#2b2b2b6e] z-50 rounded-xl sm:w-full sm:mx-auto md:w-auto md:py-2 md:mr-3"
@@ -182,9 +178,9 @@ export default function HomePage() {
             </div>
 
             {/* Profile Card */}
-            <div className="sm:mt-4 md:mt-0 md:-ml-9 w-full mx-auto">
+            <div className="pt-[54px] md:mt-0 md:-ml-9 w-full max-w-md mx-auto">
               <div
-                className="md:rounded-xl overflow-hidden bg-white/6 backdrop-blur-md bg-[#2222226e] border border-white/10 shadow-lg"
+                className="md:rounded-xl bg-white/6 overflow-hidden backdrop-blur-md bg-[#2222226e] border border-white/10 shadow-lg"
                 style={{
                   WebkitBackdropFilter: "blur(10px)",
                   backdropFilter: "blur(10px)",
@@ -193,12 +189,13 @@ export default function HomePage() {
                 <div className="flex justify-end mt-2 mr-2">
                   <h1 className="p-2 px-4 flex items-center gap-2 text-sm border border-white/10 text-end rounded-full text-white/45 ">
                     <div className="w-[8px] h-[8px] rounded-full bg-[#64e28a]"></div>
-                    <span>Available for <span className="text-[#72ebc2]">6 projects</span></span>
+                    <span>
+                      Available for{" "}
+                      <span className="text-[#72ebc2]">6 projects</span>
+                    </span>
                   </h1>
                 </div>
                 <div className="flex flex-col items-center px-5">
-                  
-
                   <Image
                     style={{
                       borderBottom: "1px solid transparent",
@@ -206,10 +203,10 @@ export default function HomePage() {
                         "linear-gradient(to right, rgb(65, 65, 65), rgb(22, 22, 22)) 1",
                     }}
                     src={profile}
-                    alt="RK Foisal"
+                    alt="RK Foisal - Web Developer, MERN Stack Developer"
                     width={2000}
                     height={1300}
-                    className=" px-3  md:h-[400px] object-cover w-full"
+                    className=" px-3 h-[70vh] md:h-[400px] object-cover w-full"
                   />
 
                   <h2 className="text-2xl mt-5 text-white">RK Foisal</h2>
@@ -223,38 +220,54 @@ export default function HomePage() {
                     </span>
                   </div>
                   <div className="flex gap-4 mt-11">
-                    <Link href={'https://www.facebook.com/rh.foisal'}><div className="group relative flex items-center">
-                      <span className="border border-gray-600 text-gray-400 hover:bg-[#72ebc2]/10 rounded-full w-[40px] h-[40px] flex justify-center items-center transition-all duration-300 group-hover:border-[#72ebc2] group-hover:text-[#72ebc2]">
-                        <SlSocialFacebook size={18} />
-                      </span>
-                      <span className="absolute bottom-12 opacity-0 translate-x-[-10px] group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-sm text-[#72ebc2]">
-                        Facebook
-                      </span>
-                    </div></Link>
-                    <Link href={'mailto:foisalrk2@gmail.com?subject=Subject%20Here&body=Body%20Text%20Here'}><div className="group relative flex items-center">
-                      <span className="border border-gray-600 text-gray-400 hover:bg-[#72ebc2]/10 rounded-full w-[40px] h-[40px] flex justify-center items-center transition-all duration-300 group-hover:border-[#72ebc2] group-hover:text-[#72ebc2]">
-                        <TfiEmail size={18} />
-                      </span>
-                      <span className="absolute bottom-12 opacity-0 translate-x-[-10px] group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-sm text-[#72ebc2]">
-                        Email
-                      </span>
-                    </div></Link>
-                    <Link href={'https://wa.me/qr/UTAPNSAOBUXKH1'}><div className="group relative flex items-center">
-                      <span className="border border-gray-600 text-gray-400 hover:bg-[#72ebc2]/10 rounded-full w-[40px] h-[40px] flex justify-center items-center transition-all duration-300 group-hover:border-[#72ebc2] group-hover:text-[#72ebc2]">
-                        <FiPhoneCall size={18} />
-                      </span>
-                      <span className="absolute bottom-12 opacity-0 translate-x-[-10px] group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-sm text-[#72ebc2]">
-                        Phone
-                      </span>
-                    </div></Link>
-                    <Link href={'https://www.instagram.com/rkfoisal330?igsh=ejZvOTg0cWV4dmFj'}><div className="group relative flex items-center">
-                      <span className="border border-gray-600 text-gray-400 hover:bg-[#72ebc2]/10 rounded-full w-[40px] h-[40px] flex justify-center items-center transition-all duration-300 group-hover:border-[#72ebc2] group-hover:text-[#72ebc2]">
-                        <IoLogoInstagram size={18} />
-                      </span>
-                      <span className="absolute bottom-12 opacity-0 translate-x-[-10px] group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-sm text-[#72ebc2]">
-                        Instagram
-                      </span>
-                    </div></Link>
+                    <Link href={"https://www.facebook.com/rh.foisal"}>
+                      <div className="group relative flex items-center">
+                        <span className="border border-gray-600 text-gray-400 hover:bg-[#72ebc2]/10 rounded-full w-[40px] h-[40px] flex justify-center items-center transition-all duration-300 group-hover:border-[#72ebc2] group-hover:text-[#72ebc2]">
+                          <SlSocialFacebook size={18} />
+                        </span>
+                        <span className="absolute bottom-12 opacity-0 translate-x-[-10px] group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-sm text-[#72ebc2]">
+                          Facebook
+                        </span>
+                      </div>
+                    </Link>
+                    <Link
+                      href={
+                        "mailto:foisalrk2@gmail.com?subject=Subject%20Here&body=Body%20Text%20Here"
+                      }
+                    >
+                      <div className="group relative flex items-center">
+                        <span className="border border-gray-600 text-gray-400 hover:bg-[#72ebc2]/10 rounded-full w-[40px] h-[40px] flex justify-center items-center transition-all duration-300 group-hover:border-[#72ebc2] group-hover:text-[#72ebc2]">
+                          <TfiEmail size={18} />
+                        </span>
+                        <span className="absolute bottom-12 opacity-0 translate-x-[-10px] group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-sm text-[#72ebc2]">
+                          Email
+                        </span>
+                      </div>
+                    </Link>
+                    <Link href={"https://wa.me/qr/UTAPNSAOBUXKH1"}>
+                      <div className="group relative flex items-center">
+                        <span className="border border-gray-600 text-gray-400 hover:bg-[#72ebc2]/10 rounded-full w-[40px] h-[40px] flex justify-center items-center transition-all duration-300 group-hover:border-[#72ebc2] group-hover:text-[#72ebc2]">
+                          <FiPhoneCall size={18} />
+                        </span>
+                        <span className="absolute bottom-12 opacity-0 translate-x-[-10px] group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-sm text-[#72ebc2]">
+                          Phone
+                        </span>
+                      </div>
+                    </Link>
+                    <Link
+                      href={
+                        "https://www.instagram.com/rkfoisal330?igsh=ejZvOTg0cWV4dmFj"
+                      }
+                    >
+                      <div className="group relative flex items-center">
+                        <span className="border border-gray-600 text-gray-400 hover:bg-[#72ebc2]/10 rounded-full w-[40px] h-[40px] flex justify-center items-center transition-all duration-300 group-hover:border-[#72ebc2] group-hover:text-[#72ebc2]">
+                          <IoLogoInstagram size={18} />
+                        </span>
+                        <span className="absolute bottom-12 opacity-0 translate-x-[-10px] group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-sm text-[#72ebc2]">
+                          Instagram
+                        </span>
+                      </div>
+                    </Link>
                   </div>
                   <div className="grid grid-cols-2 gap-4 w-full mt-11 ">
                     <button
@@ -268,17 +281,24 @@ export default function HomePage() {
                     >
                       <Cloud className="" /> Resume
                     </button>
-                   <Link href={'https://drive.google.com/file/d/1cyfX7cIfWpCgSdd207s8j_oU1jekdiKq/view?usp=drivesdk'}> <button
-                      style={{
-                        borderTop: "1px solid transparent",
-                        borderLeft: "1px solid transparent",
-                        borderImage:
-                          "linear-gradient(to right, #72ebc2, rgb(22, 22, 22)) 1",
-                      }}
-                      className="flex items-center  justify-center gap-2 p-2 bg-white/6 hover:bg-[#72ebc2]/10 text-[#72ebc2]"
+                    <Link
+                      href={
+                        "https://drive.google.com/file/d/1cyfX7cIfWpCgSdd207s8j_oU1jekdiKq/view?usp=drivesdk"
+                      }
                     >
-                      <Cloud className="" /> Download CV
-                    </button></Link>
+                      {" "}
+                      <button
+                        style={{
+                          borderTop: "1px solid transparent",
+                          borderLeft: "1px solid transparent",
+                          borderImage:
+                            "linear-gradient(to right, #72ebc2, rgb(22, 22, 22)) 1",
+                        }}
+                        className="flex items-center  justify-center gap-2 p-2 bg-white/6 hover:bg-[#72ebc2]/10 text-[#72ebc2]"
+                      >
+                        <Cloud className="" /> Download CV
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -288,31 +308,33 @@ export default function HomePage() {
       )}
 
       {/* Mobile Navigation (Always Visible) */}
-      <div className="md:hidden">
-        <div
-          className="bg-white/6 flex bottom-2 fixed left-1/2 transform -translate-x-1/2 backdrop-blur-md border border-white/10 z-50 rounded-xl sm:w-full sm:mx-auto md:w-auto px-2"
-          style={{
-            WebkitBackdropFilter: "blur(10px)",
-            backdropFilter: "blur(10px)",
-          }}
-        >
-          <div className="flex flex-row sm:justify-center sm:gap-2 md:gap-0">
-            {navItems.map((item) => (
-              <button
-                key={item.label}
-                onClick={() => handleTabChange(item.label, item.id)}
-                className={`flex items-center gap-3 p-4 transition-all duration-300 ease-in-out transform hover:scale-105 hover:text-[#72ebc2] relative group ${
-                  activeTab === item.label
-                    ? "text-[#72ebc2] border-b border-[#72ebc2]"
-                    : "text-gray-500"
-                }`}
-              >
-                <item.icon className="w-5 h-5 z-10" />
-                <span className="absolute -top-7 left-1/2 transform -translate-x-1/2 opacity-0 transition-all duration-300 ease-in-out whitespace-nowrap group-hover:opacity-100 group-hover:translate-y-2">
-                  {item.label}
-                </span>
-              </button>
-            ))}
+      <div className="">
+        <div className="md:hidden ">
+          <div
+            className="bg-white/6 flex justify-center w-full items-center top-0 fixed  backdrop-blur-md border border-white/10 z-50 sm:w-full sm:mx-auto md:w-auto "
+            style={{
+              WebkitBackdropFilter: "blur(10px)",
+              backdropFilter: "blur(10px)",
+            }}
+          >
+            <div className=" flex justify-center w-full sm:gap-2 md:gap-0">
+              {navItems.map((item) => (
+                <button
+                  key={item.label}
+                  onClick={() => handleTabChange(item.label, item.id)}
+                  className={`flex items-center gap-3 p-4 transition-all duration-300 ease-in-out transform hover:scale-105 hover:text-[#72ebc2] relative group ${
+                    activeTab === item.label
+                      ? "text-[#72ebc2] border-b border-[#72ebc2]"
+                      : "text-gray-500"
+                  }`}
+                >
+                  <item.icon className="w-5 h-5 z-10" />
+                  <span className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 opacity-0 transition-all duration-300 ease-in-out whitespace-nowrap group-hover:opacity-100 group-hover:translate-y-2">
+                    {item.label}
+                  </span>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </div>
