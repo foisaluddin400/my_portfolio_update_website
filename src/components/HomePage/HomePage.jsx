@@ -143,14 +143,14 @@ export default function HomePage() {
         WebkitBackdropFilter: "blur(8px)",
         backdropFilter: "blur(8px)",
       }}
-      className="sm:block md:flex min-h-screen text-white bg-white/6 backdrop-blur-md bg-[#1818186e] border border-white/10 shadow-lg"
+      className="sm:block md:flex  min-h-screen text-white bg-white/6 backdrop-blur-md bg-[#1818186e] border border-white/10 shadow-lg"
     >
       {isLeftSectionVisible && (
-        <div className="sm:w-full md:w-[360px] lg:w-[460px]  md:flex md:flex-col md:items-center md:fixed md:overflow-y-auto">
+        <div className="sm:w-full md:w-[360px] lg:w-[460px]  md:flex md:flex-col md:items-center md:fixed md:overflow-y-auto no-scrollbar">
           <div className="flex items-center md:h-screen ">
             <div className="hidden md:flex">
               <div
-                className="bg-white/6 backdrop-blur-xl border border-white/10 bg-[#2b2b2b6e] z-50 rounded-xl sm:w-full sm:mx-auto md:w-auto md:py-2 md:mr-3"
+                className="bg-white/6  backdrop-blur-xl border border-white/10 bg-[#2b2b2b6e] z-50 rounded-xl sm:w-full sm:mx-auto md:w-auto md:py-2 md:mr-3"
                 style={{
                   WebkitBackdropFilter: "blur(10px)",
                   backdropFilter: "blur(10px)",
