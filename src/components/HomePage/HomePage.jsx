@@ -340,7 +340,7 @@ export default function HomePage() {
       </div>
 
       {/* Content Area */}
-      <div className="sm:mt-4 flex md:items-center md:w-full mt-5 md:mt-0">
+      <div className=" flex md:items-center md:w-full mt-16 md:mt-0">
         <div
           className={`w-full ${
             isLeftSectionVisible ? "md:ml-[370px] lg:ml-[420px]" : "md:ml-0"

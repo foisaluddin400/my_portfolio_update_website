@@ -109,7 +109,7 @@ const AboutMe = () => {
         variants={sectionVariants}
         initial="hidden"
         animate={isAboutInView ? 'visible' : 'hidden'}
-        className="mb-16"
+        className="mb-16 -mt-9 md:mt-0"
       >
         <motion.div
           variants={childVariants}
@@ -123,7 +123,7 @@ const AboutMe = () => {
         </motion.div>
         <motion.h1
           variants={childVariants}
-          className="mt-9 mb-4 text-5xl"
+          className="mt-9 mb-4 md:text-5xl text-3xl"
         >
           I am a <span className="text-[#72ebc2]">{displayedText}</span>
         </motion.h1>
