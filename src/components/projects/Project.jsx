@@ -181,6 +181,87 @@ It is designed with a professional and modern architecture — **fully asynchron
         ],
       },
     },
+     {
+  id: 9,
+  title: 'ShopFlow',
+  description:
+    'A modern, customizable e-commerce platform where users can design products (T-shirts, mugs, etc.), add to cart, and pay securely via Stripe — powered by MERN stack with full admin control.',
+  image: project4,
+  codeLink: 'https://github.com/username/project-four',
+  previewLink: 'https://tshirtsexpress.com',
+  details: {
+    overview: `
+**ShopFlow** is a **next-gen customizable e-commerce platform** built with the **MERN stack**.  
+Users can **design their own products** (T-shirts, hoodies, mugs, phone cases) using an **in-browser visual editor**, add them to a **persistent cart**, and complete checkout with **Stripe**.  
+All orders, inventory, and designs are managed via a **comprehensive admin dashboard** with real-time analytics.
+    `,
+
+    // ── User Features (Frontend) ─────────────────────────────
+    features: [
+      'Live product customizer (drag-and-drop text, clipart, colors)',
+      'Real-time preview with zoom & 360° view (for supported items)',
+      'Save designs for later (guest & logged-in users)',
+      'Smart cart with auto-save (localStorage + backend sync)',
+      'Guest checkout + user accounts with order history',
+      'Stripe Payments (Credit Card, Apple Pay, Google Pay)',
+      'Order confirmation emails with design preview (Nodemailer + React Email)',
+      'Wishlist, recently viewed, and recommended products',
+      'Responsive design – mobile-first experience',
+    ],
+
+    // ── Product Customization Engine ────────────────────────
+    customization: [
+      'Canvas-based editor using Fabric.js',
+      'Upload personal images (PNG/JPG) with auto-crop',
+      'Text styling: font family, size, color, bold/italic, alignment',
+      'Pre-built clipart library (1000+ SVG icons)',
+      'Color picker for product variants (e.g., T-shirt color)',
+      'Layer management (bring to front/back, lock, delete)',
+      'Design templates (e.g., "Birthday", "Team", "Quote")',
+      'Auto-save design every 10 seconds',
+    ],
+
+    // ── Admin Dashboard ─────────────────────────────────────
+    admin: [
+      'Add/edit products (name, base price, variants, stock)',
+      'Upload product mockup templates (front/back/side views)',
+      'Manage categories & collections',
+      'View & process orders (Pending → Processing → Shipped → Delivered)',
+      'Refund via Stripe dashboard integration',
+      'Inventory tracking with low-stock alerts',
+      'Sales analytics (daily, weekly, top products)',
+      'User management (ban, view orders)',
+      'Design approval queue (for print-on-demand safety)',
+      'Export orders (CSV/PDF)',
+    ],
+
+    // ── Technologies Used ───────────────────────────────────
+    technologies: [
+      'Next.js (App Router + Server Actions)',
+      'Tailwind CSS + Headless UI',
+      'Ant Design (admin panel)',
+      'Node.js + Express',
+      'MongoDB (products, orders, designs)',
+      'Stripe API + Webhooks',
+      'Fabric.js (canvas editor)',
+      'Cloudinary (image processing & CDN)',
+      'JWT + HTTP-only cookies',
+    ],
+
+    // ── Key Highlights ──────────────────────────────────────
+    highlights: [
+      'Full-stack **print-on-demand** ready (integrates with Printful API in future)',
+      'Designs saved as SVG + PNG for production',
+      'Stripe webhooks handle payment success/failure automatically',
+      'Server-side rendering for SEO-optimized product pages',
+      'PWA support – installable on mobile',
+      'Accessibility: keyboard navigation in editor, ARIA labels',
+      'Performance: lazy-loaded editor, code splitting, image optimization',
+      'Admin panel secured with 2FA & role-based access',
+      'Deployed on Vercel (frontend) + Render (backend)',
+    ],
+  },
+},
     {
   id: 2,
   title: "Cathy's Jewelry",
@@ -318,87 +399,7 @@ The entire content is managed via a **secure admin dashboard**, and the site sup
     ],
   },
 },
-  {
-  id: 4,
-  title: 'ShopFlow',
-  description:
-    'A modern, customizable e-commerce platform where users can design products (T-shirts, mugs, etc.), add to cart, and pay securely via Stripe — powered by MERN stack with full admin control.',
-  image: project4,
-  codeLink: 'https://github.com/username/project-four',
-  previewLink: 'https://shopflow-demo.com',
-  details: {
-    overview: `
-**ShopFlow** is a **next-gen customizable e-commerce platform** built with the **MERN stack**.  
-Users can **design their own products** (T-shirts, hoodies, mugs, phone cases) using an **in-browser visual editor**, add them to a **persistent cart**, and complete checkout with **Stripe**.  
-All orders, inventory, and designs are managed via a **comprehensive admin dashboard** with real-time analytics.
-    `,
-
-    // ── User Features (Frontend) ─────────────────────────────
-    features: [
-      'Live product customizer (drag-and-drop text, clipart, colors)',
-      'Real-time preview with zoom & 360° view (for supported items)',
-      'Save designs for later (guest & logged-in users)',
-      'Smart cart with auto-save (localStorage + backend sync)',
-      'Guest checkout + user accounts with order history',
-      'Stripe Payments (Credit Card, Apple Pay, Google Pay)',
-      'Order confirmation emails with design preview (Nodemailer + React Email)',
-      'Wishlist, recently viewed, and recommended products',
-      'Responsive design – mobile-first experience',
-    ],
-
-    // ── Product Customization Engine ────────────────────────
-    customization: [
-      'Canvas-based editor using Fabric.js',
-      'Upload personal images (PNG/JPG) with auto-crop',
-      'Text styling: font family, size, color, bold/italic, alignment',
-      'Pre-built clipart library (1000+ SVG icons)',
-      'Color picker for product variants (e.g., T-shirt color)',
-      'Layer management (bring to front/back, lock, delete)',
-      'Design templates (e.g., "Birthday", "Team", "Quote")',
-      'Auto-save design every 10 seconds',
-    ],
-
-    // ── Admin Dashboard ─────────────────────────────────────
-    admin: [
-      'Add/edit products (name, base price, variants, stock)',
-      'Upload product mockup templates (front/back/side views)',
-      'Manage categories & collections',
-      'View & process orders (Pending → Processing → Shipped → Delivered)',
-      'Refund via Stripe dashboard integration',
-      'Inventory tracking with low-stock alerts',
-      'Sales analytics (daily, weekly, top products)',
-      'User management (ban, view orders)',
-      'Design approval queue (for print-on-demand safety)',
-      'Export orders (CSV/PDF)',
-    ],
-
-    // ── Technologies Used ───────────────────────────────────
-    technologies: [
-      'Next.js (App Router + Server Actions)',
-      'Tailwind CSS + Headless UI',
-      'Ant Design (admin panel)',
-      'Node.js + Express',
-      'MongoDB (products, orders, designs)',
-      'Stripe API + Webhooks',
-      'Fabric.js (canvas editor)',
-      'Cloudinary (image processing & CDN)',
-      'JWT + HTTP-only cookies',
-    ],
-
-    // ── Key Highlights ──────────────────────────────────────
-    highlights: [
-      'Full-stack **print-on-demand** ready (integrates with Printful API in future)',
-      'Designs saved as SVG + PNG for production',
-      'Stripe webhooks handle payment success/failure automatically',
-      'Server-side rendering for SEO-optimized product pages',
-      'PWA support – installable on mobile',
-      'Accessibility: keyboard navigation in editor, ARIA labels',
-      'Performance: lazy-loaded editor, code splitting, image optimization',
-      'Admin panel secured with 2FA & role-based access',
-      'Deployed on Vercel (frontend) + Render (backend)',
-    ],
-  },
-},
+ 
     {
   id: 5,
   title: 'dentalCare',
