@@ -9,7 +9,7 @@ import React from 'react'
       name: "RK Foisal",
       alternateName: ["Foisal", "R K Foisal"],
       jobTitle: "Full Stack Web Developer",
-      url: "https://rkfoisal-portfolio.vercel.app",
+      url: "https://main-portfolio-using-react-ymia.vercel.app",
       sameAs: [
         "https://github.com/foisaluddin400",
         "https://www.facebook.com/rh.foisal",
@@ -37,14 +37,14 @@ export const metadata = {
   ],
 
   alternates: {
-    canonical: "https://rkfoisal-portfolio.vercel.app",
+    canonical: "https://main-portfolio-using-react-ymia.vercel.app",
   },
 
   openGraph: {
     title: "RK Foisal | Full Stack Web Developer (MERN)",
     description:
       "Official portfolio website of RK Foisal, a professional Full Stack Web Developer and MERN Stack specialist.",
-    url: "https://rkfoisal-portfolio.vercel.app",
+    url: "https://main-portfolio-using-react-ymia.vercel.app",
     siteName: "RK Foisal Portfolio",
     images: [
       {
