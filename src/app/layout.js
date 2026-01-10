@@ -11,7 +11,7 @@ const style = localFont({
   variable: "--style-display"
   
 });
-
+//
 
 const playSans = localFont({
   src: "../font/Syne-Regular-BF642e31d3934f5.otf",
