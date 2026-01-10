@@ -32,12 +32,56 @@ const geistMono = localFont({
 });
 
 export const metadata = {
-  title: "RK Foisal",
-  description: "RK Foisal's Personal Portfolio Website showcasing projects, blogs, resume, and contact information.",
-   icons: {
-    icon: "/vercel.svg",
+  title: {
+    default: "RK Foisal | Full Stack Web Developer (MERN)",
+    template: "%s | RK Foisal",
+  },
+
+  description:
+    "RK Foisal is a Full Stack Web Developer specializing in MERN stack development. This personal portfolio showcases projects, blogs, skills, resume, and contact information.",
+
+  keywords: [
+    "RK Foisal",
+    "Full Stack Web Developer",
+    "MERN Stack Developer",
+    "React Developer",
+    "Next.js Developer",
+    "Web Developer Portfolio",
+    "Software Developer Bangladesh",
+  ],
+
+  authors: [{ name: "RK Foisal" }],
+  creator: "RK Foisal",
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+
+  icons: {
+    icon: "/favicon.ico",
+  },
+
+  openGraph: {
+    title: "RK Foisal | Full Stack Web Developer (MERN)",
+    description:
+      "Explore the portfolio of RK Foisal, a Full Stack Web Developer and MERN Stack specialist building modern, scalable web applications.",
+    siteName: "RK Foisal Portfolio",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "RK Foisal | Full Stack Web Developer (MERN)",
+    description:
+      "Portfolio of RK Foisal – Full Stack Web Developer specializing in MERN stack.",
   },
 };
+
 
 export default function RootLayout({ children }) {
   return (

@@ -1,65 +1,75 @@
-"use client";
-import { Suspense, useEffect } from "react";
-import HomePage from "@/components/HomePage/HomePage";
+import Main from '@/components/Main'
+import React from 'react'
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: "RK Foisal",
+      alternateName: ["Foisal", "R K Foisal"],
+      jobTitle: "Full Stack Web Developer",
+      url: "https://rkfoisal-portfolio.vercel.app",
+      sameAs: [
+        "https://github.com/foisaluddin400",
+        "https://www.facebook.com/rh.foisal",
+        "https://www.instagram.com/rkfoisal330?igsh=ejZvOTg0cWV4dmFj",
+        "https://wa.me/qr/UTAPNSAOBUXKH1",
+      ],
+    }),
+  }}
+/>
 
-export default function Home() {
-  useEffect(() => {
-    const lines = document.querySelectorAll("#cyberlines line");
+export const metadata = {
+  title: "RK Foisal | Full Stack Web Developer (MERN)",
+  description:
+    "RK Foisal is a Full Stack Web Developer specializing in MERN stack development. This is the official personal portfolio of Foisal showcasing projects, skills, experience, and contact information.",
 
-    const animate = () => {
-      // lines move slowly downward
-      lines.forEach((line) => {
-        const y1 = parseFloat(line.getAttribute("y1"));
-        const y2 = parseFloat(line.getAttribute("y2"));
-        let newY1 = y1 + 1;
-        let newY2 = y2 + 1;
-        if (newY1 > 1080) newY1 = 0;
-        if (newY2 > 1080) newY2 = 0;
-        line.setAttribute("y1", newY1);
-        line.setAttribute("y2", newY2);
-      });
-      requestAnimationFrame(animate);
-    };
-    animate();
-  }, []);
+  keywords: [
+    "RK Foisal",
+    "Foisal",
+    "Full Stack Web Developer",
+    "MERN Stack Developer",
+    "React Developer",
+    "Next.js Developer",
+    "Web Developer Portfolio",
+    "Software Developer Bangladesh",
+  ],
 
+  alternates: {
+    canonical: "https://rkfoisal-portfolio.vercel.app",
+  },
+
+  openGraph: {
+    title: "RK Foisal | Full Stack Web Developer (MERN)",
+    description:
+      "Official portfolio website of RK Foisal, a professional Full Stack Web Developer and MERN Stack specialist.",
+    url: "https://rkfoisal-portfolio.vercel.app",
+    siteName: "RK Foisal Portfolio",
+    images: [
+      {
+        url: "/logo.png",
+        width: 512,
+        height: 512,
+        alt: "RK Foisal Portfolio Logo",
+      },
+    ],
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "RK Foisal | Full Stack Web Developer (MERN)",
+    description:
+      "Portfolio of RK Foisal – Full Stack Web Developer (MERN Stack).",
+    images: ["/logo.png"],
+  },
+};
+
+const page = () => {
   return (
-    <div
-      className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#222222] via-[#0f0f0f] to-[#252525] bg-cover bg-center"
-    >
-      {/* 🌌 Cyberline animated layer */}
-      <div className="absolute inset-0 overflow-hidden">
-        <svg
-          id="cyberlines"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1920 1080"
-          preserveAspectRatio="none"
-          className="w-full h-full opacity-80 blur-[0.5px]"
-        >
-          <g className="lines" stroke="#72ebc2" strokeWidth="1.3">
-            {[...Array(25)].map((_, i) => (
-              <line
-                key={i}
-                x1={Math.random() * 1920}
-                y1={Math.random() * 1080}
-                x2={Math.random() * 1920}
-                y2={Math.random() * 1080}
-                opacity={0.3 + Math.random() * 0.6}
-              />
-            ))}
-          </g>
-        </svg>
-      </div>
-
-      {/* ✨ Subtle dark overlay for depth */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/70"></div>
-
-      {/* 🌟 Main content */}
-      <div className="relative z-10 font-clash">
-        <Suspense fallback={<div className="text-center py-10">Loading...</div>}>
-        <HomePage />
-        </Suspense>
-      </div>
-    </div>
-  );
+    <Main></Main>
+  )
 }
+
+export default page
