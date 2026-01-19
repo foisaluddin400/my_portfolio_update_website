@@ -44,7 +44,7 @@ const ServiceCard = ({ service }) => {
       variants={sectionVariants}
       initial="hidden"
       animate={isInView ? 'visible' : 'hidden'}
-      className="p-6 rounded-xl shadow-lg text-center hover:scale-105 transition-all duration-300 relative"
+      className="p-6 rounded-xl bg-gradient-to-b from-white/5 to-white/2 backdrop-blur-xl border border-white/10 shadow-lg text-center hover:scale-105 transition-all duration-300 relative"
       style={{
         borderTop: '1px solid transparent',
         borderRight: '1px solid transparent',

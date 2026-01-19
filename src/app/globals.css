@@ -118,3 +118,70 @@ body {
 .no-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
+
+
+
+
+
+
+
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotateBorder {
+  to {
+    --angle: 360deg;
+  }
+}
+
+.animated-border-card {
+  position: relative;
+  border: 2px solid transparent;           /* important */
+  background: 
+    linear-gradient(#202020, #161616) padding-box,   /* your card bg */
+    conic-gradient(
+      from var(--angle),
+      #35484b 0deg 60deg,
+      transparent 100deg 200deg,
+      #35484b 260deg 320deg,
+      transparent 340deg
+    ) border-box;
+  
+  border-radius: 12px;          /* md:rounded-xl */
+  animation: rotateBorder 10s linear infinite;
+  overflow: hidden;
+}
+
+/* Optional: slower & smoother glow version */
+.animated-border-card.glow::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: conic-gradient(
+    from calc(var(--angle) - 90deg),
+    transparent 0deg 120deg,
+    #72ebc2 140deg 180deg,
+    transparent 200deg
+  );
+  filter: blur(8px);
+  opacity: 0.6;
+  z-index: -1;
+  animation: rotateBorder 6s linear infinite;
+}
+
+
+
+
+
+/* tailwind.config.js or global css */
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.3; transform: scale(0.98); }
+  50%      { opacity: 0.5; transform: scale(1.02); }
+}
+.animate-pulse-slow {
+  animation: pulse-slow 8s infinite ease-in-out;
+}

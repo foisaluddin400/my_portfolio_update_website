@@ -22,6 +22,7 @@ import cover2 from "../../../public/cover_2.jpg";
 import cover3 from "../../../public/cover_3.png";
 import cover4 from "../../../public/cover_4.png";
 import profile from "../../../public/profile.png";
+
 import AboutMe from "./AboutMe";
 import { ResumeTimeline } from "../resume/Resume";
 import Blog from "../blogs/Blog";
@@ -143,14 +144,14 @@ export default function HomePage() {
         WebkitBackdropFilter: "blur(8px)",
         backdropFilter: "blur(8px)",
       }}
-      className="sm:block md:flex  min-h-screen text-white bg-white/6 backdrop-blur-md bg-[#1818186e] border border-white/10 shadow-lg"
+      className="sm:block md:flex  min-h-screen text-white bg-white/6 backdrop-blur-md bg-[#181818c0] border border-white/10 shadow-lg"
     >
       {isLeftSectionVisible && (
         <div className="sm:w-full md:w-[360px] lg:w-[460px]  md:flex md:flex-col md:items-center md:fixed md:overflow-y-auto no-scrollbar">
           <div className="flex items-center md:h-screen ">
             <div className="hidden md:flex">
               <div
-                className="bg-white/6  backdrop-blur-xl border border-white/10 bg-[#2b2b2b6e] z-50 rounded-xl sm:w-full sm:mx-auto md:w-auto md:py-2 md:mr-3"
+                className="bg-white/6  backdrop-blur-xl border border-white/10 bg-[#1f1e1e] z-50 rounded-xl sm:w-full sm:mx-auto md:w-auto md:py-2 md:mr-3"
                 style={{
                   WebkitBackdropFilter: "blur(10px)",
                   backdropFilter: "blur(10px)",
@@ -178,13 +179,10 @@ export default function HomePage() {
             </div>
 
             {/* Profile Card */}
-            <div className="pt-[54px] md:mt-0 md:-ml-9 w-full max-w-md mx-auto">
+            <div className="pt-16 md:pt-0 md:mt-0 md:-ml-9 w-full max-w-md mx-auto">
               <div
-                className="md:rounded-xl bg-white/6 overflow-hidden backdrop-blur-md bg-[#2222226e] border border-white/10 shadow-lg"
-                style={{
-                  WebkitBackdropFilter: "blur(10px)",
-                  backdropFilter: "blur(10px)",
-                }}
+                className="animated-border-card md:rounded-xl  overflow-hidden "
+              
               >
                 <div className="flex justify-end mt-2 mr-2">
                   <h1 className="p-2 px-4 flex items-center gap-2 text-sm border border-white/10 text-end rounded-full text-white/45 ">
@@ -195,7 +193,7 @@ export default function HomePage() {
                     </span>
                   </h1>
                 </div>
-                <div className="flex flex-col items-center px-5">
+                <div className="flex flex-col items-center px-2">
                   <Image
                     style={{
                       borderBottom: "1px solid transparent",
@@ -269,7 +267,10 @@ export default function HomePage() {
                       </div>
                     </Link>
                   </div>
-                  <div className="grid grid-cols-2 gap-4 w-full mt-11 ">
+                  
+                </div>
+                
+<div className="grid grid-cols-2 px-3 gap-4 w-full mt-11 ">
                     <button
                       style={{
                         borderTop: "1px solid transparent",
@@ -300,7 +301,6 @@ export default function HomePage() {
                       </button>
                     </Link>
                   </div>
-                </div>
               </div>
             </div>
           </div>

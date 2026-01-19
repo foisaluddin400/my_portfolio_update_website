@@ -130,7 +130,7 @@ const ClientReview = () => {
   }, [nextSlide]); // Added nextSlide to dependency array
 
   return (
-    <div className="pt-16 pb-11">
+    <div className="pt-16 pb-16">
       <motion.div
         variants={sectionVariants}
         initial="hidden"

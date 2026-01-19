@@ -1,216 +1,198 @@
 'use client';
 
-import React, { useEffect, useState, useRef, Suspense } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
+import nn from '../../../public/img/nn.png'
 import ServicesSection from './ServicesSection';
 import ClientReview from './ClientReview';
+import CountUp from 'react-countup';           // ← add this package
 import Title from '../shared/Title';
-import { motion, useInView } from 'framer-motion';
+import Image from 'next/image';
+
+const gradients = [
+  'from-[#72ebc2] via-[#4cc9f0] to-[#4895ef]',
+  'from-[#a78bfa] via-[#7c3aed] to-[#4c1d95]',
+  'from-[#60a5fa] via-[#3b82f6] to-[#1d4ed8]',
+];
 
 const AboutMe = () => {
-  // Animation variants for parent container
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.05,
-      },
-    },
-  };
-
-  // Animation variants for sections
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.3,
-        ease: 'easeOut',
-        when: 'beforeChildren',
-        staggerChildren: 0.05,
-      },
-    },
-  };
-
-  // Animation variants for child elements
-  const childVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.25,
-        ease: 'easeOut',
-      },
-    },
-  };
-
-  // Refs for each section
-  const aboutRef = useRef(null);
-  const satisfactionRef = useRef(null);
-  const servicesRef = useRef(null);
-  const reviewRef = useRef(null);
-
-  // useInView hooks
-  const isAboutInView = useInView(aboutRef, { once: true, amount: 0.2 });
-  const isSatisfactionInView = useInView(satisfactionRef, { once: true, amount: 0.2 });
-  const isServicesInView = useInView(servicesRef, { once: true, amount: 0.2 });
-  const isReviewInView = useInView(reviewRef, { once: true, amount: 0.2 });
+  const [textIndex, setTextIndex] = useState(0);
+  const [displayText, setDisplayText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [gradientIndex, setGradientIndex] = useState(0);
 
   const texts = [
-    'Creative Front-End Developer',
-    'Turning Ideas into Web Reality',
-    'MERN Stack Web Developer',
-    'JavaScript & React Enthusiast',
-    'Building Modern Web Experiences',
-    'Bringing Designs to Life with Code',
+    "Creative Front-End Developer",
+    "MERN Stack Craftsman",
+    "Turning Vision into Pixel-Perfect Reality",
+    "React • TypeScript • Performance Enthusiast",
+    "Building Tomorrow's Web Experiences Today",
   ];
-  const [currentTextIndex, setCurrentTextIndex] = useState(0);
-  const [displayedText, setDisplayedText] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
 
+  // Better typing effect
   useEffect(() => {
-    const currentText = texts[currentTextIndex];
-    let timeout;
+    let timer;
+    const current = texts[textIndex];
 
-    if (!isDeleting && displayedText.length < currentText.length) {
-      // Typing
-      timeout = setTimeout(() => {
-        setDisplayedText(currentText.slice(0, displayedText.length + 1));
-      }, 100);
-    } else if (isDeleting && displayedText.length > 0) {
-      // Deleting
-      timeout = setTimeout(() => {
-        setDisplayedText(currentText.slice(0, displayedText.length - 1));
-      }, 50);
-    } else if (!isDeleting && displayedText.length === currentText.length) {
-      // Wait before deleting
-      timeout = setTimeout(() => setIsDeleting(true), 1500);
-    } else if (isDeleting && displayedText.length === 0) {
-      // Move to next text
+    if (!isDeleting && displayText.length < current.length) {
+      timer = setTimeout(() => {
+        setDisplayText(current.slice(0, displayText.length + 1));
+      }, 60 + Math.random() * 40);
+    } 
+    else if (isDeleting && displayText.length > 0) {
+      timer = setTimeout(() => {
+        setDisplayText(current.slice(0, displayText.length - 1));
+      }, 35);
+    } 
+    else if (!isDeleting && displayText.length === current.length) {
+      timer = setTimeout(() => {
+        setIsDeleting(true);
+      }, 1800);
+    } 
+    else if (isDeleting && displayText.length === 0) {
       setIsDeleting(false);
-      setCurrentTextIndex((prev) => (prev + 1) % texts.length);
+      setTextIndex((prev) => (prev + 1) % texts.length);
+      setGradientIndex((prev) => (prev + 1) % gradients.length);
     }
 
-    return () => clearTimeout(timeout);
-  }, [displayedText, isDeleting, currentTextIndex, texts]); // Added texts to dependency array
+    return () => clearTimeout(timer);
+  }, [displayText, isDeleting, textIndex]);
+
+  // Auto change gradient every full cycle
+  useEffect(() => {
+    const t = setInterval(() => {
+      setGradientIndex(i => (i + 1) % gradients.length);
+    }, 12000);
+    return () => clearInterval(t);
+  }, []);
+
+  const stats = [
+    { end: 100, suffix: "%", label: "Client Satisfaction" },
+    { end: 38,  suffix: "+", label: "Loved Reviews" },
+    { end: 30,  suffix: "+", label: "Projects Delivered" },
+    { end: 2,   suffix: "+", label: "Years Focused Journey" },
+  ];
+
+  const container = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1, transition: { staggerChildren: 0.08 } }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 35 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } }
+  };
+
+  const refs = [useRef(), useRef(), useRef(), useRef()];
+  const inViews = refs.map(ref => useInView(ref, { once: true, amount: 0.25 }));
 
   return (
-    <motion.div
-      className=""
-      variants={containerVariants}
+    <motion.section
+      variants={container}
       initial="hidden"
-      animate="visible"
+      animate="show"
+      className="relative overflow-hidden"
     >
-      {/* About Me Section */}
-      <motion.div
-        ref={aboutRef}
-        variants={sectionVariants}
-        initial="hidden"
-        animate={isAboutInView ? 'visible' : 'hidden'}
-        className="mb-16 -mt-9 md:mt-0"
-      >
-        <motion.div
-          variants={childVariants}
-          style={{
-            borderBottom: '1px solid transparent',
-            borderImage:
-              'linear-gradient(to right, rgb(65, 65, 65), rgb(22, 22, 22)) 1',
-          }}
-        >
-          <Title title={'About Me'} />
+   
+
+      {/* =================== HERO =================== */}
+      <div className='lg:grid grid-cols-2'>
+        <motion.div ref={refs[0]} className=" ">
+        <motion.div variants={item}>
+          <Title title="About Me" fancy />
         </motion.div>
-        <motion.h1
-          variants={childVariants}
-          className="mt-9 mb-4 md:text-5xl text-3xl"
-        >
-          I am a <span className="text-[#72ebc2]">{displayedText}</span>
-        </motion.h1>
-        <motion.p
-          variants={childVariants}
-          className="text-gray-500 text-sm leading-relaxed mb-4"
-        >
-          I&apos;m a passionate MERN Stack and Front-End Developer with a knack for crafting
-          visually stunning and highly functional web applications.
-        </motion.p>
-        <motion.p
-          variants={childVariants}
-          className="text-gray-500 text-sm md:text-sm leading-relaxed mb-4"
-        >
-          My focus is on building seamless user experiences using modern technologies
-          like React, Node.js, Express, and MongoDB. I love designing sleek UI
-          components, optimizing performance, and bringing creative ideas to life with
-          clean, efficient code.
-        </motion.p>
-        <motion.p
-          variants={childVariants}
-          className="text-gray-500 text-lg md:text-sm leading-relaxed"
-        >
-          Let&apos;s collaborate to turn your vision into reality with modern,
-          performance-driven, and visually engaging web solutions that stand out in the
-          digital world!
-        </motion.p>
+
+        <div className="mt-10 md:mt-16">
+          <motion.h1 
+            className="text-3xl sm:text-4xl md:text-3xl lg:text-2xl xl:text-4xl font-bold tracking-tight leading-tight"
+            variants={item}
+          >
+            Hi, I'm a{"\n"}
+            <span className={`bg-gradient-to-r ${gradients[gradientIndex]} bg-clip-text text-transparent inline-block min-w-[20ch]`}>
+              {displayText}
+              <span className="animate-blink-fast">|</span>
+            </span>
+          </motion.h1>
+
+          <motion.div 
+            variants={item}
+            className="mt-8 md:mt-12 max-w-3xl space-y-6 text-gray-400/90 text-lg md:text-xl leading-relaxed"
+          >
+            <p>
+              Passionate <strong className="text-white/90">MERN stack</strong> developer focused on creating 
+              <span className="text-white/80"> beautiful</span>, <span className="text-white/80">fast</span> and 
+              <span className="text-white/80"> intuitive</span> digital experiences.
+            </p>
+            
+            <p>
+              I specialize in React, Next.js, TypeScript, TailwindCSS, Framer Motion 
+              and love turning complex ideas into clean, maintainable, and delightful interfaces.
+            </p>
+          </motion.div>
+        </div>
+      
+      </motion.div>
+        <Image src={nn} alt='df'/>
+      </div>
+
+      {/* =================== STATS =================== */}
+      <motion.div 
+        ref={refs[1]}
+        variants={item}
+        className="mt-20 md:mt-11"
+      >
+        <div className="">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 py-6 md:py-5 rounded-2xl bg-gradient-to-b from-white/5 to-white/2 backdrop-blur-xl border border-white/10">
+            {stats.map((stat, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="text-center group"
+              >
+                <div className="text-4xl md:text-5xl lg:text-5xl font-bold bg-gradient-to-br from-white via-white/90 to-white/70 bg-clip-text text-transparent">
+                  <CountUp
+                    end={stat.end}
+                    duration={2.2}
+                    delay={0.4 + i * 0.15}
+                    enableScrollSpy
+                    scrollSpyDelay={300}
+                  />
+                  {stat.suffix}
+                </div>
+                <div className="mt-3 text-sm md:text-base text-gray-400/80 font-medium group-hover:text-cyan-400/90 transition-colors">
+                  {stat.label}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </motion.div>
 
-      {/* Client Satisfaction Section */}
-      <motion.div
-        ref={satisfactionRef}
-        variants={sectionVariants}
-        initial="hidden"
-        animate={isSatisfactionInView ? 'visible' : 'hidden'}
-        className="mb-16"
-      >
-        <motion.div
-          variants={childVariants}
-          style={{
-            borderTop: '1px solid transparent',
-            borderBottom: '1px solid transparent',
-            borderImage:
-              'linear-gradient(to left, rgb(65, 65, 65), rgba(255, 255, 255, 0)) 1',
-          }}
-          className="grid lg:grid-cols-4 text-center grid-cols-2 py-4 justify-between gap-8 text-gray-500"
-        >
-          {[
-            { value: '100%', label: 'Clients Satisfied' },
-            { value: '38+', label: 'Positive Feedback' },
-            { value: '30+', label: 'Project Completed' },
-            { value: '2+', label: 'Years Experience' },
-          ].map((item, idx) => (
-            <motion.div
-              key={idx}
-              variants={childVariants}
-              className="gap-5 hover:scale-105 transition-transform duration-300"
-            >
-              <h3 className="font-bold font-style lg:text-5xl text-3xl mb-2">{item.value}</h3>
-              <p className="text-sm">{item.label}</p>
-            </motion.div>
-          ))}
-        </motion.div>
-      </motion.div>
+      
 
-      {/* Services Section */}
-      <motion.div
-        ref={servicesRef}
-        variants={sectionVariants}
-        initial="hidden"
-        animate={isServicesInView ? 'visible' : 'hidden'}
-      >
+      {/* Services & Reviews */}
+      <div ref={refs[2]} className="">
         <ServicesSection />
-      </motion.div>
+      </div>
 
-      {/* Client Review Section */}
-      <motion.div
-        ref={reviewRef}
-        variants={sectionVariants}
-        initial="hidden"
-        animate={isReviewInView ? 'visible' : 'hidden'}
-      >
-        <Suspense fallback={<div className="text-center py-10">Loading...</div>}>
-          <ClientReview />
-        </Suspense>
-      </motion.div>
-    </motion.div>
+      <div ref={refs[3]} className="">
+        <ClientReview />
+      </div>
+
+      {/* Simple blinking cursor style */}
+      <style jsx global>{`
+        @keyframes blink-fast {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0; }
+        }
+        .animate-blink-fast {
+          animation: blink-fast 0.7s infinite;
+        }
+      `}</style>
+    </motion.section>
   );
 };
 

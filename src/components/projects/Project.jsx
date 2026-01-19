@@ -23,94 +23,122 @@ import project6 from '../../../public/img/project_6.png';
 /* ------------------------------------------------------------------ */
 const ProjectCard = ({ project, onOpenModal }) => {
   const cardRef = useRef(null);
-  const isInView = useInView(cardRef, { once: true, amount: 0.2 });
-
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.3,
-        ease: 'easeOut',
-        when: 'beforeChildren',
-        staggerChildren: 0.05,
-      },
-    },
-  };
-
-  const childVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.25, ease: 'easeOut' },
-    },
-  };
+  const isInView = useInView(cardRef, { once: true, amount: 0.3 });
 
   return (
     <motion.div
       ref={cardRef}
-      variants={sectionVariants}
-      initial="hidden"
-      animate={isInView ? 'visible' : 'hidden'}
-      style={{
-        borderTop: '1px solid transparent',
-        borderRight: '1px solid transparent',
-        borderBottom: '1px solid transparent',
-        borderLeft: '1px solid transparent',
-        borderImage:
-          'linear-gradient(to right, rgb(65, 65, 65), rgba(22, 22, 22, 0)) 1',
-      }}
-      className="relative group overflow-hidden "
+      initial={{ opacity: 0, y: 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      className={`
+        group relative
+        rounded-2xl overflow-hidden
+        bg-gradient-to-b  from-[#000000] via-[#222222]
+        backdrop-blur-md p-3
+        border border-white/5
+        shadow-xl 
+        hover:shadow-2xl hover:shadow-cyan-900/30
+        transition-all duration-500
+        h-full
+      `}
     >
-      {/* Image */}
-      <motion.div
-        variants={childVariants}
-        className="relative w-full h-60 overflow-hidden"
-      >
+      {/* Image container */}
+      <div className="relative h-64 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10" />
+        
         <Image
           src={project.image}
           alt={project.title}
           fill
-          className="object-cover object-top transition-transform duration-500 group-hover:scale-110"
+          className="object-cover object-center scale-105 transition-transform duration-700 group-hover:scale-110"
+          quality={85}
         />
-        <div className="absolute inset-0 flex items-center gap-4 justify-center bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500">
+
+        {/* Overlay buttons - appear on hover */}
+        <div className="
+          absolute inset-0 
+          flex items-center justify-center gap-5
+          bg-black/40 backdrop-blur-sm
+          opacity-0 group-hover:opacity-100
+          transition-all duration-500
+          z-20
+        ">
           <a
             href={project.codeLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="border border-[#72ebc2] w-[50px] h-[50px] flex justify-center items-center rounded-full text-[#72ebc2] text-xl hover:scale-110 transition"
+            className="
+              w-14 h-14 rounded-full
+              bg-black/40 border border-cyan-400/30
+              flex items-center justify-center
+              text-cyan-300 hover:text-white
+              hover:bg-cyan-500/20 hover:border-cyan-400/60
+              backdrop-blur-md
+              transition-all duration-300
+              scale-90 hover:scale-110
+              shadow-lg shadow-black/40
+            "
           >
-            <CodeOutlined />
+            <CodeOutlined className="text-2xl" />
           </a>
+
           <a
             href={project.previewLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="border border-[#72ebc2] w-[50px] h-[50px] flex justify-center items-center rounded-full text-[#72ebc2] text-xl hover:scale-110 transition"
+            className="
+              w-14 h-14 rounded-full
+              bg- border border-cyan-400/30
+              flex items-center justify-center
+              text-cyan-300 hover:text-white
+              hover:bg-cyan-500/20 hover:border-cyan-400/60
+              backdrop-blur-md
+              transition-all duration-300
+              scale-90 hover:scale-110
+              shadow-lg shadow-black/40
+            "
           >
-            <EyeOutlined />
+            <EyeOutlined className="text-2xl" />
           </a>
         </div>
-      </motion.div>
+      </div>
 
-      {/* Text */}
-      <motion.div
-        variants={childVariants}
-        className="p-4 flex flex-col gap-2"
-      >
-        <div className="flex items-center justify-between">
-          <h3 className="text-xl font-bold text-white">{project.title}</h3>
+      {/* Content */}
+      <div className="p-2 pt-6 relative z-10">
+        <div className="flex items-center justify-between mb-3">
+          <h3 className="
+            text-2xl font-bold 
+            bg-gradient-to-r from-cyan-200 to-cyan-400 bg-clip-text text-transparent
+          ">
+            {project.title}
+          </h3>
+
           <button
             onClick={() => onOpenModal(project)}
-            className="text-white text-xl hover:text-cyan-400 transition"
+            className="
+              text-gray-400 hover:text-cyan-300 
+              transition-colors p-2 -mr-2
+              hover:scale-110 active:scale-95
+            "
           >
-            <InfoCircleOutlined />
+            <InfoCircleOutlined className="text-xl" />
           </button>
         </div>
-        <p className="text-gray-400 line-clamp-2">{project.description}</p>
-      </motion.div>
+
+        <p className="text-gray-400/90 line-clamp-3 text-sm leading-relaxed">
+          {project.description}
+        </p>
+      </div>
+
+      {/* Subtle shine effect on hover */}
+      <div className="
+        pointer-events-none absolute inset-0 
+        bg-gradient-to-r from-transparent via-white/5 to-transparent
+        -translate-x-full group-hover:translate-x-full
+        transition-transform duration-1000
+        ease-out
+      "/>
     </motion.div>
   );
 };
