@@ -18,6 +18,7 @@ import project3 from '../../../public/img/project_3.jpg';
 import project4 from '../../../public/img/project_4.png';
 import project5 from '../../../public/img/project_5.png';
 import project6 from '../../../public/img/project_6.png';
+import project7 from '../../../public/img/project_7.png';
 /* ------------------------------------------------------------------ */
 /*  ProjectCard – animated on scroll                                   */
 /* ------------------------------------------------------------------ */
@@ -38,7 +39,7 @@ const ProjectCard = ({ project, onOpenModal }) => {
         backdrop-blur-md p-3
         border border-white/5
         shadow-xl 
-        hover:shadow-2xl hover:shadow-cyan-900/30
+        hover:shadow-2xl hover:shadow-cyan-700/30
         transition-all duration-500
         h-full
       `}
@@ -51,7 +52,7 @@ const ProjectCard = ({ project, onOpenModal }) => {
           src={project.image}
           alt={project.title}
           fill
-          className="object-cover object-center scale-105 transition-transform duration-700 group-hover:scale-110"
+          className="object-cover object-top scale-105 transition-transform duration-400 group-hover:scale-110"
           quality={85}
         />
 
@@ -227,6 +228,83 @@ All orders, inventory, and designs are managed via a **comprehensive admin dashb
     // ── User Features (Frontend) ─────────────────────────────
     features: [
       'Live product customizer (drag-and-drop text, clipart, colors)',
+      'Real-time preview with zoom & 360° view (for supported items)',
+      'Save designs for later (guest & logged-in users)',
+      'Smart cart with auto-save (localStorage + backend sync)',
+      'Guest checkout + user accounts with order history',
+      'Stripe Payments (Credit Card, Apple Pay, Google Pay)',
+      'Order confirmation emails with design preview (Nodemailer + React Email)',
+      'Wishlist, recently viewed, and recommended products',
+      'Responsive design – mobile-first experience',
+    ],
+
+    // ── Product Customization Engine ────────────────────────
+    customization: [
+      'Canvas-based editor using Fabric.js',
+      'Upload personal images (PNG/JPG) with auto-crop',
+      'Text styling: font family, size, color, bold/italic, alignment',
+      'Pre-built clipart library (1000+ SVG icons)',
+      'Color picker for product variants (e.g., T-shirt color)',
+      'Layer management (bring to front/back, lock, delete)',
+      'Design templates (e.g., "Birthday", "Team", "Quote")',
+      'Auto-save design every 10 seconds',
+    ],
+
+    // ── Admin Dashboard ─────────────────────────────────────
+    admin: [
+      'Add/edit products (name, base price, variants, stock)',
+      'Upload product mockup templates (front/back/side views)',
+      'Manage categories & collections',
+      'View & process orders (Pending → Processing → Shipped → Delivered)',
+      'Refund via Stripe dashboard integration',
+      'Inventory tracking with low-stock alerts',
+      'Sales analytics (daily, weekly, top products)',
+      'User management (ban, view orders)',
+      'Design approval queue (for print-on-demand safety)',
+      'Export orders (CSV/PDF)',
+    ],
+
+    // ── Technologies Used ───────────────────────────────────
+    technologies: [
+      'Next.js (App Router + Server Actions)',
+      'Tailwind CSS + Headless UI',
+      'Ant Design (admin panel)',
+      'Node.js + Express',
+      'MongoDB (products, orders, designs)',
+      'Stripe API + Webhooks',
+      'Fabric.js (canvas editor)',
+      'Cloudinary (image processing & CDN)',
+      'JWT + HTTP-only cookies',
+    ],
+
+    // ── Key Highlights ──────────────────────────────────────
+    highlights: [
+      'Full-stack **print-on-demand** ready (integrates with Printful API in future)',
+      'Designs saved as SVG + PNG for production',
+      'Stripe webhooks handle payment success/failure automatically',
+      'Server-side rendering for SEO-optimized product pages',
+      'PWA support – installable on mobile',
+      'Accessibility: keyboard navigation in editor, ARIA labels',
+      'Performance: lazy-loaded editor, code splitting, image optimization',
+      'Admin panel secured with 2FA & role-based access',
+      'Deployed on Vercel (frontend) + Render (backend)',
+    ],
+  },
+},
+  {
+  id: 9,
+  title: 'Education Website',
+  description:
+    'A modern, educational platform where users can learn various courses with interactive content, quizzes, and progress tracking — powered by MERN stack with full admin control.',
+  image: project7,
+  codeLink: 'https://github.com/foisaluddin400/asyed_education_website.git',
+  previewLink: 'https://asyed-education-website.vercel.app/',
+  details: {
+    overview: `Education Website is a modern, educational platform where users can learn various courses with interactive content, quizzes, and progress tracking — powered by MERN stack with full admin control.`,
+
+    // ── User Features (Frontend) ─────────────────────────────
+    features: [
+      'Live E-learning platform with interactive courses and quizzes',
       'Real-time preview with zoom & 360° view (for supported items)',
       'Save designs for later (guest & logged-in users)',
       'Smart cart with auto-save (localStorage + backend sync)',
@@ -547,7 +625,7 @@ The platform includes a **patient portal**, **testimonial system**, and a **powe
       </motion.div>
 
       {/* Grid of animated cards */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-8">
         {projects.map((project) => (
           <ProjectCard
             key={project.id}
