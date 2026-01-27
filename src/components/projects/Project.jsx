@@ -45,7 +45,7 @@ const ProjectCard = ({ project, onOpenModal }) => {
       `}
     >
       {/* Image container */}
-      <div className="relative h-64 overflow-hidden">
+      <div className="relative h-96 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10" />
         
         <Image
@@ -53,7 +53,7 @@ const ProjectCard = ({ project, onOpenModal }) => {
           alt={project.title}
           fill
           className="object-cover object-top scale-105 transition-transform duration-400 group-hover:scale-110"
-          quality={85}
+          quality={1000}
         />
 
         {/* Overlay buttons - appear on hover */}
@@ -625,7 +625,7 @@ The platform includes a **patient portal**, **testimonial system**, and a **powe
       </motion.div>
 
       {/* Grid of animated cards */}
-      <div className="grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-2 gap-8">
         {projects.map((project) => (
           <ProjectCard
             key={project.id}
