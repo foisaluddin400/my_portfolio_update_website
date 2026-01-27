@@ -624,7 +624,7 @@ This project strengthened my understanding of **full-stack architecture, securit
             <Title title={"My Blogs"} />
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-5">
+          <div className="grid grid-cols-1 md:grid-cols-1 gap-8 pt-5">
             {blogs.map((item) => (
               <BlogCard
                 key={item.id}
