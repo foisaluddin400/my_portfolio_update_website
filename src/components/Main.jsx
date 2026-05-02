@@ -6,7 +6,7 @@ export default function Main() {
 
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#161616] bg-cover bg-center">
+    <div className=" bg-[#111816] bg-cover bg-center">
     
   
 
@@ -14,9 +14,9 @@ export default function Main() {
  
 
       {/* 🌟 Main content */}
-      <div className="relative z-10 font-clash">
+      <div className=" z-10 font-clash">
         <Suspense
-          fallback={<div className="text-center py-10">Loading...</div>}
+          fallback={<div className="text-center py-8">Loading...</div>}
         >
           <HomePage />
         </Suspense>

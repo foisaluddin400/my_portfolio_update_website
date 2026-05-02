@@ -59,6 +59,7 @@ const SkillSection = () => {
     { name: "Node.js", img: nodeImg },
     { name: "Express.js", img: expressImg },
     { name: "MongoDB", img: mongoImg },
+    { name: "MongoDB", img: mongoImg },
   ];
 
   const softSkills = [
@@ -69,7 +70,7 @@ const SkillSection = () => {
   ];
 
   return (
-    <div className="text-gray-200 mt-16 space-y-16">
+    <div className="text-gray-200 ">
       {/* Section Title */}
       <motion.div variants={sectionVariants} initial="hidden" animate="visible">
         <Title title="Skill" />
@@ -78,10 +79,11 @@ const SkillSection = () => {
       <div
         style={{
           borderTop: "1px solid transparent",
+          borderLeft: "1px solid transparent",
           borderImage:
             "linear-gradient(to right, rgb(65, 65, 65), rgb(22, 22, 22)) 1",
         }}
-        className="grid 2xl:grid-cols-2  gap-4"
+        className="grid 2xl:grid-cols-1  gap-4"
       >
         {/* Technology Skills */}
         <motion.div
@@ -95,7 +97,7 @@ const SkillSection = () => {
               borderBottom: "1px solid transparent",
               borderImage:
                 "linear-gradient(to right, rgb(65, 65, 65), rgb(22, 22, 22)) 1",
-            }} className="flex items-center gap-3 mb-8 py-4">
+            }} className="flex pl-3 items-center gap-3 mb-8 py-4">
             <motion.div variants={childVariants}>
               <div className="w-12 h-12 rounded-full border-2 border-[#72ebc2] flex items-center justify-center">
                 <span className="text-[#72ebc2] text-xl">💻</span>
@@ -110,14 +112,14 @@ const SkillSection = () => {
           </div>
 
           <motion.div
-            className="grid lg:grid-cols-5 grid-cols-4 gap-2 lg:gap-3"
+            className="grid lg:grid-cols-6 grid-cols-4 gap-2 pl-3 lg:gap-3"
             variants={sectionVariants}
           >
             {techSkills.map((skill, index) => (
               <motion.div
                 key={index}
                 variants={childVariants}
-                className="flex flex-col items-center p-4 bg-gradient-to-b from-white/5 to-white/2 rounded-xl shadow-lg  hover:scale-105 transition-transform duration-300"
+                className="flex flex-col items-center p-4 bg-gradient-to-b from-white/5 to-white/2  rounded-xl  shadow-xl hover:scale-105 transition-transform duration-300"
               >
                 <img
                   src={skill.img.src}
@@ -132,12 +134,7 @@ const SkillSection = () => {
 
         {/* Software Skills */}
         <motion.div
-          style={{
-            borderLeft: "1px solid transparent",
-
-            borderImage:
-              "linear-gradient(to right, rgb(65, 65, 65), rgb(22, 22, 22)) 1",
-          }}
+          
           ref={softRef}
           variants={sectionVariants}
           initial="hidden"
@@ -147,6 +144,7 @@ const SkillSection = () => {
             style={{
               borderRight: "1px solid transparent",
               borderBottom: "1px solid transparent",
+              
               borderImage:
                 "linear-gradient(to right, rgb(65, 65, 65), rgb(22, 22, 22)) 1",
             }}
@@ -166,7 +164,7 @@ const SkillSection = () => {
           </div>
 
           <motion.div
-            className="grid lg:grid-cols-5 grid-cols-4 gap-2 pl-3 lg:gap-3"
+            className="grid lg:grid-cols-6 grid-cols-4 gap-2 pl-3 lg:gap-3"
             variants={sectionVariants}
           >
             {softSkills.map((skill, index) => (
@@ -188,7 +186,7 @@ const SkillSection = () => {
       </div>
 
       {/* Language Skills */}
-      <div className=" grid lg:grid-cols-2">
+      {/* <div className=" grid lg:grid-cols-2">
         <motion.div
           ref={langRef}
           variants={sectionVariants}
@@ -234,7 +232,7 @@ const SkillSection = () => {
           </motion.div>
         </motion.div>
 
-        {/* Knowledge */}
+  
         <motion.div
           ref={knowledgeRef}
           variants={sectionVariants}
@@ -277,7 +275,7 @@ const SkillSection = () => {
             ))}
           </motion.ul>
         </motion.div>
-      </div>
+      </div> */}
     </div>
   );
 };

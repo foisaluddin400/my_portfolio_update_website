@@ -1,10 +1,9 @@
 'use client';
 
+import React from 'react';
 import { Briefcase, GraduationCap } from 'lucide-react';
 import Title from '../shared/Title';
-import SkillSecton from './Skill';
-import { motion } from 'framer-motion'; // Import Framer Motion
-import { Suspense } from 'react';
+import { motion } from 'framer-motion';
 
 const experienceItems = [
   {
@@ -15,8 +14,6 @@ const experienceItems = [
     description:
       'Developed and maintained responsive user interfaces using React, Tailwind CSS, and Framer Motion. Collaborated with backend developers to integrate RESTful APIs and optimize performance.',
     dateRange: '2023 - 2024',
-    actionLabel: 'RECOMMENDATION',
-    actionType: 'recommendation',
   },
   {
     id: 'exp-2',
@@ -26,8 +23,6 @@ const experienceItems = [
     description:
       'Worked on full-stack projects using MongoDB, Express, React, and Node.js. Built dynamic admin dashboards and e-commerce modules as part of real-world client projects.',
     dateRange: '2024 - 2025',
-    actionLabel: 'INTERNSHIP',
-    actionType: 'internship',
   },
   {
     id: 'exp-3',
@@ -37,11 +32,8 @@ const experienceItems = [
     description:
       'Improved English communication and presentation skills to enhance professional collaboration and client interaction. Focused on fluency, pronunciation, and confidence in public speaking.',
     dateRange: '2024',
-    actionLabel: 'CERTIFICATE',
-    actionType: 'certificate',
   },
 ];
-
 
 const educationItems = [
   {
@@ -51,8 +43,6 @@ const educationItems = [
     location: 'Computer Science and Engineering',
     description: 'Diploma in Computer Science and Engineering',
     dateRange: '2020 - 2024',
-    actionLabel: 'CERTIFICATE',
-    actionType: 'certificate',
   },
   {
     id: 'edu-2',
@@ -61,8 +51,6 @@ const educationItems = [
     location: 'MERN Stack Development',
     description: 'Professional training focused on full-stack web development using MongoDB, Express, React, and Node.js.',
     dateRange: '2024 - 2025',
-    actionLabel: 'CERTIFICATE',
-    actionType: 'certificate',
   },
   {
     id: 'edu-3',
@@ -71,48 +59,60 @@ const educationItems = [
     location: 'MERN Stack Development',
     description: 'Hands-on project-based learning in modern web application development with the MERN stack.',
     dateRange: '2023 - 2024',
-    actionLabel: 'CERTIFICATE',
-    actionType: 'certificate',
   },
 ];
 
-
 export function ResumeTimeline() {
-  // Parent container animation variants for staggering children (same as AboutMe)
+  // Animation for the overall container
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.2, // Stagger child animations by 0.2s
-      },
+      transition: { staggerChildren: 0.2 },
     },
   };
 
-  // Animation variants for individual sections and items (same as AboutMe)
+  // Standard section slide-up
   const sectionVariants = {
-    hidden: {
-      opacity: 0,
-      y: 30, // Slide up from below
-    },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.5, // Smooth 0.5s animation
-        ease: 'easeOut',
-      },
+      transition: { duration: 0.5, ease: 'easeOut' },
+    },
+  };
+
+  // Timeline Line "Drawing" Animation
+  const lineVariants = {
+    hidden: { scaleY: 0, opacity: 0 },
+    visible: {
+      scaleY: 1,
+      opacity: 1,
+      transition: { duration: 1.5, ease: 'easeInOut', delay: 0.2 },
+    },
+  };
+
+  // Timeline Dot "Pop" Animation
+  const dotVariants = {
+    hidden: { scale: 0, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: { type: 'spring', stiffness: 300, damping: 15, delay: 0.6 },
     },
   };
 
   return (
     <motion.div
-      className=""
       variants={containerVariants}
       initial="hidden"
-      animate="visible"
+      whileInView="visible"
+      viewport={{ once: true }}
+      className=""
     >
+      {/* Header Section */}
       <div
+        className=""
         style={{
           borderBottom: '1px solid transparent',
           borderImage: 'linear-gradient(to right, rgb(65, 65, 65), rgb(22, 22, 22)) 1',
@@ -122,43 +122,39 @@ export function ResumeTimeline() {
           <Title title={'My Resume'} />
         </motion.div>
       </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+        
         {/* Experience Section */}
-        <motion.div
-          style={{
-            borderRight: '1px solid transparent',
-            borderImage: 'linear-gradient(to bottom, rgb(65, 65, 65), rgb(22, 22, 22)) 1',
-          }}
-          className="space-y-8"
-          variants={sectionVariants}
-        >
+        <motion.div className="space-y-8" variants={sectionVariants}>
           <div
             style={{
               borderRight: '1px solid transparent',
               borderBottom: '1px solid transparent',
               borderImage: 'linear-gradient(to right, rgb(65, 65, 65), rgb(22, 22, 22)) 1',
             }}
-            className="flex items-center gap-3 mb-12 p-4"
+            className="flex items-center gap-4 mb-12 p-4"
           >
-            <motion.div variants={sectionVariants}>
-              <div className="w-12 h-12 rounded-full border-2 border-[#72ebc2] flex items-center justify-center">
-                <Briefcase className="w-6 h-6 text-[#72ebc2]" />
-              </div>
-            </motion.div>
-            <motion.h2
-              className="text-xl md:text-2xl font-bold text-white tracking-wide"
-              variants={sectionVariants}
-            >
-              EXPERIENCE
-            </motion.h2>
+            <div className="w-12 h-12 rounded-full border-2 border-[#72ebc2] flex items-center justify-center shadow-[0_0_15px_rgba(114,235,194,0.2)]">
+              <Briefcase className="w-6 h-6 text-[#72ebc2]" />
+            </div>
+            <h2 className="text-xl md:text-2xl font-bold text-white tracking-wide">EXPERIENCE</h2>
           </div>
 
-          <motion.div className="relative pl-[23px] space-y-12" variants={sectionVariants}>
-            <div className="absolute left-2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#72ebc2] to-green-400/30" />
+          <div className="relative pl-[23px] space-y-12">
+            {/* Animated Vertical Line */}
+            <motion.div
+              variants={lineVariants}
+              className="absolute left-2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#72ebc2] via-[#72ebc2]/50 to-transparent origin-top"
+            />
 
             {experienceItems.map((item) => (
               <motion.div key={item.id} className="relative" variants={sectionVariants}>
-                <div className="absolute -left-5 top-1 w-3 h-3 rounded-full bg-[#72ebc2]" />
+                {/* Animated Dot */}
+                <motion.div
+                  variants={dotVariants}
+                  className="absolute -left-[21px] top-1.5 w-3.5 h-3.5 rounded-full bg-[#72ebc2] shadow-[0_0_10px_#72ebc2] z-10"
+                />
 
                 <div
                   style={{
@@ -167,34 +163,16 @@ export function ResumeTimeline() {
                   }}
                   className="space-y-3 pb-9"
                 >
-                  <motion.div
-                    className="inline-block px-3 py-1 rounded border border-[#72ebc2] bg-green-400/10 text-[#72ebc2] text-xs font-mono"
-                    variants={sectionVariants}
-                  >
+                  <div className="inline-block px-3 py-1 rounded border border-[#72ebc2]/30 bg-[#72ebc2]/10 text-[#72ebc2] text-xs font-mono">
                     {item.dateRange}
-                  </motion.div>
-
-                  <motion.h3 className="text-lg  text-white" variants={sectionVariants}>
-                    {item.title}
-                  </motion.h3>
-                  <motion.p
-                    className="text-sm text-gray-400 font-medium"
-                    variants={sectionVariants}
-                  >
-                    {item.company}
-                  </motion.p>
-                  <motion.p
-                    className="text-sm text-gray-400 leading-relaxed"
-                    variants={sectionVariants}
-                  >
-                    {item.description}
-                  </motion.p>
-
-                  
+                  </div>
+                  <h3 className="text-lg text-white font-semibold">{item.title}</h3>
+                  <p className="text-sm text-[#72ebc2]/80 font-medium">{item.company}</p>
+                  <p className="text-sm text-gray-400 leading-relaxed">{item.description}</p>
                 </div>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </motion.div>
 
         {/* Education Section */}
@@ -205,27 +183,28 @@ export function ResumeTimeline() {
               borderBottom: '1px solid transparent',
               borderImage: 'linear-gradient(to right, rgb(65, 65, 65), rgb(22, 22, 22)) 1',
             }}
-            className="flex items-center gap-3 mb-12 p-4"
+            className="flex items-center gap-4 mb-12 p-4"
           >
-            <motion.div variants={sectionVariants}>
-              <div className="w-12 h-12 rounded-full border-2 border-[#72ebc2] flex items-center justify-center">
-                <GraduationCap className="w-6 h-6 text-[#72ebc2]" />
-              </div>
-            </motion.div>
-            <motion.h2
-              className="text-xl md:text-2xl font-bold text-white tracking-wide"
-              variants={sectionVariants}
-            >
-              EDUCATION
-            </motion.h2>
+            <div className="w-12 h-12 rounded-full border-2 border-[#72ebc2] flex items-center justify-center shadow-[0_0_15px_rgba(114,235,194,0.2)]">
+              <GraduationCap className="w-6 h-6 text-[#72ebc2]" />
+            </div>
+            <h2 className="text-xl md:text-2xl font-bold text-white tracking-wide">EDUCATION</h2>
           </div>
 
-          <motion.div className="relative pl-[23px] space-y-12" variants={sectionVariants}>
-            <div className="absolute left-2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#72ebc2] to-green-400/30" />
+          <div className="relative pl-[23px] space-y-12">
+            {/* Animated Vertical Line */}
+            <motion.div
+              variants={lineVariants}
+              className="absolute left-2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#72ebc2] via-[#72ebc2]/50 to-transparent origin-top"
+            />
 
             {educationItems.map((item) => (
               <motion.div key={item.id} className="relative" variants={sectionVariants}>
-                <div className="absolute -left-5 top-1 w-3 h-3 rounded-full bg-[#72ebc2]" />
+                {/* Animated Dot */}
+                <motion.div
+                  variants={dotVariants}
+                  className="absolute -left-[21px] top-1.5 w-3.5 h-3.5 rounded-full bg-[#72ebc2] shadow-[0_0_10px_#72ebc2] z-10"
+                />
 
                 <div
                   style={{
@@ -234,41 +213,19 @@ export function ResumeTimeline() {
                   }}
                   className="space-y-3 pb-9"
                 >
-                  <motion.div
-                    className="inline-block px-3 py-1 rounded border border-[#72ebc2] bg-green-400/10 text-[#72ebc2] text-xs font-mono"
-                    variants={sectionVariants}
-                  >
+                  <div className="inline-block px-3 py-1 rounded border border-[#72ebc2]/30 bg-[#72ebc2]/10 text-[#72ebc2] text-xs font-mono">
                     {item.dateRange}
-                  </motion.div>
-
-                  <motion.h3 className="text-lg  text-white" variants={sectionVariants}>
-                    {item.title}
-                  </motion.h3>
-                  <motion.p
-                    className="text-sm text-gray-400 font-medium"
-                    variants={sectionVariants}
-                  >
-                    {item.company}
-                  </motion.p>
-                  <motion.p
-                    className="text-sm text-gray-400 leading-relaxed"
-                    variants={sectionVariants}
-                  >
-                    {item.location}
-                  </motion.p>
-
-                  
+                  </div>
+                  <h3 className="text-lg text-white font-semibold">{item.title}</h3>
+                  <p className="text-sm text-[#72ebc2]/80 font-medium">{item.company}</p>
+                  <p className="text-sm text-gray-400 leading-relaxed">{item.location}</p>
                 </div>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </motion.div>
-      </div>
 
-      {/* Skills Section */}
-      <motion.div variants={sectionVariants}>
-        <Suspense fallback={<div className="text-center py-10">Loading...</div>}><SkillSecton /></Suspense>
-      </motion.div>
+      </div>
     </motion.div>
   );
 }

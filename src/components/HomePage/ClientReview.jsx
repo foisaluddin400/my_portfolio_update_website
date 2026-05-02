@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Title from '../shared/Title';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 
@@ -8,194 +8,140 @@ const ClientReview = () => {
   const reviews = [
     {
       name: 'John Doe',
-      review:
-        'Amazing work! The website exceeded my expectations with its sleek design and performance. Highly recommend!',
-      date: 'October 20, 2025',
+      review: 'Amazing work! The website exceeded my expectations with its sleek design and performance. Highly recommend!',
+      date: 'Oct 2025',
+      role: 'Founder @ TechFlow'
     },
     {
       name: 'Jane Smith',
-      review:
-        'Professional and timely delivery. The UI/UX is top-notch, and the support was excellent.',
-      date: 'October 15, 2025',
+      review: 'Professional and timely delivery. The UI/UX is top-notch, and the support was excellent.',
+      date: 'Oct 2025',
+      role: 'Product Manager'
     },
     {
       name: 'Mike Johnson',
-      review:
-        'A pleasure to work with. The backend solutions were robust and perfectly tailored to our needs.',
-      date: 'October 10, 2025',
+      review: 'A pleasure to work with. The backend solutions were robust and perfectly tailored to our needs.',
+      date: 'Oct 2025',
+      role: 'CTO'
     },
-    {
-      name: 'Sarah Williams',
-      review:
-        'Foisal created a responsive, visually appealing website that boosted our brand presence online. Fantastic job!',
-      date: 'October 5, 2025',
-    },
-    {
-      name: 'David Brown',
-      review:
-        'His MERN stack knowledge is impressive. The project was delivered faster than expected and performed flawlessly.',
-      date: 'September 30, 2025',
-    },
-    {
-      name: 'Olivia Taylor',
-      review:
-        'Very dedicated and detail-oriented developer. The animations and transitions made our site come alive!',
-      date: 'September 25, 2025',
-    },
-    {
-      name: 'James Anderson',
-      review:
-        'Excellent communication and coding skills. The web app runs smoothly and the design looks premium.',
-      date: 'September 20, 2025',
-    },
-    {
-      name: 'Sophia Martinez',
-      review:
-        'Creative, reliable, and technically strong — Foisal delivered exactly what we needed with a modern touch.',
-      date: 'September 15, 2025',
-    },
+    // ... rest of your reviews
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  // Animation variants for review section
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.3,
-        ease: 'easeOut',
-        when: 'beforeChildren',
-        staggerChildren: 0.05,
-      },
-    },
-  };
-
-  // Animation variants for child elements
-  const childVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.25,
-        ease: 'easeOut',
-      },
-    },
-  };
-
-  // Animation variants for slide transitions
-  const slideVariants = {
-    enter: { opacity: 0, x: 50 },
-    center: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.3,
-        ease: 'easeOut',
-        when: 'beforeChildren',
-        staggerChildren: 0.05,
-      },
-    },
-    exit: { opacity: 0, x: -50, transition: { duration: 0.3, ease: 'easeOut' } },
-  };
-
-  // Ref for the review section
   const reviewRef = useRef(null);
-  const isInView = useInView(reviewRef, {
-    once: true,
-    amount: 0.2,
-  });
+  const isInView = useInView(reviewRef, { once: true, amount: 0.2 });
 
-  // Function to go to the next slide
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % reviews.length);
-  };
+  // Memoized navigation to prevent effect re-runs
+  const nextSlide = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % reviews.length);
+  }, [reviews.length]);
 
-  // Function to go to the previous slide
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + reviews.length) % reviews.length);
+    setCurrentIndex((prev) => (prev - 1 + reviews.length) % reviews.length);
   };
 
-  // Auto-slide every 3 seconds
   useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 3000); // 3000ms = 3 seconds
-
-    // Cleanup interval on component unmount
+    const interval = setInterval(nextSlide, 5000); // 5 seconds feels more premium than 3
     return () => clearInterval(interval);
-  }, [nextSlide]); // Added nextSlide to dependency array
+  }, [nextSlide]);
 
   return (
-    <div className="pt-16 pb-16">
+    <div className=" relative overflow-hidden" ref={reviewRef}>
+      {/* Decorative Background Glows */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-teal-500/10 blur-[120px] rounded-full -z-10" />
+
       <motion.div
-        variants={sectionVariants}
-        initial="hidden"
-        animate="visible"
+        initial={{ opacity: 0, y: 20 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6 }}
       >
         <Title title={'Client Feedback'} />
       </motion.div>
-      <motion.div
-        ref={reviewRef}
-        variants={sectionVariants}
-        initial="hidden"
-        animate={isInView ? 'visible' : 'hidden'}
-        className="max-w-4xl mx-auto text-center mt-16"
-      >
-        <div className="relative">
-          <div className="relative overflow-hidden">
-            <AnimatePresence initial={false} mode="wait">
-              <motion.div
-                key={currentIndex}
-                variants={slideVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                className="w-full flex-shrink-0"
-              >
-                <motion.p
-                  variants={childVariants}
-                  className="text-gray-300 text-lg md:text-3xl leading-relaxed mb-4 italic"
-                >
-                  {reviews[currentIndex].review}
-                </motion.p>
-                <motion.h4
-                  variants={childVariants}
-                  className="text-white font-semibold text-lg"
-                >
-                  {reviews[currentIndex].name}
-                </motion.h4>
-                <motion.p
-                  variants={childVariants}
-                  className="text-gray-400 text-sm"
-                >
-                  {reviews[currentIndex].date}
-                </motion.p>
-              </motion.div>
-            </AnimatePresence>
-          </div>
+
+      <div className=" px-10 mt-20 relative">
+        <AnimatePresence mode="wait">
           <motion.div
-            variants={childVariants}
-            className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 flex gap-4"
+            key={currentIndex}
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 1.05, y: -20 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="relative z-10"
           >
+            {/* Large Decorative Quote Mark */}
+            <span className="absolute -top-12 -left-4 md:-left-10 text-[160px] leading-none text-[#72ebc2]/10 font-serif select-none">
+              “
+            </span>
+
+            <div className="relative bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-8  shadow-2xl">
+              <motion.p 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.2 }}
+                className="text-white text-xl md:text-2xl py-9 leading-tight md:leading-[1.2] font-medium tracking-tight mb-10"
+              >
+                {reviews[currentIndex].review}
+              </motion.p>
+
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-t border-white/10 pt-4">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-[#72ebc2] to-teal-600 flex items-center justify-center text-black font-bold">
+                    {reviews[currentIndex].name.charAt(0)}
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold text-lg leading-none mb-1">
+                      {reviews[currentIndex].name}
+                    </h4>
+                    <p className="text-gray-400 text-sm uppercase tracking-widest font-semibold">
+                      {reviews[currentIndex].role || "Client"}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="text-gray-500 text-sm font-mono">
+                  {reviews[currentIndex].date}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Navigation & Progress Section */}
+        <div className="mt-12 flex flex-col md:flex-row items-center justify-between gap-8">
+          {/* Progress Indicators */}
+          <div className="flex gap-2">
+            {reviews.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentIndex(idx)}
+                className={`h-1 transition-all duration-500 rounded-full ${
+                  currentIndex === idx ? 'w-12 bg-[#72ebc2]' : 'w-4 bg-white/20'
+                }`}
+              />
+            ))}
+          </div>
+
+          {/* Minimalist Controls */}
+          <div className="flex gap-4">
             <button
               onClick={prevSlide}
-              className="w-10 h-10 bg-white/10 backdrop-blur-md border border-white/10 rounded-full text-white hover:bg-yellow-400/50 transition-colors duration-300"
+              className="group p-4 bg-white/5 hover:bg-[#72ebc2] border border-white/10 rounded-2xl transition-all duration-300"
             >
-              &lt;
+              <svg className="w-5 h-5 text-white group-hover:text-black transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
             </button>
             <button
               onClick={nextSlide}
-              className="w-10 h-10 bg-white/10 backdrop-blur-md border border-white/10 rounded-full text-white hover:bg-teal-300/50 transition-colors duration-300"
+              className="group p-4 bg-white/5 hover:bg-[#72ebc2] border border-white/10 rounded-2xl transition-all duration-300"
             >
-              &gt;
+              <svg className="w-5 h-5 text-white group-hover:text-black transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
             </button>
-          </motion.div>
+          </div>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 };

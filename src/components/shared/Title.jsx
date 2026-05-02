@@ -1,14 +1,26 @@
+"use client";
 import React from "react";
+import { motion } from "framer-motion";
 
 const Title = ({ title }) => {
   return (
-    <div
-    
-      className="relative  mb-6"
-    >
-      <div className="w-[50px] h-[25px] rounded-full bg-gradient-to-r from-[#01ffea77]  to-[#0000002f] "></div>
+    <div className="relative border border-gray-600 inline-block mb-6 overflow-hidden rounded-full">
+      
+      {/* Animated highlight */}
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-r from-transparent via-[#72ebc2]/30 to-transparent rounded-full"
+        animate={{ x: ["-100%", "0%", "100%"] }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          ease: "linear", // important for no pause
+        }}
+      />
 
-      <div className="absolute text-2xl top-0 -mt-1 ml-4 ">{title}</div>
+      {/* Title */}
+      <h2 className="relative z-10 text-lg  px-4">
+        {title}
+      </h2>
     </div>
   );
 };
