@@ -22,11 +22,7 @@ const AboutMe = () => {
   const [gradientIndex, setGradientIndex] = useState(0);
 
   const texts = [
-    "Creative Front-End Developer",
-    "MERN Stack Craftsman",
-    "Turning Vision into Pixel-Perfect Reality",
-    "React • TypeScript • Performance Enthusiast",
-    "Building Tomorrow's Web Experiences Today",
+    "Full Stack Web and Mobile App",
   ];
 
   // Better typing effect
