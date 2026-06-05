@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -H 10.10.20.60 -p 3003",
+    "dev": "next dev -H 192.168.0.100 -p 3003",
     "build": "next build",
-    "start": "next start -H 10.10.20.60 -p 3003",
-    "preview": "next start -H 10.10.20.60 -p 3003",
+    "start": "next start -H 192.168.0.100 -p 3003",
+    "preview": "next start -H 192.168.0.100 -p 3003",
     "lint": "next lint"
   },
   "dependencies": {
@@ -28,7 +28,8 @@
     "react-toastify": "^10.0.6",
     "react-tsparticles": "^2.12.2",
     "swiper": "^11.1.14",
-    "tsparticles": "^3.9.1"
+    "tsparticles": "^3.9.1",
+    "uuid": "^14.0.0"
   },
   "devDependencies": {
     "daisyui": "^4.12.13",

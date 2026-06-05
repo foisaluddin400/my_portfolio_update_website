@@ -5,7 +5,7 @@ const settingApi = baseApi.injectEndpoints({
     getCategory: builder.query({
       query: () => {
         return {
-          url: "/category/all-categories",
+          url: "/blogs",
           method: "GET",
         };
       },
