@@ -1,21 +1,15 @@
 "use client";
 
 import React, { useRef } from "react";
-import { CheckOutlined } from "@ant-design/icons";
 import Title from "../shared/Title";
 import { motion, useInView } from "framer-motion";
-import reactImg from "../../../public/react.png";
-import nextImg from "../../../public/next.png";
-import nodeImg from "../../../public/node.png";
-import expressImg from "../../../public/express.png";
-import mongoImg from "../../../public/mongo.png";
-import githubImg from "../../../public/github.png";
-import gitImg from "../../../public/git.png";
-import vscodeImg from "../../../public/vscode.png";
-import figmaImg from "../../../public/figma.png";
+import { ImageUrl } from "@/redux/Api/baseApi";
 
-const SkillSection = () => {
-  // Animation variants
+const SkillSection = ({ skillsData }) => {
+  const skills = skillsData?.skills || [];
+
+  
+
   const sectionVariants = {
     hidden: { opacity: 0, y: 30 },
     visible: {
@@ -29,6 +23,7 @@ const SkillSection = () => {
       },
     },
   };
+
   const childVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -38,41 +33,20 @@ const SkillSection = () => {
     },
   };
 
-  // Refs and inView hooks
   const techRef = useRef(null);
-  const softRef = useRef(null);
-  const langRef = useRef(null);
-  const knowledgeRef = useRef(null);
 
-  const isTechInView = useInView(techRef, { once: true, amount: 0.2 });
-  const isSoftInView = useInView(softRef, { once: true, amount: 0.2 });
-  const isLangInView = useInView(langRef, { once: true, amount: 0.2 });
-  const isKnowledgeInView = useInView(knowledgeRef, {
+  const isTechInView = useInView(techRef, {
     once: true,
     amount: 0.2,
   });
 
-  // Skill data with images
-  const techSkills = [
-    { name: "React", img: reactImg },
-    { name: "Next.js", img: nextImg },
-    { name: "Node.js", img: nodeImg },
-    { name: "Express.js", img: expressImg },
-    { name: "MongoDB", img: mongoImg },
-    { name: "MongoDB", img: mongoImg },
-  ];
-
-  const softSkills = [
-    { name: "GitHub", img: githubImg },
-    { name: "Git", img: gitImg },
-    { name: "VS Code", img: vscodeImg },
-    { name: "Figma", img: figmaImg },
-  ];
-
   return (
-    <div className="text-gray-200 ">
-      {/* Section Title */}
-      <motion.div variants={sectionVariants} initial="hidden" animate="visible">
+    <div className="text-gray-200">
+      <motion.div
+        variants={sectionVariants}
+        initial="hidden"
+        animate="visible"
+      >
         <Title title="Skill" />
       </motion.div>
 
@@ -83,199 +57,64 @@ const SkillSection = () => {
           borderImage:
             "linear-gradient(to right, rgb(65, 65, 65), rgb(22, 22, 22)) 1",
         }}
-        className="grid 2xl:grid-cols-1  gap-4"
+        className="grid 2xl:grid-cols-1 gap-4"
       >
-        {/* Technology Skills */}
-        <motion.div
-          ref={techRef}
-          variants={sectionVariants}
-          initial="hidden"
-          animate={isTechInView ? "visible" : "hidden"}
-        >
-          <div  style={{
-              borderRight: "1px solid transparent",
-              borderBottom: "1px solid transparent",
-              borderImage:
-                "linear-gradient(to right, rgb(65, 65, 65), rgb(22, 22, 22)) 1",
-            }} className="flex pl-3 items-center gap-3 mb-8 py-4">
-            <motion.div variants={childVariants}>
-              <div className="w-12 h-12 rounded-full border-2 border-[#72ebc2] flex items-center justify-center">
-                <span className="text-[#72ebc2] text-xl">💻</span>
-              </div>
-            </motion.div>
-            <motion.h2
-              variants={childVariants}
-              className="text-xl md:text-2xl font-bold text-white tracking-wide"
-            >
-              Technology Skills
-            </motion.h2>
-          </div>
-
+        {skills.map((category) => (
           <motion.div
-            className="grid lg:grid-cols-6 grid-cols-4 gap-2 pl-3 lg:gap-3"
+            key={category._id}
+            ref={techRef}
             variants={sectionVariants}
+            initial="hidden"
+            animate={isTechInView ? "visible" : "hidden"}
           >
-            {techSkills.map((skill, index) => (
-              <motion.div
-                key={index}
-                variants={childVariants}
-                className="flex flex-col items-center p-4 bg-gradient-to-b from-white/5 to-white/2  rounded-xl  shadow-xl hover:scale-105 transition-transform duration-300"
-              >
-                <img
-                  src={skill.img.src}
-                  alt={skill.name}
-                  className="w-12 h-12 object-contain mb-2"
-                />
-                <p className="text-white text-sm lg:text-md lg:font-medium">{skill.name}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.div>
-
-        {/* Software Skills */}
-        <motion.div
-          
-          ref={softRef}
-          variants={sectionVariants}
-          initial="hidden"
-          animate={isSoftInView ? "visible" : "hidden"}
-        >
-          <div
-            style={{
-              borderRight: "1px solid transparent",
-              borderBottom: "1px solid transparent",
-              
-              borderImage:
-                "linear-gradient(to right, rgb(65, 65, 65), rgb(22, 22, 22)) 1",
-            }}
-            className="flex items-center gap-3 mb-8 py-4 pl-3"
-          >
-            <motion.div variants={childVariants}>
-              <div className="w-12 h-12 rounded-full border-2 border-[#72ebc2] flex items-center justify-center">
-                <span className="text-[#72ebc2] text-xl">🗂️</span>
-              </div>
-            </motion.div>
-            <motion.h2
-              variants={childVariants}
-              className="text-xl md:text-2xl font-bold text-white tracking-wide"
+            <div
+              style={{
+                borderRight: "1px solid transparent",
+                borderBottom: "1px solid transparent",
+                borderImage:
+                  "linear-gradient(to right, rgb(65, 65, 65), rgb(22, 22, 22)) 1",
+              }}
+              className="flex pl-3 items-center gap-3 mb-8 py-4"
             >
-              Software Skills
-            </motion.h2>
-          </div>
-
-          <motion.div
-            className="grid lg:grid-cols-6 grid-cols-4 gap-2 pl-3 lg:gap-3"
-            variants={sectionVariants}
-          >
-            {softSkills.map((skill, index) => (
-              <motion.div
-                key={index}
-                variants={childVariants}
-                className="flex flex-col items-center p-4 bg-gradient-to-b from-white/5 to-white/2  rounded-xl shadow-lg hover:scale-105 transition-transform duration-300"
-              >
-                <img
-                  src={skill.img.src}
-                  alt={skill.name}
-                  className="w-12 h-12 object-contain mb-2"
-                />
-                <p className="text-white text-sm lg:text-md lg:font-medium">{skill.name}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.div>
-      </div>
-
-      {/* Language Skills */}
-      {/* <div className=" grid lg:grid-cols-2">
-        <motion.div
-          ref={langRef}
-          variants={sectionVariants}
-          initial="hidden"
-          animate={isLangInView ? "visible" : "hidden"}
-        >
-          <div style={{
-              borderRight: "1px solid transparent",
-              borderBottom: "1px solid transparent",
-              borderImage:
-                "linear-gradient(to right, rgb(65, 65, 65), rgb(22, 22, 22)) 1",
-            }} className="flex items-center gap-3 mb-8 pb-4">
-            <motion.div variants={childVariants}>
-              <div className="w-12 h-12 rounded-full border-2 border-[#72ebc2] flex items-center justify-center">
-                <span className="text-[#72ebc2] text-xl">🌍</span>
-              </div>
-            </motion.div>
-            <motion.h2
-              variants={childVariants}
-              className="text-xl md:text-2xl font-bold text-white tracking-wide"
-            >
-              Language Skills
-            </motion.h2>
-          </div>
-          <motion.div className="space-y-3" variants={sectionVariants}>
-            {[
-              { lang: "English", dots: 12 },
-              { lang: "Bangla", dots: 15 },
-              { lang: "Hindi", dots: 8 },
-            ].map((item, index) => (
-              <motion.div key={index} variants={childVariants}>
-                <p>{item.lang}</p>
-                <div className="flex gap-2 mt-2">
-                  {[...Array(15)].map((_, i) => (
-                    <div
-                      key={i}
-                      className={`w-3 h-3 rounded-full ${i < item.dots ? "bg-[#72ebc2]" : "bg-gray-500"}`}
-                    />
-                  ))}
+              <motion.div variants={childVariants}>
+                <div className="w-12 h-12 rounded-full border-2 border-[#72ebc2] flex items-center justify-center">
+                  <span className="text-[#72ebc2] text-xl">💻</span>
                 </div>
               </motion.div>
-            ))}
-          </motion.div>
-        </motion.div>
 
-  
-        <motion.div
-          ref={knowledgeRef}
-          variants={sectionVariants}
-          initial="hidden"
-          animate={isKnowledgeInView ? "visible" : "hidden"}
-        >
-          <div    style={{
-              borderRight: "1px solid transparent",
-              borderBottom: "1px solid transparent",
-              borderImage:
-                "linear-gradient(to right, rgb(65, 65, 65), rgb(22, 22, 22)) 1",
-            }} className="flex items-center gap-3 mb-8 pb-4 mt-5 lg:mt-0">
-            <motion.div variants={childVariants}>
-              <div className="w-12 h-12 rounded-full border-2 border-[#72ebc2] flex items-center justify-center">
-                <span className="text-[#72ebc2] text-xl">✅</span>
-              </div>
-            </motion.div>
-            <motion.h2
-              variants={childVariants}
-              className="text-xl md:text-2xl font-bold text-white tracking-wide"
-            >
-              Knowledge
-            </motion.h2>
-          </div>
-          <motion.ul className="space-y-2" variants={sectionVariants}>
-            {[
-              "Time Management",
-              "Problem Solving",
-              "Team Collaboration",
-              "Project Planning",
-              "Adaptability",
-            ].map((item, index) => (
-              <motion.li
-                key={index}
+              <motion.h2
                 variants={childVariants}
-                className="flex items-center"
+                className="text-xl md:text-2xl font-bold text-white tracking-wide"
               >
-                <CheckOutlined className="text-[#72ebc2] mr-2" /> {item}
-              </motion.li>
-            ))}
-          </motion.ul>
-        </motion.div>
-      </div> */}
+                {category.category}
+              </motion.h2>
+            </div>
+
+            <motion.div
+              className="grid lg:grid-cols-6 grid-cols-4 gap-2 pl-3 lg:gap-3"
+              variants={sectionVariants}
+            >
+              {category.skills?.map((skill) => (
+                <motion.div
+                  key={skill._id}
+                  variants={childVariants}
+                  className="flex flex-col items-center p-4 bg-gradient-to-b from-white/5 to-white/2 rounded-xl shadow-xl hover:scale-105 transition-transform duration-300"
+                >
+                  <img
+                    src={`${ImageUrl}/${skill.skillIconImage}`}
+                    alt={skill.languageName}
+                    className="w-12 h-12 object-contain mb-2"
+                  />
+
+                  <p className="text-white text-sm lg:text-md lg:font-medium text-center">
+                    {skill.languageName}
+                  </p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.div>
+        ))}
+      </div>
     </div>
   );
 };

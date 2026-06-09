@@ -1,161 +1,170 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
+import Image from 'next/image';
 import Title from '../shared/Title';
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { ImageUrl } from "@/redux/Api/baseApi";
+import { UserOutlined, MailOutlined, PhoneOutlined, EnvironmentOutlined } from '@ant-design/icons';
+import { useCreateContactMutation } from '@/redux/Api/contactApi';
 
-export default function Contact() {
-  // Animation variants for sections
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.3, // Fast animation (same as others)
-        ease: 'easeOut',
-        when: 'beforeChildren',
-        staggerChildren: 0.05, // Fast stagger (same as others)
-      },
-    },
+const ContactSection = ({ profileData }) => {
+  const profile = profileData || {};
+const [createContact] = useCreateContactMutation()
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: ""
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Animation variants for child elements
-  const childVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.25, // Fast child animation (same as others)
-        ease: 'easeOut',
-      },
-    },
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const contactPayload = {
+      name: formData.name,
+      email: formData.email,
+      message: formData.message,
+    };
+
+    try {
+      // Replace with your actual API call
+      const response = await createContact(contactPayload)
+
+  
+        alert("Message sent successfully!");
+        setFormData({ name: "", email: "", message: "" });
+     
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
-
-  // Refs for each section
-  const mapRef = useRef(null);
-  const contactInfoRef = useRef(null);
-  const formRef = useRef(null);
-
-  // useInView hooks
-  const isMapInView = useInView(mapRef, { once: true, amount: 0.2 });
-  const isContactInfoInView = useInView(contactInfoRef, { once: true, amount: 0.2 });
-  const isFormInView = useInView(formRef, { once: true, amount: 0.2 });
 
   return (
-    <div className="">
-      <motion.div
-        variants={sectionVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <Title title={'Contact'} />
-      </motion.div>
+    <section className=" relative">
+      <Title title="Get In Touch" />
 
-      <div className="">
-        {/* Left Side: Google Map */}
-        <motion.div
-          ref={mapRef}
-          variants={sectionVariants}
-          initial="hidden"
-          animate={isMapInView ? 'visible' : 'hidden'}
-          className="w-full h-96 rounded-xl overflow-hidden shadow-lg border border-white/10"
-        >
-          <motion.iframe
-            variants={childVariants}
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.902903624818!2d90.39279211543035!3d23.75090398458992!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8b4a7dfb05b%3A0xa1a0f07f8f1c3c55!2sDhaka%2C%20Bangladesh!5e0!3m2!1sen!2sus!4v1708699900000!5m2!1sen!2sus"
-            width="100%"
-            height="100%"
-            className="border-0"
-            allowFullScreen=""
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
-        </motion.div>
-
-        {/* Right Side: Contact Info + Form */}
-        <motion.div
-          variants={sectionVariants}
-          initial="hidden"
-          animate={isContactInfoInView ? 'visible' : 'hidden'}
-          className="flex flex-col gap-3"
-        >
-          {/* Contact Info */}
+      <div className="max-w-6xl mx-auto  ">
+        <div className="grid md:grid-cols-1 gap-16">
+          {/* Left Side - Profile Info */}
           <motion.div
-            ref={contactInfoRef}
-            variants={sectionVariants}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-6 bg-white/5 p-4 rounded-lg shadow border border-white/10 md:mt-6 mt-4"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            className="space-y-8"
           >
-            {[
-              { label: 'Name', value: 'Momtaj Uddin' },
-              { label: 'Email', value: 'foisalrk2@gmail.com' },
-              { label: 'Phone', value: '+880 1605 722887' },
-              { label: 'Address', value: 'Dhaka, Bangladesh' },
-            ].map((item, idx) => (
-              <motion.div key={idx} variants={childVariants}>
-                <h4 className="font-semibold mb-1 text-white">{item.label}</h4>
-                <p>{item.value}</p>
-              </motion.div>
-            ))}
+          
+
+            <div className="space-y-6 text-gray-300">
+              <div className="flex items-start gap-4">
+                <MailOutlined className="text-2xl text-[#72ebc2] mt-1" />
+                <div>
+                  <p className="text-sm uppercase tracking-widest text-gray-500">Email</p>
+                  <a href={`mailto:${profile.email}`} className="hover:text-[#72ebc2] transition-colors">
+                    {profile.email}
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <PhoneOutlined className="text-2xl text-[#72ebc2] mt-1" />
+                <div>
+                  <p className="text-sm uppercase tracking-widest text-gray-500">Phone</p>
+                  <a href={`tel:${profile.phone}`} className="hover:text-[#72ebc2] transition-colors">
+                    {profile.phone}
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <EnvironmentOutlined className="text-2xl text-[#72ebc2] mt-1" />
+                <div>
+                  <p className="text-sm uppercase tracking-widest text-gray-500">Location</p>
+                  <p>{profile.address}</p>
+                </div>
+              </div>
+            </div>
+
+            {profile.resumeLink && (
+              <a
+                href={profile.resumeLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 px-8 py-3.5 bg-[#72ebc2] text-black font-semibold rounded-2xl hover:bg-white transition-all"
+              >
+                Download Resume
+              </a>
+            )}
           </motion.div>
 
-          {/* Contact Form */}
-          <motion.form
-            ref={formRef}
-            variants={sectionVariants}
-            initial="hidden"
-            animate={isFormInView ? 'visible' : 'hidden'}
-            className="flex flex-col gap-4 bg-white/5 p-6 rounded-xl shadow border border-white/10"
+          {/* Right Side - Contact Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
           >
-            <motion.div variants={childVariants} className="grid grid-cols-2 gap-4">
-              <motion.input
-                variants={childVariants}
-                type="text"
-                placeholder="Your Name"
-                style={{
-                  borderBottom: '1px solid transparent',
-                  borderImage:
-                    'linear-gradient(to right, rgb(65, 65, 65), rgb(22, 22, 22)) 1',
-                }}
-                className="bg-transparent p-3 rounded placeholder-gray-400 focus:outline-none focus:border-[#72ebc2]"
-                required
-              />
-              <motion.input
-                variants={childVariants}
-                type="email"
-                placeholder="Your Email"
-                style={{
-                  borderBottom: '1px solid transparent',
-                  borderImage:
-                    'linear-gradient(to right, rgb(65, 65, 65), rgb(22, 22, 22)) 1',
-                }}
-                className="bg-transparent p-3 rounded placeholder-gray-400 focus:outline-none focus:border-[#72ebc2]"
-                required
-              />
-            </motion.div>
-            <motion.textarea
-              variants={childVariants}
-              placeholder="Your Message"
-              rows={5}
-              style={{
-                borderBottom: '1px solid transparent',
-                borderImage:
-                  'linear-gradient(to right, rgb(65, 65, 65), rgb(22, 22, 22)) 1',
-              }}
-              className="bg-transparent p-3 rounded placeholder-gray-400 focus:outline-none focus:border-[#72ebc2]"
-              required
-            />
-            <motion.button
-              variants={childVariants}
-              type="submit"
-              className="bg-gradient-to-r from-emerald-400 to-teal-300 hover:from-emerald-300 hover:to-teal-200 text-black py-3 rounded-lg font-semibold hover:bg-cyan-500 transition"
-            >
-              Send Message
-            </motion.button>
-          </motion.form>
-        </motion.div>
+            <form onSubmit={handleSubmit} className="space-y-6 bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-3xl p-4 md:p-4">
+              <div>
+                <label className="block text-sm text-gray-400 mb-2">Your Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-[#72ebc2] transition-colors"
+                  placeholder="John Doe"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm text-gray-400 mb-2">Your Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-[#72ebc2] transition-colors"
+                  placeholder="you@example.com"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm text-gray-400 mb-2">Message</label>
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows={6}
+                  className="w-full bg-white/5 border border-white/10 rounded-3xl px-6 py-4 text-white focus:outline-none focus:border-[#72ebc2] transition-colors resize-y"
+                  placeholder="Hello! I want to hire you for a project..."
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full py-3 bg-[#72ebc2] hover:bg-white text-black font-bold rounded-2xl transition-all disabled:opacity-70 flex items-center justify-center gap-3"
+              >
+                {isSubmitting ? "Sending..." : "Send Message"}
+              </button>
+            </form>
+          </motion.div>
+        </div>
       </div>
-    </div>
+    </section>
   );
-}
+};
+
+export default ContactSection;

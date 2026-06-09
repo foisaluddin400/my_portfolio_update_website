@@ -62,8 +62,21 @@ const educationItems = [
   },
 ];
 
-export function ResumeTimeline() {
+export function ResumeTimeline({resumeData}) {
   // Animation for the overall container
+console.log(resumeData)
+const resumes = resumeData?.resumes || [];
+
+const experienceItems = resumes.filter(
+  (item) => item.type === "experience"
+);
+
+const educationItems = resumes.filter(
+  (item) => item.type === "education"
+);
+
+
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -149,29 +162,43 @@ export function ResumeTimeline() {
             />
 
             {experienceItems.map((item) => (
-              <motion.div key={item.id} className="relative" variants={sectionVariants}>
-                {/* Animated Dot */}
-                <motion.div
-                  variants={dotVariants}
-                  className="absolute -left-[21px] top-1.5 w-3.5 h-3.5 rounded-full bg-[#72ebc2] shadow-[0_0_10px_#72ebc2] z-10"
-                />
+  <motion.div
+    key={item._id}
+    className="relative"
+    variants={sectionVariants}
+  >
+    <motion.div
+      variants={dotVariants}
+      className="absolute -left-[21px] top-1.5 w-3.5 h-3.5 rounded-full bg-[#72ebc2] shadow-[0_0_10px_#72ebc2] z-10"
+    />
 
-                <div
-                  style={{
-                    borderBottom: '1px solid transparent',
-                    borderImage: 'linear-gradient(to left, rgb(65, 65, 65), rgb(22, 22, 22)) 1',
-                  }}
-                  className="space-y-3 pb-9"
-                >
-                  <div className="inline-block px-3 py-1 rounded border border-[#72ebc2]/30 bg-[#72ebc2]/10 text-[#72ebc2] text-xs font-mono">
-                    {item.dateRange}
-                  </div>
-                  <h3 className="text-lg text-white font-semibold">{item.title}</h3>
-                  <p className="text-sm text-[#72ebc2]/80 font-medium">{item.company}</p>
-                  <p className="text-sm text-gray-400 leading-relaxed">{item.description}</p>
-                </div>
-              </motion.div>
-            ))}
+    <div
+      style={{
+        borderBottom: "1px solid transparent",
+        borderImage:
+          "linear-gradient(to left, rgb(65, 65, 65), rgb(22, 22, 22)) 1",
+      }}
+      className="space-y-3 pb-9"
+    >
+      <div className="inline-block px-3 py-1 rounded border border-[#72ebc2]/30 bg-[#72ebc2]/10 text-[#72ebc2] text-xs font-mono">
+        {item.startingYear} -{" "}
+        {item.running ? "Present" : item.passingYear || "Present"}
+      </div>
+
+      <h3 className="text-lg text-white font-semibold">
+        {item.title}
+      </h3>
+
+      <p className="text-sm text-[#72ebc2]/80 font-medium">
+        {item.instituteName}
+      </p>
+
+      <p className="text-sm text-gray-400 leading-relaxed">
+        {item.description}
+      </p>
+    </div>
+  </motion.div>
+))}
           </div>
         </motion.div>
 
@@ -199,29 +226,43 @@ export function ResumeTimeline() {
             />
 
             {educationItems.map((item) => (
-              <motion.div key={item.id} className="relative" variants={sectionVariants}>
-                {/* Animated Dot */}
-                <motion.div
-                  variants={dotVariants}
-                  className="absolute -left-[21px] top-1.5 w-3.5 h-3.5 rounded-full bg-[#72ebc2] shadow-[0_0_10px_#72ebc2] z-10"
-                />
+  <motion.div
+    key={item._id}
+    className="relative"
+    variants={sectionVariants}
+  >
+    <motion.div
+      variants={dotVariants}
+      className="absolute -left-[21px] top-1.5 w-3.5 h-3.5 rounded-full bg-[#72ebc2] shadow-[0_0_10px_#72ebc2] z-10"
+    />
 
-                <div
-                  style={{
-                    borderBottom: '1px solid transparent',
-                    borderImage: 'linear-gradient(to right, rgb(65, 65, 65), rgb(22, 22, 22)) 1',
-                  }}
-                  className="space-y-3 pb-9"
-                >
-                  <div className="inline-block px-3 py-1 rounded border border-[#72ebc2]/30 bg-[#72ebc2]/10 text-[#72ebc2] text-xs font-mono">
-                    {item.dateRange}
-                  </div>
-                  <h3 className="text-lg text-white font-semibold">{item.title}</h3>
-                  <p className="text-sm text-[#72ebc2]/80 font-medium">{item.company}</p>
-                  <p className="text-sm text-gray-400 leading-relaxed">{item.location}</p>
-                </div>
-              </motion.div>
-            ))}
+    <div
+      style={{
+        borderBottom: "1px solid transparent",
+        borderImage:
+          "linear-gradient(to right, rgb(65, 65, 65), rgb(22, 22, 22)) 1",
+      }}
+      className="space-y-3 pb-9"
+    >
+      <div className="inline-block px-3 py-1 rounded border border-[#72ebc2]/30 bg-[#72ebc2]/10 text-[#72ebc2] text-xs font-mono">
+        {item.startingYear} -{" "}
+        {item.running ? "Present" : item.passingYear || "Present"}
+      </div>
+
+      <h3 className="text-lg text-white font-semibold">
+        {item.title}
+      </h3>
+
+      <p className="text-sm text-[#72ebc2]/80 font-medium">
+        {item.instituteName}
+      </p>
+
+      <p className="text-sm text-gray-400 leading-relaxed">
+        {item.description}
+      </p>
+    </div>
+  </motion.div>
+))}
           </div>
         </motion.div>
 

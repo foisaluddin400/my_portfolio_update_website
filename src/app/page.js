@@ -2,20 +2,20 @@ import HomePage from "@/components/HomePage/HomePage";
 import VisitorTracker from "@/components/HomePage/VisitorTracker";
 import React from "react";
 
-const BASE_URL = "http://192.168.0.100:5000/api/v1";
+const BASE_URL = "http://10.10.20.60:5000/api/v1";
 
 async function getAllData() {
   try {
     const [about, blogs, skills, profile, projects, reviews, services, resume] =
       await Promise.all([
-        fetch(`${BASE_URL}/about`, { cache: "no-store" }).then((r) => r.json()),
-        fetch(`${BASE_URL}/blogs`, { cache: "no-store" }).then((r) => r.json()),
-        fetch(`${BASE_URL}/skills`, { cache: "no-store" }).then((r) => r.json()),
-        fetch(`${BASE_URL}/profile`, { cache: "no-store" }).then((r) => r.json()),
-        fetch(`${BASE_URL}/projects`, { cache: "no-store" }).then((r) => r.json()),
-        fetch(`${BASE_URL}/reviews`, { cache: "no-store" }).then((r) => r.json()),
-        fetch(`${BASE_URL}/services`, { cache: "no-store" }).then((r) => r.json()),
-        fetch(`${BASE_URL}/resume`, { cache: "no-store" }).then((r) => r.json()),
+        fetch(`${BASE_URL}/about`, { next: { revalidate: 60 } }).then((r) => r.json()),
+        fetch(`${BASE_URL}/blogs`, { next: { revalidate: 60 } }).then((r) => r.json()),
+        fetch(`${BASE_URL}/skills`, { next: { revalidate: 60 } }).then((r) => r.json()),
+        fetch(`${BASE_URL}/profile`, { next: { revalidate: 60 } }).then((r) => r.json()),
+        fetch(`${BASE_URL}/projects`, { next: { revalidate: 60 } }).then((r) => r.json()),
+        fetch(`${BASE_URL}/reviews`, { next: { revalidate: 60 } }).then((r) => r.json()),
+        fetch(`${BASE_URL}/services`, { next: { revalidate: 60 } }).then((r) => r.json()),
+        fetch(`${BASE_URL}/resume`, { next: { revalidate: 60 } }).then((r) => r.json()),
       ]);
 
     return {

@@ -12,6 +12,7 @@ import {
 
 const navItems = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+  { name: 'Visitors', href: '/dashboard/visitors', icon: Users },
   { name: 'About Us', href: '/dashboard/about-us', icon: Users },
   { name: 'Skills', href: '/dashboard/skills', icon: Award },
   { name: 'Resume', href: '/dashboard/resume', icon: FolderOpen },
@@ -20,6 +21,7 @@ const navItems = [
         
           { name: 'Projects', href: '/dashboard/projects', icon: Users },
           { name: 'Contact', href: '/dashboard/contact', icon: Users },
+           { name: 'Profile', href: '/dashboard/profile', icon: Users },
 ];
 
 export default function DashboardLayout({ children }) {
@@ -79,7 +81,7 @@ export default function DashboardLayout({ children }) {
         </header>
 
         {/* Page Content */}
-        <main className="flex-1 overflow-auto p- bg-[#111816]">
+        <main className="flex-1 overflow-auto p-4 bg-[#111816]">
           {children}
         </main>
       </div>

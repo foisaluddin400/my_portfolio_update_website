@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 
 // const baseUrl = "https://api.kidsknowrights.com";
 const baseUrl = "http://10.10.20.60:5000/api/v1";
+export const ImageUrl = "http://10.10.20.60:5000";
 
 // Get token from cookie
 const getToken = () => {
@@ -34,6 +35,7 @@ export const baseApi = createApi({
 
   tagTypes: [
     "auth",
+    "about",
     "blogs",
     "skills",
     "projects",

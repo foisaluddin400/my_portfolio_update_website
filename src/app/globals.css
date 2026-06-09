@@ -127,6 +127,45 @@ body {
 
 
 
+.jodit-container {
+  border: none !important;
+}
+
+.jodit-toolbar__box {
+  background: #162b2c !important;
+  border-color: #475569 !important;
+}
+
+.jodit-workplace {
+  background: #121a17 !important;
+}
+
+.jodit-wysiwyg {
+  background: #121a17 !important;
+  color: white !important;
+}
+
+.jodit-status-bar {
+  background: #162b2c !important;
+  color: white !important;
+  border-color: #475569 !important;
+}
+
+.jodit-toolbar-button button {
+  color: white !important;
+}
+
+.jodit-icon {
+  fill: white !important;
+}
+
+
+
+
+
+
+
+
 
 @property --angle {
   syntax: "<angle>";

@@ -16,7 +16,7 @@ export const blogsApi = baseApi.injectEndpoints({
       query: (data) => ({
         url: '/blogs',
         method: 'POST',
-        body: data,           // FormData হবে (image + text)
+        body: data,           
       }),
       invalidatesTags: ['blogs'],
     }),

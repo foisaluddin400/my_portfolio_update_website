@@ -2,11 +2,16 @@
 const nextConfig = {
   images: {
     remotePatterns: [
+    
+      {
+        protocol: 'http',
+        hostname: '10.10.20.60',
+        port: '5000',
+        pathname: '/uploads/**',
+      },
       {
         protocol: 'https',
-        hostname: 'i.ibb.co',
-        port: '',
-        pathname: '**',
+        hostname: '**',           // Allow all HTTPS domains (safe for production)
       },
     ],
   },

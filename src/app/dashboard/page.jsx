@@ -1,6 +1,12 @@
 'use client';
 
+import React from 'react';
+import { useGetContactsQuery } from '@/redux/Api/contactApi';
+import { useGetProjectsQuery } from '@/redux/Api/projectsApi';
+import { useGetReviewsQuery } from '@/redux/Api/reviewApi';
+import { useGetVisitorsStatsQuery } from '@/redux/Api/visitorsApi';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { Navigate } from "@/components/shared/Navigate";
 
 const visitorData = [
   { month: 'Jan', visitors: 1240 },
@@ -11,47 +17,47 @@ const visitorData = [
   { month: 'Jun', visitors: 2780 },
 ];
 
-const recentContacts = [
-  { id: 1, name: "Rahim Khan", email: "rahim@example.com", message: "Portfolio দেখে খুব ভালো লেগেছে", date: "2 hours ago" },
-  { id: 2, name: "Sadia Ahmed", email: "sadia@gmail.com", message: "Project details জানতে চাই", date: "5 hours ago" },
-  { id: 3, name: "Tamim Iqbal", email: "tamim@tech.com", message: "Freelance opportunity", date: "Yesterday" },
-];
-
 export default function DashboardPage() {
+  const { data: contactsData } = useGetContactsQuery();
+  const { data: projectsData } = useGetProjectsQuery();
+  const { data: reviewsData } = useGetReviewsQuery();
+  const { data: visitorsData } = useGetVisitorsStatsQuery();
+
+  const contacts = contactsData?.data?.contacts || [];
+  const totalContacts = contactsData?.data?.total || 0;
+  const totalProjects = projectsData?.data?.total || projectsData?.data?.projects?.length || 0;
+  const totalReviews = reviewsData?.data?.total || reviewsData?.data?.reviews?.length || 0;
+  const totalVisits = visitorsData?.data?.totalVisits || 0;
+
+  // Get recent 3 contacts (sorted by newest first)
+  const recentContacts = [...contacts]
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    .slice(0, 3);
+
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 ">
       {/* Header */}
-   
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-[#1a2421] border border-gray-800 p-6 rounded-2xl hover:border-emerald-500 transition-all">
           <p className="text-gray-400 text-sm">Portfolio Visitors</p>
-          <p className="text-4xl font-bold text-white mt-3">8,472</p>
-          <p className="text-emerald-500 text-sm mt-2">↑ 12% this month</p>
+          <p className="text-4xl font-bold text-white mt-3">{totalVisits}</p>
         </div>
 
         <div className="bg-[#1a2421] border border-gray-800 p-6 rounded-2xl hover:border-emerald-500 transition-all">
           <p className="text-gray-400 text-sm">Total Projects</p>
-          <p className="text-4xl font-bold text-white mt-3">24</p>
-          <p className="text-emerald-500 text-sm mt-2">↑ 3 this month</p>
+          <p className="text-4xl font-bold text-white mt-3">{totalProjects}</p>
         </div>
 
         <div className="bg-[#1a2421] border border-gray-800 p-6 rounded-2xl hover:border-emerald-500 transition-all">
-          <p className="text-gray-400 text-sm">Total Blogs</p>
-          <p className="text-4xl font-bold text-white mt-3">18</p>
-          <p className="text-emerald-500 text-sm mt-2">↑ 2 this month</p>
-        </div>
-
-        <div className="bg-[#1a2421] border border-gray-800 p-6 rounded-2xl hover:border-emerald-500 transition-all">
-          <p className="text-gray-400 text-sm">Total Skills</p>
-          <p className="text-4xl font-bold text-white mt-3">47</p>
+          <p className="text-gray-400 text-sm">Total Reviews</p>
+          <p className="text-4xl font-bold text-white mt-3">{totalReviews}</p>
         </div>
 
         <div className="bg-[#1a2421] border border-gray-800 p-6 rounded-2xl hover:border-emerald-500 transition-all">
           <p className="text-gray-400 text-sm">Total Contacts</p>
-          <p className="text-4xl font-bold text-white mt-3">156</p>
-          <p className="text-emerald-500 text-sm mt-2">↑ 8 this week</p>
+          <p className="text-4xl font-bold text-white mt-3">{totalContacts}</p>
         </div>
       </div>
 
@@ -88,7 +94,7 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* Recent Contacts */}
+      {/* Recent Contacts - REAL DATA */}
       <div className="bg-[#1a2421] border border-gray-800 p-8 rounded-2xl">
         <h2 className="text-2xl font-semibold text-white mb-6">Recent Contacts</h2>
         
@@ -103,22 +109,42 @@ export default function DashboardPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-800">
-              {recentContacts.map((contact) => (
-                <tr key={contact.id} className="hover:bg-gray-800/50 transition-all">
-                  <td className="py-5 text-white font-medium">{contact.name}</td>
-                  <td className="py-5 text-gray-400">{contact.email}</td>
-                  <td className="py-5 text-gray-300 max-w-md truncate">{contact.message}</td>
-                  <td className="py-5 text-gray-500 text-sm">{contact.date}</td>
+              {recentContacts.length > 0 ? (
+                recentContacts.map((contact) => (
+                  <tr key={contact._id} className="hover:bg-gray-800/50 transition-all">
+                    <td className="py-5 text-white font-medium">{contact.name}</td>
+                    <td className="py-5 text-gray-400">{contact.email}</td>
+                    <td className="py-5 text-gray-300 max-w-md truncate">
+                      {contact.message}
+                    </td>
+                    <td className="py-5 text-gray-500 text-sm">
+                      {new Date(contact.createdAt).toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                      })}
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={4} className="py-10 text-center text-gray-400">
+                    No contacts yet
+                  </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>
 
         <div className="mt-6 text-center">
-          <button className="text-emerald-500 hover:text-emerald-400 font-medium text-sm">
+          <a 
+            href="/dashboard/contact" 
+            className="text-emerald-500 hover:text-emerald-400 font-medium text-sm inline-flex items-center gap-1"
+          >
             View All Contacts →
-          </button>
+          </a>
         </div>
       </div>
     </div>

@@ -1,37 +1,18 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import Image from 'next/image';
 import Title from '../shared/Title';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { ImageUrl } from "@/redux/Api/baseApi";
 
-const ClientReview = () => {
-  const reviews = [
-    {
-      name: 'John Doe',
-      review: 'Amazing work! The website exceeded my expectations with its sleek design and performance. Highly recommend!',
-      date: 'Oct 2025',
-      role: 'Founder @ TechFlow'
-    },
-    {
-      name: 'Jane Smith',
-      review: 'Professional and timely delivery. The UI/UX is top-notch, and the support was excellent.',
-      date: 'Oct 2025',
-      role: 'Product Manager'
-    },
-    {
-      name: 'Mike Johnson',
-      review: 'A pleasure to work with. The backend solutions were robust and perfectly tailored to our needs.',
-      date: 'Oct 2025',
-      role: 'CTO'
-    },
-    // ... rest of your reviews
-  ];
-
+const ClientReview = ({ ClientReview }) => {
+  const reviews = ClientReview?.reviews || [];
+console.log(ClientReview)
   const [currentIndex, setCurrentIndex] = useState(0);
   const reviewRef = useRef(null);
   const isInView = useInView(reviewRef, { once: true, amount: 0.2 });
 
-  // Memoized navigation to prevent effect re-runs
   const nextSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % reviews.length);
   }, [reviews.length]);
@@ -40,14 +21,30 @@ const ClientReview = () => {
     setCurrentIndex((prev) => (prev - 1 + reviews.length) % reviews.length);
   };
 
+  // Auto slide
   useEffect(() => {
-    const interval = setInterval(nextSlide, 5000); // 5 seconds feels more premium than 3
+    if (reviews.length <= 1) return;
+    const interval = setInterval(nextSlide, 5000);
     return () => clearInterval(interval);
-  }, [nextSlide]);
+  }, [nextSlide, reviews.length]);
+
+  // Format date
+  const formatDate = (dateString) => {
+    if (!dateString) return 'Recent';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'short' 
+    });
+  };
+
+  if (reviews.length === 0) {
+    return <div className="text-center py-20 text-gray-400">No reviews available yet.</div>;
+  }
 
   return (
-    <div className=" relative overflow-hidden" ref={reviewRef}>
-      {/* Decorative Background Glows */}
+    <div className="relative overflow-hidden" ref={reviewRef}>
+      {/* Decorative Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-teal-500/10 blur-[120px] rounded-full -z-10" />
 
       <motion.div
@@ -55,10 +52,10 @@ const ClientReview = () => {
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6 }}
       >
-        <Title title={'Client Feedback'} />
+        <Title title="Client Feedback" />
       </motion.div>
 
-      <div className=" px-10 mt-20 relative">
+      <div className="px-10 mt-20 relative">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentIndex}
@@ -68,60 +65,75 @@ const ClientReview = () => {
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             className="relative z-10"
           >
-            {/* Large Decorative Quote Mark */}
+            {/* Large Quote Mark */}
             <span className="absolute -top-12 -left-4 md:-left-10 text-[160px] leading-none text-[#72ebc2]/10 font-serif select-none">
               “
             </span>
 
-            <div className="relative bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-8  shadow-2xl">
+            <div className="relative bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-8 md:p-12 shadow-2xl">
               <motion.p 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2 }}
-                className="text-white text-xl md:text-2xl py-9 leading-tight md:leading-[1.2] font-medium tracking-tight mb-10"
+                className="text-white text-xl md:text-2xl py-9 leading-tight md:leading-[1.35] font-medium tracking-tight mb-12"
               >
-                {reviews[currentIndex].review}
+                {reviews[currentIndex].description}
               </motion.p>
 
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-t border-white/10 pt-4">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-[#72ebc2] to-teal-600 flex items-center justify-center text-black font-bold">
-                    {reviews[currentIndex].name.charAt(0)}
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-t border-white/10 pt-8">
+                <div className="flex items-center gap-5">
+                  {/* Profile Image */}
+                  <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-[#72ebc2]/30 flex-shrink-0">
+                    {reviews[currentIndex].profileImage ? (
+                      <img
+                        src={`${ImageUrl}/${reviews[currentIndex].profileImage}`}
+                        alt={reviews[currentIndex].clientName}
+                        fill
+                        className="object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-tr from-[#72ebc2] to-teal-600 flex items-center justify-center text-black font-bold text-2xl">
+                        {reviews[currentIndex].clientName?.charAt(0)}
+                      </div>
+                    )}
                   </div>
+
                   <div>
-                    <h4 className="text-white font-bold text-lg leading-none mb-1">
-                      {reviews[currentIndex].name}
+                    <h4 className="text-white font-bold text-xl leading-none mb-1.5">
+                      {reviews[currentIndex].clientName}
                     </h4>
                     <p className="text-gray-400 text-sm uppercase tracking-widest font-semibold">
-                      {reviews[currentIndex].role || "Client"}
+                      {reviews[currentIndex].profession || "Client"}
                     </p>
                   </div>
                 </div>
 
-                <div className="text-gray-500 text-sm font-mono">
-                  {reviews[currentIndex].date}
+                <div className="text-gray-400 text-sm font-mono">
+                  {formatDate(reviews[currentIndex].date)}
                 </div>
               </div>
             </div>
           </motion.div>
         </AnimatePresence>
 
-        {/* Navigation & Progress Section */}
+        {/* Navigation Section */}
         <div className="mt-12 flex flex-col md:flex-row items-center justify-between gap-8">
-          {/* Progress Indicators */}
+          {/* Progress Dots */}
           <div className="flex gap-2">
             {reviews.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => setCurrentIndex(idx)}
                 className={`h-1 transition-all duration-500 rounded-full ${
-                  currentIndex === idx ? 'w-12 bg-[#72ebc2]' : 'w-4 bg-white/20'
+                  currentIndex === idx 
+                    ? 'w-12 bg-[#72ebc2]' 
+                    : 'w-4 bg-white/20 hover:bg-white/40'
                 }`}
               />
             ))}
           </div>
 
-          {/* Minimalist Controls */}
+          {/* Arrow Controls */}
           <div className="flex gap-4">
             <button
               onClick={prevSlide}
