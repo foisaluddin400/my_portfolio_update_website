@@ -2,7 +2,7 @@ import HomePage from "@/components/HomePage/HomePage";
 import VisitorTracker from "@/components/HomePage/VisitorTracker";
 import React from "react";
 
-const BASE_URL = "http://10.10.20.60:5000/api/v1";
+const BASE_URL = "https://my-portfolio-foisal-server.vercel.app/api/v1";
 
 async function getAllData() {
   try {
