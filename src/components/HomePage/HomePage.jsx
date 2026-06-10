@@ -81,7 +81,7 @@ export default function HomePage({ aboutData, blogsData, skillsData, profileData
   const handleSelectBlog = (blog) => {
     setSelectedBlog(blog);
     setActiveSection("blogs");
-    // উপরে scroll করো
+    
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 

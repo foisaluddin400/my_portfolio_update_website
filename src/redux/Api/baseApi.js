@@ -4,8 +4,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import Cookies from "js-cookie";
 
 // const baseUrl = "https://api.kidsknowrights.com";
-const baseUrl = "http://10.10.20.60:5000/api/v1";
-export const ImageUrl = "http://10.10.20.60:5000";
+const baseUrl = "https://my-portfolio-foisal-server.vercel.app/api/v1";
+export const ImageUrl = "https://my-portfolio-foisal-server.vercel.app";
 
 // Get token from cookie
 const getToken = () => {
