@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import ResetPassword from './ResetPassword'
 
 const page = () => {
   return (
-    <ResetPassword />
+     <Suspense fallback={<div>Loading...</div>}><ResetPassword /> </Suspense>
   )
 }
 

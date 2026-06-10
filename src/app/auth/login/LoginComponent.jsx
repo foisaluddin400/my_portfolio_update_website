@@ -1,27 +1,27 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
-import Cookies from 'js-cookie';
-import { useRouter } from 'next/navigation';
-import { Eye, EyeOff, Loader2 } from 'lucide-react';
-import { useLoginMutation } from '@/redux/Api/authApi';
-import Link from 'next/link';
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
+import { useLoginMutation } from "@/redux/Api/authApi";
+import Link from "next/link";
 
 const LoginComponent = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const [login, { isLoading }] = useLoginMutation();
   const router = useRouter();
 
   // Load saved credentials if "Remember Me" was checked
   useEffect(() => {
-    const savedEmail = Cookies.get('rememberEmail');
-    const savedPassword = Cookies.get('rememberPassword');
+    const savedEmail = Cookies.get("rememberEmail");
+    const savedPassword = Cookies.get("rememberPassword");
 
     if (savedEmail) setEmail(savedEmail);
     if (savedPassword) setPassword(savedPassword);
@@ -30,36 +30,36 @@ const LoginComponent = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
     try {
       const response = await login({ email, password }).unwrap();
 
       if (response.success) {
         const { token, admin } = response.data;
-console.log(token)
+        console.log(token);
         // Set Token in Cookie (7 days)
-       Cookies.set('token', token, {
-  expires: 7,
-  sameSite: 'strict'
-});
+        Cookies.set("token", token, {
+          expires: 7,
+          sameSite: "strict",
+        });
 
-localStorage.setItem('token', JSON.stringify(admin));
+        localStorage.setItem("token", JSON.stringify(admin));
 
         // Handle Remember Me
         if (rememberMe) {
-          Cookies.set('rememberEmail', email, { expires: 30 });
-          Cookies.set('rememberPassword', password, { expires: 30 });
+          Cookies.set("rememberEmail", email, { expires: 30 });
+          Cookies.set("rememberPassword", password, { expires: 30 });
         } else {
-          Cookies.remove('rememberEmail');
-          Cookies.remove('rememberPassword');
+          Cookies.remove("rememberEmail");
+          Cookies.remove("rememberPassword");
         }
 
         // Redirect to Dashboard
-        router.push('/dashboard');
+        router.push("/dashboard");
       }
     } catch (err) {
-      setError(err?.data?.message || 'Invalid email or password');
+      setError(err?.data?.message || "Invalid email or password");
     }
   };
 
@@ -100,7 +100,7 @@ localStorage.setItem('token', JSON.stringify(admin));
             </label>
             <div className="relative">
               <input
-                type={showPassword ? 'text' : 'password'}
+                type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -118,25 +118,27 @@ localStorage.setItem('token', JSON.stringify(admin));
           </div>
 
           {/* Remember Me */}
-         <div className="flex items-center justify-between">
-             <div className="flex items-center justify-between">
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={rememberMe}
-                onChange={(e) => setRememberMe(e.target.checked)}
-                className="w-4 h-4 accent-blue-600"
-              />
-              <span className="text-sm text-gray-600">Remember me</span>
-            </label>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                  className="w-4 h-4 accent-blue-600"
+                />
+                <span className="text-sm text-gray-600">Remember me</span>
+              </label>
+            </div>
+            <button>
+              <Link
+                href="/auth/forgot-password"
+                className="text-sm text-blue-600 hover:text-blue-800"
+              >
+                Forgot password?
+              </Link>
+            </button>
           </div>
-<button>
-            <Link href="/auth/forgot-password" className="text-sm text-blue-600 hover:text-blue-800">
-              Forgot password?
-            </Link>
-          
-</button>
-         </div>
           {/* Login Button */}
           <button
             type="submit"
@@ -149,7 +151,7 @@ localStorage.setItem('token', JSON.stringify(admin));
                 Logging in...
               </>
             ) : (
-              'Login'
+              "Login"
             )}
           </button>
         </form>
