@@ -11,25 +11,96 @@ import {
 import { motion, useInView } from "framer-motion";
 import Title from "../shared/Title";
 import { ImageUrl } from "@/redux/Api/baseApi";
+import { useGetProjectsQuery } from "@/redux/Api/projectsApi";
 
+const ProjectSection = () => {
+  const [activeTab, setActiveTab] = useState("all"); // "all" | "website" | "app"
+  const [seeAll, setSeeAll] = useState(false);
 
-const ProjectSection = ({ projectsData }) => {
-  const projects = projectsData?.projects || [];
+  // Query with filters
+  const { data: projectsData, isLoading } = useGetProjectsQuery({
+    projectType: activeTab === "all" ? undefined : activeTab,
+    seeAll: seeAll ? "true" : undefined,
+  });
+
+  const projects = projectsData?.data?.projects || [];
+
+  const tabs = [
+    { id: "all", label: "All Projects" },
+    { id: "website", label: "Websites" },
+    { id: "app", label: "Apps" },
+  ];
 
   return (
-    <section className="">
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <Title title="Featured Deployments" />
-      </motion.div>
+    <section className="py-16">
+      <div className="max-w-7xl mx-auto px-6">
+        {/* Header with Tabs & See All */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <Title title="Featured Deployments" />
+          </motion.div>
 
-      <div className="space-y-16">
-        {projects.map((project, index) => (
-          <ProjectDisplay key={project._id} project={project} index={index} />
-        ))}
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+            {/* Tabs */}
+            <div className="flex bg-[#1a1a1a] border border-white/10 rounded-2xl p-1">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => {
+                    setActiveTab(tab.id);
+                    // Optional: reset seeAll when changing tab
+                    // setSeeAll(false);
+                  }}
+                  className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                    activeTab === tab.id
+                      ? "bg-[#72ebc2] text-black shadow-lg"
+                      : "text-gray-400 hover:text-white"
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+
+            {/* See All Button */}
+            <button
+              onClick={() => setSeeAll(!seeAll)}
+              className={`px-6 py-2.5 rounded-2xl text-sm font-medium border transition-all flex items-center gap-2 ${
+                seeAll
+                  ? "bg-white text-black border-white"
+                  : "border-white/20 hover:border-white/50 text-gray-300"
+              }`}
+            >
+              {seeAll ? "Show Less" : "See All"}
+            </button>
+          </div>
+        </div>
+
+        {/* Loading State */}
+        {isLoading && (
+          <div className="text-center py-20 text-gray-400">Loading projects...</div>
+        )}
+
+        {/* Projects */}
+        {!isLoading && projects.length === 0 && (
+          <div className="text-center py-20 text-gray-400">
+            No projects found in this category.
+          </div>
+        )}
+
+        <div className="space-y-20">
+          {projects.map((project, index) => (
+            <ProjectDisplay
+              key={project._id}
+              project={project}
+              index={index}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -45,12 +116,11 @@ const ProjectDisplay = ({ project, index }) => {
     project.secondImage,
     project.thirdImage,
   ].filter(Boolean);
-  console.log(images)
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const goToSlide = (index) => {
-    setCurrentIndex(index);
+  const goToSlide = (idx) => {
+    setCurrentIndex(idx);
   };
 
   return (
@@ -80,6 +150,15 @@ const ProjectDisplay = ({ project, index }) => {
                 {project.websiteLink || "#"}
               </span>
             </div>
+
+            {/* Project Type Badge */}
+            <div className={`px-3 py-1 text-xs font-bold rounded-full ${
+              project.projectType === "app"
+                ? "bg-blue-500/20 text-blue-400"
+                : "bg-purple-500/20 text-purple-400"
+            }`}>
+              {project.projectType?.toUpperCase()}
+            </div>
           </div>
 
           {/* Website Image Content with Slider */}
@@ -87,18 +166,16 @@ const ProjectDisplay = ({ project, index }) => {
             {images.length > 0 && (
               <img
                 key={currentIndex}
-                src={`${images[currentIndex]}`}
+                src={`${ImageUrl}${images[currentIndex]}`}
                 alt={project.title || project.name}
-                className="object-cover object-top transition-all duration-700"
-                fill
-                priority
+                className="w-full h-full object-cover object-top transition-all duration-700"
               />
             )}
 
             {/* Overlay Gradient */}
             <div className="absolute inset-0 bg-gradient-to-t from-[#0f0f0f] via-transparent to-transparent opacity-40" />
 
-            {/* Dots Indicator - Only Bottom Dots */}
+            {/* Dots Indicator */}
             {images.length > 1 && (
               <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
                 {images.map((_, idx) => (
@@ -117,7 +194,11 @@ const ProjectDisplay = ({ project, index }) => {
 
             {/* Current Image Label */}
             <div className="absolute top-4 right-4 bg-black/70 text-white text-xs px-3 py-1 rounded-full">
-              {currentIndex === 0 ? "Banner" : currentIndex === 1 ? "Second View" : "Third View"}
+              {currentIndex === 0
+                ? "Banner"
+                : currentIndex === 1
+                ? "Second View"
+                : "Third View"}
             </div>
           </div>
         </div>
@@ -127,7 +208,7 @@ const ProjectDisplay = ({ project, index }) => {
           {/* Header & Tech Stack */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div className="space-y-4">
-              <h3 className="text-2xl md:text-2xl italic text-white">
+              <h3 className="text-2xl md:text-3xl italic text-white">
                 {project.title || project.name}
               </h3>
               <div className="flex flex-wrap gap-3">
@@ -144,33 +225,39 @@ const ProjectDisplay = ({ project, index }) => {
 
             {/* Action Buttons */}
             <div className="flex flex-col gap-3 min-w-[240px]">
-              <a
-                href={project.websiteLink || "#"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-between group/btn px-6 py-2 rounded-xl bg-[#72ebc2] text-black font-bold hover:shadow-[0_0_30px_rgba(114,235,194,0.3)] transition-all"
-              >
-                <span>Live Preview</span>
-                <GlobalOutlined className="text-xl group-hover/btn:rotate-12 transition-transform" />
-              </a>
+              {project.websiteLink && (
+                <a
+                  href={project.websiteLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between group/btn px-6 py-3 rounded-xl bg-[#72ebc2] text-black font-bold hover:shadow-[0_0_30px_rgba(114,235,194,0.3)] transition-all"
+                >
+                  <span>Live Preview</span>
+                  <GlobalOutlined className="text-xl group-hover/btn:rotate-12 transition-transform" />
+                </a>
+              )}
 
               <div className="grid grid-cols-2 gap-3">
-                <a
-                  href={project.uiCodeLink || "#"}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm font-semibold hover:bg-white/10 transition-all"
-                >
-                  <GithubOutlined /> UI Code
-                </a>
-                <a
-                  href={project.apiCodeLink || "#"}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm font-semibold hover:bg-white/10 transition-all"
-                >
-                  <DatabaseOutlined /> API Code
-                </a>
+                {project.uiCodeLink && (
+                  <a
+                    href={project.uiCodeLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm font-semibold hover:bg-white/10 transition-all"
+                  >
+                    <GithubOutlined /> UI Code
+                  </a>
+                )}
+                {project.apiCodeLink && (
+                  <a
+                    href={project.apiCodeLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm font-semibold hover:bg-white/10 transition-all"
+                  >
+                    <DatabaseOutlined /> API Code
+                  </a>
+                )}
               </div>
             </div>
           </div>
@@ -183,7 +270,7 @@ const ProjectDisplay = ({ project, index }) => {
 
             {project.features?.map((feature, i) => (
               <motion.div
-                key={feature._id || i}
+                key={i}
                 whileHover={{ x: 5 }}
                 className="bg-gradient-to-b from-white/5 to-white/2 border border-white/10 rounded-2xl p-6 transition-all hover:border-[#72ebc2]/30"
               >
