@@ -66,7 +66,7 @@ export default function HomePage({ aboutData, blogsData, skillsData, profileData
     setActiveSection(id);
     isManualScroll.current = true;
 
-    // Blog details খোলা থাকলে আগে close করো
+
     if (selectedBlog) setSelectedBlog(null);
 
     setTimeout(() => {
