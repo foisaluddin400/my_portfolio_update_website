@@ -55,7 +55,7 @@ console.log(ClientReview)
         <Title title="Client Feedback" />
       </motion.div>
 
-      <div className="px-10 mt-20 relative">
+      <div className="px-3 mt-20 relative">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentIndex}

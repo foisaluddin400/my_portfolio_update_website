@@ -36,7 +36,7 @@ const BlogCard = ({ item, onSelect }) => {
       variants={cardVariants}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
-      className="group relative flex flex-col bg-[#111111] border border-white/5 rounded-2xl overflow-hidden hover:border-[#72ebc2]/50 transition-all duration-500 shadow-2xl"
+      className="group relative flex flex-col bg-[#222324] border border-white/5 rounded-2xl overflow-hidden hover:border-[#72ebc2]/50 transition-all duration-500 shadow-2xl"
     >
       <div className="relative aspect-[16/10] overflow-hidden">
         <img
@@ -106,7 +106,7 @@ const BlogDetails = ({ blog, onBack }) => {
           fill
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#222324]/60 to-transparent" />
       </div>
 
       {/* Date + Tags */}

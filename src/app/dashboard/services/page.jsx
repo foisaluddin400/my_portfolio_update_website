@@ -48,7 +48,7 @@ const ServicesPage = () => {
       description: service.description || "",
       iconImage: null,
     });
-    setPreviewImage(service.iconImage ? `{service.iconImage}` : "");
+    setPreviewImage(service.iconImage || "");
     setIsEditMode(true);
     setShowModal(true);
   };
@@ -142,7 +142,7 @@ const ServicesPage = () => {
                   <td className="px-6 py-4">
                     {service.iconImage && (
                       <img
-                        src={`{service.iconImage}`}
+                        src={service.iconImage}
                         alt={service.title}
                         className="w-12 h-12 object-cover rounded-lg border border-slate-600"
                       />

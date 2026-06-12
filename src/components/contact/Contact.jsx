@@ -50,10 +50,10 @@ const [createContact] = useCreateContactMutation()
   };
 
   return (
-    <section className=" relative">
+    <section className=" ">
       <Title title="Get In Touch" />
 
-      <div className="max-w-6xl mx-auto  ">
+      <div className="  ">
         <div className="grid md:grid-cols-1 gap-16">
           {/* Left Side - Profile Info */}
           <motion.div

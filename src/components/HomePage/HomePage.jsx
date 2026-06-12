@@ -214,9 +214,9 @@ export default function HomePage({ aboutData, blogsData, skillsData, profileData
         </aside>
 
         {/* ==================== MOBILE BOTTOM NAV ==================== */}
-        <nav className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[92%] max-w-md p-[1.6px] overflow-hidden rounded-xl bg-gradient-to-br from-white/5 to-white/2 bg-[#151a18] backdrop-blur-xl group z-[100]">
+        <nav className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[92%] max-w-md p-[1.6px] overflow-hidden rounded-xl bg-gradient-to-br from-white/5 to-white/2 bg-[#222324] backdrop-blur-xl group z-[100]">
           <div className="absolute inset-[-1000%] animate-[spin_4s_linear_infinite] opacity-30 group-hover:opacity-100 transition-opacity duration-500 bg-[conic-gradient(from_0deg,transparent_0deg,transparent_90deg,#72ebc2_180deg,#72ebc2_270deg,transparent_360deg)]" />
-          <div className="relative bg-[#151a18f5] rounded-[11px] h-16 flex justify-around items-center border border-white/5">
+          <div className="relative bg-[#222324] rounded-[11px] h-14 flex justify-around items-center border border-white/5">
             {navItems.map((item) => {
               const isActive = activeSection === item.id;
               return (

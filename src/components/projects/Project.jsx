@@ -32,10 +32,10 @@ const ProjectSection = () => {
   ];
 
   return (
-    <section className="py-16">
-      <div className="max-w-7xl mx-auto ">
+    <section className="py-11">
+      <div className="  ">
         {/* Header with Tabs & See All */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div className="  mb-12">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -44,7 +44,7 @@ const ProjectSection = () => {
             <Title title="Featured Deployments" />
           </motion.div>
 
-          <div className="flex flex-col sm:flex-row items-center gap-4">
+          <div className="flex gap-4">
             {/* Tabs */}
             <div className="flex bg-[#1a1a1a] border border-white/10 rounded-2xl p-1">
               {tabs.map((tab) => (
@@ -55,7 +55,7 @@ const ProjectSection = () => {
                     // Optional: reset seeAll when changing tab
                     // setSeeAll(false);
                   }}
-                  className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                  className={`px-3 py-2 rounded-xl text-sm font-medium transition-all ${
                     activeTab === tab.id
                       ? "bg-[#72ebc2] text-black shadow-lg"
                       : "text-gray-400 hover:text-white"
@@ -67,16 +67,7 @@ const ProjectSection = () => {
             </div>
 
             {/* See All Button */}
-            <button
-              onClick={() => setSeeAll(!seeAll)}
-              className={`px-6 py-2.5 rounded-2xl text-sm font-medium border transition-all flex items-center gap-2 ${
-                seeAll
-                  ? "bg-white text-black border-white"
-                  : "border-white/20 hover:border-white/50 text-gray-300"
-              }`}
-            >
-              {seeAll ? "Show Less" : "See All"}
-            </button>
+           
           </div>
         </div>
 
@@ -101,6 +92,19 @@ const ProjectSection = () => {
             />
           ))}
         </div>
+      </div>
+      
+      <div className="flex justify-center">
+         <button
+              onClick={() => setSeeAll(!seeAll)}
+              className={`px-6 py-2.5 rounded-2xl text-sm font-medium border transition-all flex items-center gap-2 ${
+                seeAll
+                  ? "bg-white text-black border-white"
+                  : "border-white/20 hover:border-white/50 text-gray-300"
+              }`}
+            >
+              {seeAll ? "Show Less" : "See All"}
+            </button>
       </div>
     </section>
   );
