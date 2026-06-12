@@ -1,14 +1,11 @@
 "use client";
 
-import React, { useRef } from "react";
+import React from "react";
 import Title from "../shared/Title";
-import { motion, useInView } from "framer-motion";
-
+import { motion } from "framer-motion";
 
 const SkillSection = ({ skillsData }) => {
   const skills = skillsData?.skills || [];
-
-  
 
   const sectionVariants = {
     hidden: { opacity: 0, y: 30 },
@@ -33,13 +30,6 @@ const SkillSection = ({ skillsData }) => {
     },
   };
 
-  const techRef = useRef(null);
-
-  const isTechInView = useInView(techRef, {
-    once: true,
-    amount: 0.2,
-  });
-
   return (
     <div className="text-gray-200">
       <motion.div
@@ -62,10 +52,10 @@ const SkillSection = ({ skillsData }) => {
         {skills.map((category) => (
           <motion.div
             key={category._id}
-            ref={techRef}
             variants={sectionVariants}
             initial="hidden"
-            animate={isTechInView ? "visible" : "hidden"}
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
           >
             <div
               style={{
@@ -101,7 +91,7 @@ const SkillSection = ({ skillsData }) => {
                   className="flex flex-col items-center p-4 bg-gradient-to-b from-white/5 to-white/2 rounded-xl shadow-xl hover:scale-105 transition-transform duration-300"
                 >
                   <img
-                    src={`${skill.skillIconImage}`}
+                    src={skill.skillIconImage}
                     alt={skill.languageName}
                     className="w-12 h-12 object-contain mb-2"
                   />

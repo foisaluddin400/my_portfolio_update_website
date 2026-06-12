@@ -19,24 +19,26 @@ const ResumePage = () => {
   const [selectedResume, setSelectedResume] = useState(null);
 
   // Form State
-  const [formData, setFormData] = useState({
-    title: "",
-    instituteName: "",
-    description: "",
-    startingYear: "",
-    passingYear: "",
-    running: false,
-  });
+const [formData, setFormData] = useState({
+  title: "",
+  instituteName: "",
+  description: "",
+  startingYear: "",
+  passingYear: "",
+  running: false,
+  type: "education",
+});
 
   const resetForm = () => {
-    setFormData({
-      title: "",
-      instituteName: "",
-      description: "",
-      startingYear: "",
-      passingYear: "",
-      running: false,
-    });
+ setFormData({
+  title: "",
+  instituteName: "",
+  description: "",
+  startingYear: "",
+  passingYear: "",
+  running: false,
+  type: "education",
+});
     setSelectedResume(null);
     setIsEditMode(false);
     setShowModal(false);
@@ -44,14 +46,15 @@ const ResumePage = () => {
 
   const handleEdit = (resume) => {
     setSelectedResume(resume);
-    setFormData({
-      title: resume.title || "",
-      instituteName: resume.instituteName || "",
-      description: resume.description || "",
-      startingYear: resume.startingYear || "",
-      passingYear: resume.passingYear || "",
-      running: resume.running || false,
-    });
+  setFormData({
+  title: resume.title || "",
+  instituteName: resume.instituteName || "",
+  description: resume.description || "",
+  startingYear: resume.startingYear || "",
+  passingYear: resume.passingYear || "",
+  running: resume.running || false,
+  type: resume.type || "education",
+});
     setIsEditMode(true);
     setShowModal(true);
   };
@@ -59,15 +62,17 @@ const ResumePage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const payload = {
-      title: formData.title,
-      instituteName: formData.instituteName,
-      description: formData.description,
-      startingYear: Number(formData.startingYear),
-      passingYear: formData.passingYear ? Number(formData.passingYear) : null,
-      running: formData.running,
-    };
-
+  const payload = {
+  title: formData.title,
+  instituteName: formData.instituteName,
+  description: formData.description,
+  startingYear: Number(formData.startingYear),
+  passingYear: formData.passingYear
+    ? Number(formData.passingYear)
+    : null,
+  running: formData.running,
+  type: formData.type,
+};
     try {
       if (isEditMode && selectedResume) {
         await updateResume({ id: selectedResume._id, ...payload }).unwrap();
@@ -236,7 +241,22 @@ const ResumePage = () => {
                 />
                 <label htmlFor="running" className="text-slate-300">Currently Running</label>
               </div>
+<div>
+  <label className="block mb-2 text-slate-300 font-medium">
+    Type
+  </label>
 
+  <select
+    value={formData.type}
+    onChange={(e) =>
+      setFormData({ ...formData, type: e.target.value })
+    }
+    className="w-full bg-slate-900 border border-slate-700 text-white rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500"
+  >
+    <option value="education">Education</option>
+    <option value="experience">Experience</option>
+  </select>
+</div>
               <div>
                 <label className="block mb-2 text-slate-300 font-medium">Description</label>
                 <textarea
