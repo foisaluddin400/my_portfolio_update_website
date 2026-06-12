@@ -21,7 +21,7 @@ const AboutMe = ({ aboutData }) => {
   const titles = aboutData?.titles?.length > 0 
     ? aboutData.titles 
     : ["Full Stack Web and Mobile App"];
-
+console.log(titles)
   // Typing Effect
   useEffect(() => {
     let timer;
@@ -103,7 +103,7 @@ const AboutMe = ({ aboutData }) => {
             {/* Dynamic Description from Backend */}
             <motion.div
               variants={item}
-              className="mt-8 md:mt-7 max-w-3xl space-y-6 text-gray-400/90 text-lg md:text-base leading-relaxed prose prose-invert"
+              className="mt-2 md:mt-1 max-w-3xl space-y-4 text-gray-400/90 text-lg md:text-base leading-relaxed prose prose-invert"
               dangerouslySetInnerHTML={{
                 __html: aboutData?.description1 || `
                   <p>Passionate MERN stack developer focused on creating beautiful, fast and intuitive digital experiences.</p>
@@ -121,14 +121,14 @@ const AboutMe = ({ aboutData }) => {
             transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
           >
             <motion.div
-              className="w-3 h-3 bg-cyan-400 rounded-full"
+              className="w-3 h-3 bg-[#72ebc2] rounded-full"
               animate={{ scale: [1, 1.8, 1] }}
               transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
             />
           </motion.div>
 
           <motion.div
-            className="absolute flex flex-col items-center text-cyan-300"
+            className="absolute flex flex-col items-center text-[#72ebc2]"
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
           >
@@ -154,7 +154,7 @@ const AboutMe = ({ aboutData }) => {
                 <CountUp end={stat.end} duration={2.2} delay={0.4 + i * 0.15} enableScrollSpy />
                 {stat.suffix}
               </div>
-              <div className="mt-3 text-sm md:text-base text-gray-600/80 font-medium group-hover:text-cyan-400/90 transition-colors">
+              <div className="mt-3 text-sm md:text-base text-gray-500/80 font-medium group-hover:text-cyan-400/90 transition-colors">
                 {stat.label}
               </div>
             </motion.div>

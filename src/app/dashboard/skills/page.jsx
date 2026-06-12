@@ -133,7 +133,7 @@ const SkillsPage = () => {
                         <div key={i} className="flex items-center gap-2 bg-[#2e4b4b] px-3 py-1 rounded-lg">
                           {s.skillIconImage && (
                             <img
-                              src={`${ImageUrl}/${s.skillIconImage}`}
+                              src={`${s.skillIconImage}`}
                               alt={s.languageName}
                               className="w-8 h-8 object-cover rounded"
                             />

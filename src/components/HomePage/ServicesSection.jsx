@@ -59,7 +59,7 @@ const ServiceCard = ({ service }) => {
           {service.iconImage && (
             <motion.div variants={childVariants} className="mb-4">
               <Image
-                src={`${ImageUrl}/${service.iconImage}`}
+                src={`${service.iconImage}`}
                 alt={service.title}
                 width={70}
                 height={70}

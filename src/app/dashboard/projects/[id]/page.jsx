@@ -64,7 +64,7 @@ const ProjectDetailPage = () => {
             <div>
               <p className="text-slate-400 text-sm mb-2">Banner Image</p>
               <img
-                src={`${ImageUrl}/${project.bannerImage}`}
+                src={`${project.bannerImage}`}
                 alt="Banner"
                 className="w-full h-72 object-cover rounded-2xl border border-slate-600"
               />
@@ -75,7 +75,7 @@ const ProjectDetailPage = () => {
             <div>
               <p className="text-slate-400 text-sm mb-2">Second Image</p>
               <img
-                src={`${ImageUrl}/${project.secondImage}`}
+                src={`${project.secondImage}`}
                 alt="Second"
                 className="w-full h-72 object-cover rounded-2xl border border-slate-600"
               />
@@ -86,7 +86,7 @@ const ProjectDetailPage = () => {
             <div>
               <p className="text-slate-400 text-sm mb-2">Third Image</p>
               <img
-                src={`${ImageUrl}/${project.thirdImage}`}
+                src={`${project.thirdImage}`}
                 alt="Third"
                 className="w-full h-72 object-cover rounded-2xl border border-slate-600"
               />

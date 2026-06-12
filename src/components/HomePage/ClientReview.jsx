@@ -86,7 +86,7 @@ console.log(ClientReview)
                   <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-[#72ebc2]/30 flex-shrink-0">
                     {reviews[currentIndex].profileImage ? (
                       <img
-                        src={`${ImageUrl}/${reviews[currentIndex].profileImage}`}
+                        src={`${reviews[currentIndex].profileImage}`}
                         alt={reviews[currentIndex].clientName}
                         fill
                         className="object-cover"

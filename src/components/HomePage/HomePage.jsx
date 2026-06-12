@@ -100,12 +100,12 @@ export default function HomePage({ aboutData, blogsData, skillsData, profileData
         {/* ==================== PROFILE CARD ==================== */}
         <aside className="md:sticky m-4 md:m-0 md:top-4 md:h-[calc(100vh-2rem)] flex items-center">
           <div className="w-full md:max-w-none max-w-md mx-auto md:mx-0">
-            <div className="relative p-[1.6px] overflow-hidden rounded-3xl bg-gradient-to-br from-white/5 to-white/2 bg-[#151a18] backdrop-blur-xl group">
+            <div className="relative p-[1.6px] overflow-hidden rounded-xl bg-gradient-to-br from-white/5 to-white/2 bg-[#303235] backdrop-blur-xl group">
               <div className="absolute inset-[-1000%] animate-[spin_4s_linear_infinite] opacity-30 group-hover:opacity-100 transition-opacity duration-500 bg-[conic-gradient(from_0deg,transparent_0deg,transparent_90deg,#72ebc2_180deg,#72ebc2_270deg,transparent_360deg)]" />
-              <div className="relative bg-[#151a18f5] rounded-[22px] overflow-hidden">
+              <div className="relative bg-[#222324] rounded-[11px] overflow-hidden">
                 <div className="relative">
                   <img
-                    src={`${ImageUrl}/${profileData?.profileImage}`}
+                    src={`${profileData?.profileImage}`}
                     alt="Profile"
                     className="w-full md:p-5 p-7 h-[480px] md:h-[320px] lg:h-[380px] object-cover"
                   />
@@ -143,7 +143,7 @@ export default function HomePage({ aboutData, blogsData, skillsData, profileData
           <div className="py-8 px-4 lg:px-0 pb-24 md:pb-10">
             <Suspense fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}>
 
-              {/* ---- Blog details খোলা থাকলে শুধু blogs section দেখাবে ---- */}
+              
               {selectedBlog ? (
                 <section id="blogs" className="scroll-mt-10">
                   <Blog
@@ -181,16 +181,16 @@ export default function HomePage({ aboutData, blogsData, skillsData, profileData
         {/* ==================== DESKTOP NAVIGATION ==================== */}
         <aside className="hidden md:block">
           <div className="sticky top-4 h-[calc(100vh-2rem)] flex items-center justify-center">
-            <div className="relative p-[1.6px] overflow-hidden rounded-3xl bg-gradient-to-br from-white/5 to-white/2 bg-[#151a18] backdrop-blur-xl group">
+            <div className="relative p-[1.6px] overflow-hidden rounded-xl bg-gradient-to-br from-white/5 to-white/2 bg-[#303235] backdrop-blur-xl group">
               <div className="absolute inset-[-1000%] animate-[spin_4s_linear_infinite] opacity-30 group-hover:opacity-100 transition-opacity duration-500 bg-[conic-gradient(from_0deg,transparent_0deg,transparent_90deg,#72ebc2_180deg,#72ebc2_270deg,transparent_360deg)]" />
-              <nav className="relative bg-[#151a18f5] rounded-[22px] py-4 px-2 flex flex-col gap-6 shadow-2xl border border-white/5">
+              <nav className="relative bg-[#222324] rounded-[11px] py-1 px-1 flex flex-col gap-2 shadow-2xl border border-white/5">
                 {navItems.map((item) => {
                   const isActive = activeSection === item.id;
                   return (
                     <button
                       key={item.id}
                       onClick={() => scrollToSection(item.id)}
-                      className={`p-3 rounded-full transition-all relative group/nav flex items-center justify-center ${
+                      className={`p-3 rounded-[11px] transition-all relative group/nav flex items-center justify-center ${
                         isActive ? "text-[#72ebc2]" : "text-gray-500 hover:text-gray-300"
                       }`}
                     >
@@ -201,7 +201,7 @@ export default function HomePage({ aboutData, blogsData, skillsData, profileData
                       {isActive && (
                         <motion.div
                           layoutId="activePill"
-                          className="absolute inset-0 border border-[#72ebc2] bg-[#72ebc2]/10 rounded-full"
+                          className="absolute inset-0 border border-[#72ebc2] bg-[#72ebc2]/10 rounded-[11px]"
                           transition={{ type: "spring", stiffness: 300, damping: 30 }}
                         />
                       )}
@@ -214,9 +214,9 @@ export default function HomePage({ aboutData, blogsData, skillsData, profileData
         </aside>
 
         {/* ==================== MOBILE BOTTOM NAV ==================== */}
-        <nav className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[92%] max-w-md p-[1.6px] overflow-hidden rounded-3xl bg-gradient-to-br from-white/5 to-white/2 bg-[#151a18] backdrop-blur-xl group z-[100]">
+        <nav className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[92%] max-w-md p-[1.6px] overflow-hidden rounded-xl bg-gradient-to-br from-white/5 to-white/2 bg-[#151a18] backdrop-blur-xl group z-[100]">
           <div className="absolute inset-[-1000%] animate-[spin_4s_linear_infinite] opacity-30 group-hover:opacity-100 transition-opacity duration-500 bg-[conic-gradient(from_0deg,transparent_0deg,transparent_90deg,#72ebc2_180deg,#72ebc2_270deg,transparent_360deg)]" />
-          <div className="relative bg-[#151a18f5] rounded-[22px] h-16 flex justify-around items-center border border-white/5">
+          <div className="relative bg-[#151a18f5] rounded-[11px] h-16 flex justify-around items-center border border-white/5">
             {navItems.map((item) => {
               const isActive = activeSection === item.id;
               return (

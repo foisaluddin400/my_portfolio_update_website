@@ -64,9 +64,9 @@ const ProjectsPage = () => {
       bannerImage: null, secondImage: null, thirdImage: null,
     });
     setPreviews({
-      banner: project.bannerImage ? `${ImageUrl}/${project.bannerImage}` : "",
-      second: project.secondImage ? `${ImageUrl}/${project.secondImage}` : "",
-      third: project.thirdImage ? `${ImageUrl}/${project.thirdImage}` : "",
+      banner: project.bannerImage ? `${project.bannerImage}` : "",
+      second: project.secondImage ? `${project.secondImage}` : "",
+      third: project.thirdImage ? `${project.thirdImage}` : "",
     });
     setIsEditMode(true);
     setShowModal(true);
@@ -171,7 +171,7 @@ const ProjectsPage = () => {
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
                       {project.bannerImage && (
-                        <img src={`${ImageUrl}/${project.bannerImage}`} alt="" className="w-12 h-12 object-cover rounded" />
+                        <img src={`${project.bannerImage}`} alt="" className="w-12 h-12 object-cover rounded" />
                       )}
                       <div>
                         <p className="font-medium text-white">{project.name}</p>

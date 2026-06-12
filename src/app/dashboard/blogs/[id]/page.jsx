@@ -206,7 +206,7 @@ console.log(ImageUrl)
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {existingAnotherImages.map((img, index) => (
                     <div key={index} className="relative group">
-                      <img src={`${ImageUrl}/${img}`} alt={`Existing ${index}`} className="w-full h-36 object-cover rounded-xl border border-slate-700" />
+                      <img src={`${img}`} alt={`Existing ${index}`} className="w-full h-36 object-cover rounded-xl border border-slate-700" />
                       <button type="button" onClick={() => removeExistingAdditionalImage(index)} className="absolute top-2 right-2 bg-red-600 hover:bg-red-700 text-white p-1.5 rounded-full">
                         <X size={16} />
                       </button>
@@ -262,7 +262,7 @@ console.log(ImageUrl)
           <p className="text-slate-400 text-lg mb-8">{blog.shortDescription}</p>
 
           {blog.coverImage && (
-            <img src={`${ImageUrl}/${blog.coverImage}`} alt={blog.title} className="w-full rounded-2xl mb-10 object-cover" />
+            <img src={`${blog.coverImage}`} alt={blog.title} className="w-full rounded-2xl mb-10 object-cover" />
           )}
 
           {blog.anotherImages?.length > 0 && (
@@ -270,7 +270,7 @@ console.log(ImageUrl)
               <h3 className="text-xl font-semibold mb-4 text-white">Additional Images</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {blog.anotherImages.map((img, index) => (
-                  <img key={index} src={`${ImageUrl}/${img}`} alt={`Gallery ${index}`} className="w-full h-64 object-cover rounded-2xl border border-slate-700" />
+                  <img key={index} src={`${img}`} alt={`Gallery ${index}`} className="w-full h-64 object-cover rounded-2xl border border-slate-700" />
                 ))}
               </div>
             </div>

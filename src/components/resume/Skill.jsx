@@ -101,7 +101,7 @@ const SkillSection = ({ skillsData }) => {
                   className="flex flex-col items-center p-4 bg-gradient-to-b from-white/5 to-white/2 rounded-xl shadow-xl hover:scale-105 transition-transform duration-300"
                 >
                   <img
-                    src={`${ImageUrl}/${skill.skillIconImage}`}
+                    src={`${skill.skillIconImage}`}
                     alt={skill.languageName}
                     className="w-12 h-12 object-contain mb-2"
                   />

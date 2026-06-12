@@ -99,7 +99,7 @@ const [createContact] = useCreateContactMutation()
                 href={profile.resumeLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 px-8 py-3.5 bg-[#72ebc2] text-black font-semibold rounded-2xl hover:bg-white transition-all"
+                className="inline-flex items-center gap-3 px-5 py-2 bg-[#72ebc2] text-black font-semibold rounded-xl hover:bg-[#285345] hover:text-white  transition-all"
               >
                 Download Resume
               </a>
@@ -121,7 +121,7 @@ const [createContact] = useCreateContactMutation()
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-[#72ebc2] transition-colors"
+                  className="w-full bg-transparent border-b border-white/10  px-2 py-4 text-white focus:outline-none focus:border-[#72ebc2] transition-colors"
                   placeholder="John Doe"
                 />
               </div>
@@ -134,7 +134,7 @@ const [createContact] = useCreateContactMutation()
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-[#72ebc2] transition-colors"
+                  className="w-full bg-transparent border-b border-white/10  px-2 py-4 text-white focus:outline-none focus:border-[#72ebc2] transition-colors"
                   placeholder="you@example.com"
                 />
               </div>
@@ -147,7 +147,7 @@ const [createContact] = useCreateContactMutation()
                   onChange={handleChange}
                   required
                   rows={6}
-                  className="w-full bg-white/5 border border-white/10 rounded-3xl px-6 py-4 text-white focus:outline-none focus:border-[#72ebc2] transition-colors resize-y"
+                  className="w-full bg-transparent border-b border-white/10  px-2 py-4 text-white focus:outline-none focus:border-[#72ebc2] transition-colors resize-y"
                   placeholder="Hello! I want to hire you for a project..."
                 />
               </div>
@@ -155,7 +155,7 @@ const [createContact] = useCreateContactMutation()
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-3 bg-[#72ebc2] hover:bg-white text-black font-bold rounded-2xl transition-all disabled:opacity-70 flex items-center justify-center gap-3"
+                className="inline-flex items-center gap-3 px-5 py-2 bg-[#72ebc2] text-black font-semibold rounded-xl hover:bg-[#285345] hover:text-white  transition-all"
               >
                 {isSubmitting ? "Sending..." : "Send Message"}
               </button>

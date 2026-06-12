@@ -87,7 +87,7 @@ const ProjectDisplay = ({ project, index }) => {
             {images.length > 0 && (
               <img
                 key={currentIndex}
-                src={`${ImageUrl}/${images[currentIndex]}`}
+                src={`${images[currentIndex]}`}
                 alt={project.title || project.name}
                 className="object-cover object-top transition-all duration-700"
                 fill

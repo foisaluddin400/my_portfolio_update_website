@@ -88,7 +88,7 @@ const Page = async () => {
   const data = await getAllData();
 
   return (
-    <div className="bg-[#111816] bg-cover bg-center">
+    <div className="bg-[#202122] bg-cover bg-center">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

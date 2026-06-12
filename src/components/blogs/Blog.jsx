@@ -40,7 +40,7 @@ const BlogCard = ({ item, onSelect }) => {
     >
       <div className="relative aspect-[16/10] overflow-hidden">
         <img
-          src={`${ImageUrl}/${item.coverImage}`}
+          src={`${item.coverImage}`}
           alt={item.title}
           fill
           className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -101,7 +101,7 @@ const BlogDetails = ({ blog, onBack }) => {
       {/* Cover Image */}
       <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden mb-8">
         <img
-          src={`${ImageUrl}/${blog.coverImage}`}
+          src={`${blog.coverImage}`}
           alt={blog.title}
           fill
           className="object-cover"
@@ -154,7 +154,7 @@ const BlogDetails = ({ blog, onBack }) => {
                 className="relative aspect-[4/3] rounded-xl overflow-hidden border border-white/5"
               >
                 <img
-                  src={`${ImageUrl}/${img}`}
+                  src={`${img}`}
                   alt={`Image ${i + 1}`}
                   fill
                   className="object-cover hover:scale-105 transition-transform duration-500"

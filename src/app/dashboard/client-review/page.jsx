@@ -57,7 +57,7 @@ const ReviewsPage = () => {
       date: review.date ? new Date(review.date).toISOString().split('T')[0] : "",
       profileImage: null,
     });
-    setPreviewImage(review.profileImage ? `${ImageUrl}/${review.profileImage}` : "");
+    setPreviewImage(review.profileImage ? `${review.profileImage}` : "");
     setIsEditMode(true);
     setShowModal(true);
   };
@@ -148,7 +148,7 @@ const ReviewsPage = () => {
                     <div className="flex items-center gap-3">
                       {review.profileImage && (
                         <img
-                          src={`${ImageUrl}/${review.profileImage}`}
+                          src={`${review.profileImage}`}
                           alt={review.clientName}
                           className="w-10 h-10 object-cover rounded-full border border-slate-600"
                         />

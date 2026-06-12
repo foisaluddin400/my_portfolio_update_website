@@ -12,6 +12,7 @@ const ProfilePage = () => {
   const [updateProfile, { isLoading: isUpdating }] = useUpdateProfileMutation();
 
   const profile = data?.data;
+  
 
   const [showModal, setShowModal] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
@@ -40,7 +41,7 @@ const ProfilePage = () => {
         address: profile.address || "",
         profileImage: null,
       });
-      setPreviewImage(profile.profileImage ? `${ImageUrl}/${profile.profileImage}` : "");
+      setPreviewImage(profile.profileImage ? `${profile.profileImage}` : "");
     }
   }, [profile]);
 
@@ -117,7 +118,7 @@ const ProfilePage = () => {
             {/* Profile Image */}
             <div className="flex-shrink-0">
               <img
-                src={`${ImageUrl}/${profile.profileImage}`}
+                src={`${profile.profileImage}`}
                 alt={profile.name}
                 className="w-48 h-48 object-cover rounded-2xl border-4 border-slate-600"
               />
