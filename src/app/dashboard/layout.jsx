@@ -14,6 +14,7 @@ const navItems = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   { name: 'Visitors', href: '/dashboard/visitors', icon: Users },
   { name: 'About Us', href: '/dashboard/about-us', icon: Users },
+  { name: 'Services', href: '/dashboard/services', icon: Users },
   { name: 'Skills', href: '/dashboard/skills', icon: Award },
   { name: 'Resume', href: '/dashboard/resume', icon: FolderOpen },
     { name: 'Client Review', href: '/dashboard/client-review', icon: FolderOpen },
