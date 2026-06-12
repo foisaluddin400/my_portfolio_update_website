@@ -53,7 +53,7 @@ const ServiceCard = ({ service }) => {
         />
 
         {/* Card Content */}
-        <div className="relative z-10 h-full w-full p-6 rounded-[11px] bg-gradient-to-br from-white/5 to-white/2 border border-white/10 bg-[#222324] backdrop-blur-xl flex flex-col items-center justify-center text-center">
+        <div className="relative z-10 h-full w-full p-6 rounded-[11px] bg-gradient-to-b from-white/5 to-white/2 border border-white/10 bg-[#1e1f20] backdrop-blur-xl flex flex-col items-center justify-center text-center">
           
           {/* Dynamic Icon Image */}
           {service.iconImage && (

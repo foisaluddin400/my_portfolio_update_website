@@ -3,6 +3,7 @@
 import React from "react";
 import Title from "../shared/Title";
 import { motion } from "framer-motion";
+import { GiSkills } from "react-icons/gi";
 
 const SkillSection = ({ skillsData }) => {
   const skills = skillsData?.skills || [];
@@ -68,7 +69,7 @@ const SkillSection = ({ skillsData }) => {
             >
               <motion.div variants={childVariants}>
                 <div className="w-12 h-12 rounded-full border-2 border-[#72ebc2] flex items-center justify-center">
-                  <span className="text-[#72ebc2] text-xl">💻</span>
+                  <span className="text-[#72ebc2] text-xl"><GiSkills /></span>
                 </div>
               </motion.div>
 
