@@ -23,7 +23,7 @@ import Contact from "../contact/Contact";
 import ServicesSection from "./ServicesSection";
 import ClientReview from "./ClientReview";
 import SkillSection from "../resume/Skill";
-import { ImageUrl } from "@/redux/Api/baseApi";
+
 
 export default function HomePage({ aboutData, blogsData, skillsData, profileData, projectsData, reviewsData, servicesData, resumeData }) {
 

@@ -3,7 +3,7 @@
 import React, { useRef } from "react";
 import Title from "../shared/Title";
 import { motion, useInView } from "framer-motion";
-import { ImageUrl } from "@/redux/Api/baseApi";
+
 
 const SkillSection = ({ skillsData }) => {
   const skills = skillsData?.skills || [];

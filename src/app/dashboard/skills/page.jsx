@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Edit, Trash2, Plus, X, Upload } from "lucide-react";
 import { useCreateSkillMutation, useDeleteSkillMutation, useGetSkillsQuery } from "@/redux/Api/skillsApi";
 import { Navigate } from "@/components/shared/Navigate";
-import { ImageUrl } from "@/redux/Api/baseApi";
+
 
 const SkillsPage = () => {
   const { data, isLoading, refetch } = useGetSkillsQuery();

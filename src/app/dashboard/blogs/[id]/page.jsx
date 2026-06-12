@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useSearchParams, useRouter } from 'next/navigation';
 import { Edit, Trash2, ArrowLeft, Upload, X, Loader2 } from 'lucide-react';
 import { useDeleteBlogMutation, useGetSingleBlogQuery, useUpdateBlogMutation } from '@/redux/Api/blogsApi';
-import { ImageUrl } from '@/redux/Api/baseApi';
+
 import JoditEditor from 'jodit-react';
 
 const BlogDetailPage = () => {
@@ -126,7 +126,7 @@ const BlogDetailPage = () => {
 
   if (isFetching) return <div className="text-center py-20">Loading blog...</div>;
   if (!blog) return <div className="text-center py-20 text-red-500">Blog not found</div>;
-console.log(ImageUrl)
+
   return (
     <div className="bg-[#1a2421] rounded-lg shadow-xl">
       <div className="flex justify-between items-center mb-8">

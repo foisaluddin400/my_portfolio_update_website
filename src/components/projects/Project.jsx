@@ -10,7 +10,7 @@ import {
 } from "@ant-design/icons";
 import { motion, useInView } from "framer-motion";
 import Title from "../shared/Title";
-import { ImageUrl } from "@/redux/Api/baseApi";
+
 import { useGetProjectsQuery } from "@/redux/Api/projectsApi";
 
 const ProjectSection = () => {

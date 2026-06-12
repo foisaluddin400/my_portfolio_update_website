@@ -4,7 +4,7 @@ import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Title from '../shared/Title';
 import Image from 'next/image';
-import { ImageUrl } from '@/redux/Api/baseApi';
+
 
 
 const ServiceCard = ({ service }) => {

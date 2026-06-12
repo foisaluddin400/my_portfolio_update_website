@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Plus, Trash2, Edit, X, Loader2, ExternalLink } from "lucide-react";
 import { useCreateProjectMutation, useDeleteProjectMutation, useGetProjectsQuery, useUpdateProjectMutation } from "@/redux/Api/projectsApi";
 import { Navigate } from "@/components/shared/Navigate";
-import { ImageUrl } from '@/redux/Api/baseApi';
+
 
 const ProjectsPage = () => {
   const [filterType, setFilterType] = useState(""); // "" = All, "app", "website"
@@ -75,9 +75,9 @@ const ProjectsPage = () => {
       bannerImage: null, secondImage: null, thirdImage: null,
     });
     setPreviews({
-      banner: project.bannerImage ? `${ImageUrl}${project.bannerImage}` : "",
-      second: project.secondImage ? `${ImageUrl}${project.secondImage}` : "",
-      third: project.thirdImage ? `${ImageUrl}${project.thirdImage}` : "",
+      banner: project.bannerImage ? `${project.bannerImage}` : "",
+      second: project.secondImage ? `${project.secondImage}` : "",
+      third: project.thirdImage ? `${project.thirdImage}` : "",
     });
     setIsEditMode(true);
     setShowModal(true);
@@ -217,7 +217,7 @@ const ProjectsPage = () => {
                     <div className="flex items-center gap-3">
                       {project.bannerImage && (
                         <img 
-                          src={`${ImageUrl}${project.bannerImage}`} 
+                          src={`${project.bannerImage}`} 
                           alt="" 
                           className="w-12 h-12 object-cover rounded" 
                         />

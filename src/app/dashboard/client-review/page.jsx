@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Plus, Trash2, Edit, X, Loader2, Star, Upload } from "lucide-react";
 import { useCreateReviewMutation, useDeleteReviewMutation, useGetReviewsQuery, useUpdateReviewMutation } from '@/redux/Api/reviewApi';
 import { Navigate } from "@/components/shared/Navigate";
-import { ImageUrl } from '@/redux/Api/baseApi'; // Adjust path if needed
+
 
 const ReviewsPage = () => {
   const { data, isLoading, refetch } = useGetReviewsQuery();

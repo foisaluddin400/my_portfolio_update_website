@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Plus, Edit, Trash2, X, Loader2, Upload } from "lucide-react";
 import { useCreateProfileMutation, useGetProfileQuery, useUpdateProfileMutation } from '@/redux/Api/profileApi';
 import { Navigate } from "@/components/shared/Navigate";
-import { ImageUrl } from '@/redux/Api/baseApi';
+
 
 const ProfilePage = () => {
   const { data, isLoading, refetch } = useGetProfileQuery();

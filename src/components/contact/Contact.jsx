@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Title from '../shared/Title';
 import { motion } from 'framer-motion';
-import { ImageUrl } from "@/redux/Api/baseApi";
+
 import { UserOutlined, MailOutlined, PhoneOutlined, EnvironmentOutlined } from '@ant-design/icons';
 import { useCreateContactMutation } from '@/redux/Api/contactApi';
 

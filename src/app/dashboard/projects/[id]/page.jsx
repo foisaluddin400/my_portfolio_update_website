@@ -4,7 +4,7 @@ import React from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { ArrowLeft, Edit, Trash2, ExternalLink } from 'lucide-react';
 import { useDeleteProjectMutation, useGetSingleProjectQuery } from '@/redux/Api/projectsApi';
-import { ImageUrl } from '@/redux/Api/baseApi';
+
 
 const ProjectDetailPage = () => {
   const params = useParams();

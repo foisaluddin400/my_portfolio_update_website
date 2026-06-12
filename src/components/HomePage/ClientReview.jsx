@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Image from 'next/image';
 import Title from '../shared/Title';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { ImageUrl } from "@/redux/Api/baseApi";
+
 
 const ClientReview = ({ ClientReview }) => {
   const reviews = ClientReview?.reviews || [];
