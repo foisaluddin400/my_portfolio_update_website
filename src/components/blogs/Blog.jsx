@@ -38,7 +38,7 @@ const BlogCard = ({ item, onSelect }) => {
       animate={isInView ? "visible" : "hidden"}
       className="group relative flex flex-col bg-[#222324] border border-white/5 rounded-2xl overflow-hidden hover:border-[#72ebc2]/50 transition-all duration-500 shadow-2xl"
     >
-      <div className="relative aspect-[16/10] overflow-hidden">
+      <div className="relative aspect-[16/12] overflow-hidden">
         <img
           src={`${item.coverImage}`}
           alt={item.title}
@@ -99,7 +99,7 @@ const BlogDetails = ({ blog, onBack }) => {
       </button>
 
       {/* Cover Image */}
-      <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden mb-8">
+      <div className="relative w-full rounded-2xl overflow-hidden mb-8">
         <img
           src={`${blog.coverImage}`}
           alt={blog.title}
@@ -137,9 +137,10 @@ const BlogDetails = ({ blog, onBack }) => {
       <div className="h-px w-full bg-white/10 mb-6" />
 
       {/* Main Description */}
-      <div className="text-gray-300 leading-relaxed text-sm whitespace-pre-wrap mb-10">
-        {blog.description}
-      </div>
+    <div
+  className="text-gray-300 leading-relaxed text-sm mb-10"
+  dangerouslySetInnerHTML={{ __html: blog.description }}
+/>
 
       {/* Gallery */}
       {blog.anotherImages?.length > 0 && (
