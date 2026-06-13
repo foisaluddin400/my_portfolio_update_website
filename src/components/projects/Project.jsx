@@ -92,20 +92,21 @@ const ProjectSection = () => {
             />
           ))}
         </div>
-      </div>
-      
-      <div className="flex justify-center">
+         <div className="flex justify-center">
          <button
               onClick={() => setSeeAll(!seeAll)}
-              className={`px-6 py-2.5 rounded-2xl text-sm font-medium border transition-all flex items-center gap-2 ${
+              className={`px-3 py-1.5 rounded-2xl text-sm font-medium  transition-all flex items-center gap-2 ${
                 seeAll
-                  ? "bg-white text-black border-white"
-                  : "border-white/20 hover:border-white/50 text-gray-300"
+                  ? " text-red-500 border-white"
+                  : " text-[#72ebc2]"
               }`}
             >
-              {seeAll ? "Show Less" : "See All"}
+              {seeAll ? "Show Less" : "See All Projects..."}
             </button>
       </div>
+      </div>
+      
+     
     </section>
   );
 };
