@@ -7,6 +7,8 @@ import {
   IoSchoolOutline,
   IoMailOpenOutline,
   IoLogoInstagram,
+  IoLogoGithub,
+  IoLogoLinkedin,
 } from "react-icons/io5";
 import { ImBlog } from "react-icons/im";
 import { SlSocialFacebook } from "react-icons/sl";
@@ -26,7 +28,7 @@ import SkillSection from "../resume/Skill";
 
 
 export default function HomePage({ aboutData, blogsData, skillsData, profileData, projectsData, reviewsData, servicesData, resumeData }) {
-
+const profile = profileData || {};
   const [activeSection, setActiveSection] = useState("about");
   const [selectedBlog, setSelectedBlog] = useState(null);
   const isManualScroll = useRef(false);
@@ -111,26 +113,75 @@ export default function HomePage({ aboutData, blogsData, skillsData, profileData
                   />
                   <div className="absolute top-4 right-4 bg-black/10 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full bg-[#72ebc2] animate-pulse" />
-                    <span className="text-[10px]">2 Projects</span>
+                    <span className="text-[10px]">{profileData?.projectCount || 5} Projects</span>
                   </div>
                 </div>
                 <div className="p-6 text-center">
                   <h1 className="text-xl font-bold tracking-tight">{profileData?.name}</h1>
                   <p className="text-[#72ebc2] text-xs font-medium mt-1">{profileData?.professionName}</p>
-                  <div className="flex justify-center gap-3 mt-4">
-                    {[SlSocialFacebook, TfiEmail, FiPhoneCall, IoLogoInstagram].map((Icon, i) => (
-                      <button key={i} className="p-2 rounded-full border border-white/5 text-gray-400 hover:text-[#72ebc2] transition-all">
-                        <Icon size={16} />
-                      </button>
-                    ))}
-                  </div>
+               <div className="flex justify-center gap-3 mt-4">
+  <a
+    href="https://www.facebook.com/rh.foisal"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="p-2 rounded-full border border-white/5 text-gray-400 hover:text-[#72ebc2] transition-all"
+  >
+    <SlSocialFacebook size={16} />
+  </a>
+
+  <a
+    href="mailto:foisalrk2@gmail.com"
+    className="p-2 rounded-full border border-white/5 text-gray-400 hover:text-[#72ebc2] transition-all"
+  >
+    <TfiEmail size={16} />
+  </a>
+
+  <a
+    href="https://www.instagram.com/rkfoisal330/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="p-2 rounded-full border border-white/5 text-gray-400 hover:text-[#72ebc2] transition-all"
+  >
+    <IoLogoInstagram size={16} />
+  </a>
+
+  <a
+    href="https://github.com/foisaluddin400"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="p-2 rounded-full border border-white/5 text-gray-400 hover:text-[#72ebc2] transition-all"
+  >
+    <IoLogoGithub size={16} />
+  </a>
+
+  <a
+    href="https://www.linkedin.com/in/rk-foisal/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="p-2 rounded-full border border-white/5 text-gray-400 hover:text-[#72ebc2] transition-all"
+  >
+    <IoLogoLinkedin size={16} />
+  </a>
+</div>
                   <div className="grid grid-cols-2 gap-2 mt-6">
-                    <button className="flex items-center justify-center gap-2 py-2.5 rounded-xl bg-white/5 border border-white/5 text-xs hover:bg-[#72ebc2] hover:text-black transition-all">
-                      <Cloud size={14} /> Resume
-                    </button>
-                    <button className="py-2.5 rounded-xl bg-[#72ebc2] text-black text-xs font-bold hover:bg-[#5fd4af] transition-all">
-                      Contact
-                    </button>
+
+                     {profile.resumeLink && (
+  <a
+    href={profile.resumeLink}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex items-center justify-center gap-2 py-2.5 rounded-xl bg-white/5 border border-white/5 text-xs hover:bg-[#72ebc2] hover:text-black transition-all"
+  >
+    <Cloud size={14} />
+    Resume
+  </a>
+)}
+                   <button
+  onClick={() => scrollToSection("contact")}
+  className="py-2.5 rounded-xl bg-[#72ebc2] text-black text-xs font-bold hover:bg-[#5fd4af] transition-all"
+>
+  Contact
+</button>
                   </div>
                 </div>
               </div>
